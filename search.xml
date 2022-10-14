@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>golang jwt</title>
+    <url>/2022/10/15/golang-jwt/</url>
+    <content><![CDATA[<h2 id="总结一下jwt的使用"><a href="#总结一下jwt的使用" class="headerlink" title="总结一下jwt的使用"></a>总结一下jwt的使用</h2><p>前端时间就学习了jwt的使用，现在搭建好了博客，对jwt进行一下总结</p>
+<span id="more"></span>
+<hr>
+<p><strong>安装:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">go get github.com/dgrijalva/jwt-go</span><br></pre></td></tr></table></figure>
+<p><strong>使用:</strong><br>首先定义结构体用来生成token</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> Claim <span class="keyword">struct</span> &#123;</span><br><span class="line">	Id   <span class="type">int</span></span><br><span class="line">	User <span class="type">string</span></span><br><span class="line">	jwt.StandardClaims</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中jwt.StandardClaims为标准claims结构</p>
+<p>设置过期时间 ExpiretTime&#x3D;2d</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">claim.ExpiresAt = time.Now().Add(ExpireTime).Unix()</span><br></pre></td></tr></table></figure>
+
+<p>设置签发人</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">claim.Issuer = <span class="string">&quot;SYMC&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>生成token，第一个参数为加密方式，第二个需要传入自定义的结构体，之后加盐</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">token,err:=jwt.NewWithClaims(jwt.SigningMethodHS256, claim).SignedString(<span class="string">&quot;SYMC&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p> 解析函数，第一个参数为需要解析的token字符串，第二个参数为我们自定义的结构，第三个为固定格式的函数写法</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">token, err := jwt.ParseWithClaims(tokenStr, &amp;Claim&#123;&#125;, <span class="function"><span class="keyword">func</span><span class="params">(token *jwt.Token)</span></span> (<span class="keyword">interface</span>&#123;&#125;, <span class="type">error</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> secret, <span class="literal">nil</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p> 通过断言取得claim(我们自定义的结构)指针</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">claim, ok := token.Claims.(*Claim)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>完整代码如下</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> secret = <span class="string">&quot;SYMC&quot;</span>                 <span class="comment">//盐</span></span><br><span class="line"><span class="keyword">var</span> ExpireTime = time.Hour * <span class="number">24</span> * <span class="number">2</span> <span class="comment">//过期时间2d</span></span><br><span class="line"><span class="keyword">type</span> Jwt <span class="keyword">struct</span> &#123;</span><br><span class="line">	Id   <span class="type">int</span>    <span class="string">`json:&quot;id&quot;`</span></span><br><span class="line">	User <span class="type">string</span> <span class="string">`json:&quot;user&quot;`</span></span><br><span class="line">	jwt.StandardClaims</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GenerateTokenHandler</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> claim Jwt</span><br><span class="line">	c.ShouldBindJSON(&amp;claim)</span><br><span class="line">	claim.ExpiresAt = time.Now().Add(ExpireTime).Unix() <span class="comment">//过期时间</span></span><br><span class="line">	claim.Issuer = <span class="string">&quot;SYMC&quot;</span>                               <span class="comment">//签发人</span></span><br><span class="line">	token, err := GenToken(claim)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		c.JSON(<span class="number">400</span>, gin.H&#123;</span><br><span class="line">			<span class="string">&quot;code&quot;</span>: <span class="number">400</span>,</span><br><span class="line">			<span class="string">&quot;msg&quot;</span>:  <span class="string">&quot;error&quot;</span>,</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">	c.JSON(<span class="number">200</span>, gin.H&#123;</span><br><span class="line">		<span class="string">&quot;code&quot;</span>:  <span class="number">200</span>,</span><br><span class="line">		<span class="string">&quot;msg&quot;</span>:   <span class="string">&quot;success&quot;</span>,</span><br><span class="line">		<span class="string">&quot;token&quot;</span>: token,</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GenToken</span><span class="params">(claim Jwt)</span></span> (<span class="type">string</span>, <span class="type">error</span>) &#123;</span><br><span class="line">	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claim)</span><br><span class="line">	signedToken, err := token.SignedString(<span class="string">&quot;SYMC&quot;</span>) <span class="comment">//加盐</span></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;&quot;</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> signedToken, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ParseToken</span><span class="params">(tokenStr <span class="type">string</span>)</span></span> (*Jwt, <span class="type">error</span>) &#123;</span><br><span class="line">	token, err := jwt.ParseWithClaims(tokenStr, &amp;Jwt&#123;&#125;, <span class="function"><span class="keyword">func</span><span class="params">(token *jwt.Token)</span></span> (<span class="keyword">interface</span>&#123;&#125;, <span class="type">error</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> secret, <span class="literal">nil</span></span><br><span class="line">	&#125;)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	claim, ok := token.Claims.(*Jwt)</span><br><span class="line">	<span class="keyword">if</span> ok &amp;&amp; token.Valid &#123;</span><br><span class="line">		<span class="keyword">return</span> claim, <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, errors.New(<span class="string">&quot;invalid token&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>用于解析的中间件</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Authorization</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">	token := c.GetHeader(<span class="string">&quot;Authorization&quot;</span>)</span><br><span class="line">	<span class="keyword">if</span> token == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">		c.JSON(<span class="number">401</span>, gin.H&#123;</span><br><span class="line">			<span class="string">&quot;code&quot;</span>: <span class="number">401</span>,</span><br><span class="line">			<span class="string">&quot;msg&quot;</span>:  <span class="string">&quot;none token&quot;</span>,</span><br><span class="line">		&#125;)</span><br><span class="line">		c.Abort()</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	claim, err := utility.ParseToken(token)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		c.JSON(<span class="number">401</span>, gin.H&#123;</span><br><span class="line">			<span class="string">&quot;code&quot;</span>: <span class="number">401</span>,</span><br><span class="line">			<span class="string">&quot;msg&quot;</span>:  <span class="string">&quot;invalid token&quot;</span>,</span><br><span class="line">		&#125;)</span><br><span class="line">		c.Abort()</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	c.Set(<span class="string">&quot;Id&quot;</span>, claim.Id)</span><br><span class="line">	c.Set(<span class="string">&quot;User&quot;</span>, claim.User)</span><br><span class="line">	c.Next()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>值得注意    的是c.set是用于c(Gin.Context类型)中传递数据，通过c.get取得内容</p>
+]]></content>
+      <tags>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于博客</title>
+    <url>/2022/10/15/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h2 id="第一篇博客"><a href="#第一篇博客" class="headerlink" title="第一篇博客"></a>第一篇博客</h2><blockquote>
+<p>本来打算用服务器+域名+halo的方式来搭建博客，后来发现服务器有点贵，于是采用了现在的github.io+域名+hexo的方式来搭建了…</p>
+</blockquote>
+<p>嗯，一句话总结就是hexo有点舒服。</p>
+<hr>
+<p>###对于博客内容的规划:</p>
+<ul>
+<li>一些算法的总结(虽然啥也不会，可以预料，这是很少部分的内容</li>
+<li>在学习时遇到的一些奇奇怪怪的问题</li>
+<li>对部分学习内容的总结笔记</li>
+<li>对人生的思考  <del>(bushi</del></li>
+<li>对阅读的一些书籍的思考</li>
+</ul>
+<hr>
+<p>暂且是这些，以后有想到再加。(嗯，首先要学习一下linux的操作<br>PS:Markdown真好用…</p>
+]]></content>
+      <tags>
+        <tag>关于</tag>
+      </tags>
+  </entry>
+</search>
