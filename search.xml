@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>关于博客</title>
+    <url>/2022/10/15/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h2 id="第一篇博客"><a href="#第一篇博客" class="headerlink" title="第一篇博客"></a>第一篇博客</h2><blockquote>
+<p>本来打算用服务器+域名+halo的方式来搭建博客，后来发现服务器有点贵，于是采用了现在的github.io+域名+hexo的方式来搭建了…</p>
+</blockquote>
+<p>嗯，一句话总结就是hexo有点舒服。</p>
+<hr>
+<p>###对于博客内容的规划:</p>
+<ul>
+<li>一些算法的总结(虽然啥也不会，可以预料，这是很少部分的内容</li>
+<li>在学习时遇到的一些奇奇怪怪的问题</li>
+<li>对部分学习内容的总结笔记</li>
+<li>对人生的思考  <del>(bushi</del></li>
+<li>对阅读的一些书籍的思考</li>
+</ul>
+<hr>
+<p>暂且是这些，以后有想到再加。(嗯，首先要学习一下linux的操作<br>PS:Markdown真好用…</p>
+]]></content>
+      <tags>
+        <tag>关于</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>golang jwt</title>
     <url>/2022/10/15/golang-jwt/</url>
     <content><![CDATA[<h2 id="总结一下jwt的使用"><a href="#总结一下jwt的使用" class="headerlink" title="总结一下jwt的使用"></a>总结一下jwt的使用</h2><p>前端时间就学习了jwt的使用，现在搭建好了博客，对jwt进行一下总结</p>
@@ -37,29 +60,6 @@
 ]]></content>
       <tags>
         <tag>golang</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于博客</title>
-    <url>/2022/10/15/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h2 id="第一篇博客"><a href="#第一篇博客" class="headerlink" title="第一篇博客"></a>第一篇博客</h2><blockquote>
-<p>本来打算用服务器+域名+halo的方式来搭建博客，后来发现服务器有点贵，于是采用了现在的github.io+域名+hexo的方式来搭建了…</p>
-</blockquote>
-<p>嗯，一句话总结就是hexo有点舒服。</p>
-<hr>
-<p>###对于博客内容的规划:</p>
-<ul>
-<li>一些算法的总结(虽然啥也不会，可以预料，这是很少部分的内容</li>
-<li>在学习时遇到的一些奇奇怪怪的问题</li>
-<li>对部分学习内容的总结笔记</li>
-<li>对人生的思考  <del>(bushi</del></li>
-<li>对阅读的一些书籍的思考</li>
-</ul>
-<hr>
-<p>暂且是这些，以后有想到再加。(嗯，首先要学习一下linux的操作<br>PS:Markdown真好用…</p>
-]]></content>
-      <tags>
-        <tag>关于</tag>
       </tags>
   </entry>
 </search>
