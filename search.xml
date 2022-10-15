@@ -40,6 +40,30 @@
       </tags>
   </entry>
   <entry>
+    <title>关于博客</title>
+    <url>/2022/10/15/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h2 id="第一篇博客"><a href="#第一篇博客" class="headerlink" title="第一篇博客"></a>第一篇博客</h2><blockquote>
+<p>本来打算用服务器+域名+halo的方式来搭建博客，后来发现服务器有点贵，于是采用了现在的github.io+域名+hexo的方式来搭建了…</p>
+</blockquote>
+<p>嗯，一句话总结就是hexo有点舒服。</p>
+<span id="more"></span>
+
+<hr>
+<h3 id="对于博客内容的规划"><a href="#对于博客内容的规划" class="headerlink" title="对于博客内容的规划:"></a>对于博客内容的规划:</h3><ul>
+<li>一些算法的总结(虽然啥也不会，可以预料，这是很少部分的内容</li>
+<li>在学习时遇到的一些奇奇怪怪的问题</li>
+<li>对部分学习内容的总结笔记</li>
+<li>对人生的思考  <del>(bushi</del></li>
+<li>对阅读的一些书籍的思考</li>
+</ul>
+<hr>
+<p>暂且是这些，以后有想到再加。(嗯，首先要学习一下linux的操作<br>PS:Markdown真好用…</p>
+]]></content>
+      <tags>
+        <tag>关于</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>凡所有相皆是虚妄，若见诸相非相，即见如来</title>
     <url>/2022/10/15/%E5%87%A1%E6%89%80%E6%9C%89%E7%9B%B8%E7%9A%86%E6%98%AF%E8%99%9A%E5%A6%84%EF%BC%8C%E8%8B%A5%E8%A7%81%E8%AF%B8%E7%9B%B8%E9%9D%9E%E7%9B%B8%EF%BC%8C%E5%8D%B3%E8%A7%81%E5%A6%82%E6%9D%A5/</url>
     <content><![CDATA[<p>金刚经中提到“凡所有相皆是虚妄，若见诸相非相，即见如来”，但又何以见相非相，何以无相。</p>
@@ -65,30 +89,6 @@
 ]]></content>
       <tags>
         <tag>佛经</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于博客</title>
-    <url>/2022/10/15/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h2 id="第一篇博客"><a href="#第一篇博客" class="headerlink" title="第一篇博客"></a>第一篇博客</h2><blockquote>
-<p>本来打算用服务器+域名+halo的方式来搭建博客，后来发现服务器有点贵，于是采用了现在的github.io+域名+hexo的方式来搭建了…</p>
-</blockquote>
-<p>嗯，一句话总结就是hexo有点舒服。</p>
-<span id="more"></span>
-
-<hr>
-<h3 id="对于博客内容的规划"><a href="#对于博客内容的规划" class="headerlink" title="对于博客内容的规划:"></a>对于博客内容的规划:</h3><ul>
-<li>一些算法的总结(虽然啥也不会，可以预料，这是很少部分的内容</li>
-<li>在学习时遇到的一些奇奇怪怪的问题</li>
-<li>对部分学习内容的总结笔记</li>
-<li>对人生的思考  <del>(bushi</del></li>
-<li>对阅读的一些书籍的思考</li>
-</ul>
-<hr>
-<p>暂且是这些，以后有想到再加。(嗯，首先要学习一下linux的操作<br>PS:Markdown真好用…</p>
-]]></content>
-      <tags>
-        <tag>关于</tag>
       </tags>
   </entry>
 </search>
