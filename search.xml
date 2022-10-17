@@ -91,4 +91,27 @@
         <tag>佛经</tag>
       </tags>
   </entry>
+  <entry>
+    <title>函数的连续性和可导性的证明</title>
+    <url>/2022/10/17/%E5%87%BD%E6%95%B0%E7%9A%84%E8%BF%9E%E7%BB%AD%E6%80%A7%E5%92%8C%E5%8F%AF%E5%AF%BC%E6%80%A7%E7%9A%84%E8%AF%81%E6%98%8E/</url>
+    <content><![CDATA[<p>##总结一下函数连续性和可导性的证明<br>一直有点记不清楚，总结一下</p>
+<span id="more"></span>
+
+<p><strong>1.连续性</strong></p>
+<ul>
+<li>在该点处有定义</li>
+<li>f(x)在x&#x3D;x0点有定义</li>
+<li>f(x)在x→x0时极限存在</li>
+<li>极限值等于函数值<br>如果是分段函数的话，先考虑每个分段上的连续性，再考虑分段点的连续性，（极限&#x3D;函数值）。</li>
+</ul>
+<p><strong>2.可导性</strong></p>
+<ul>
+<li>函数连续</li>
+<li>左极限等于右极限<br>分段函数的可导性证明使用定义来判断，且可导必连续</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>数学</tag>
+      </tags>
+  </entry>
 </search>
