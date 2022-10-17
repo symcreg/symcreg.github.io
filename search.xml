@@ -1,6 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hexo搭建个人博客</title>
+    <url>/2022/10/17/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>整理一下通过Hexo搭建博客的过程</p>
+<span id="more"></span>
+
+<h2 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a>一、环境准备</h2><p><strong>1.安装Node.js</strong><br>直接从官网下载即可。<a href="https://nodejs.org/en/download/">这里是Node.js官网</a></p>
+<blockquote>
+<p>后面需要使用npm下载hexo，而npm下载比较慢，使用时可以换用淘宝源cnpm</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.安装Git</strong><br>同样从官网下载。<a href="https://git-scm.com/downloads">这里是Git官网</a></p>
+<h2 id="二、安装Hexo"><a href="#二、安装Hexo" class="headerlink" title="二、安装Hexo"></a>二、安装Hexo</h2><ul>
+<li><strong>在空目录下右键找到Git Bash Here选项</strong><br> <img src="/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/1.png"></li>
+</ul>
+<p>打开后输入</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">cnpm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>等待安装完成,安装完成后可输入hexo -v查看版本。<br> <img src="/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/2.png"></p>
+</li>
+<li><p><strong>初始化hexo，新建存储博客的文件夹</strong></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo init myblog</span><br></pre></td></tr></table></figure>
+<p>(myblog即为博客存放的文件夹)</p>
+</li>
+</ul>
+<p>*进入myblog文件夹,npm安装</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> myblog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>启动本地服务</strong><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+完成后访问 <a href="http://localhost:4000/">http://localhost:4000</a> 即可在本地服务器查看博客。<br><img src="/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/3.png"></li>
+</ul>
+<h2 id="三、github建站"><a href="#三、github建站" class="headerlink" title="三、github建站"></a>三、github建站</h2><ul>
+<li>首先需要github账号，此处不再赘述，默认以已经登录账号。</li>
+<li><strong>配置git</strong><br> 首先创建ssh key，在git bash中输入 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;your_email@youremail.com&quot;</span></span><br></pre></td></tr></table></figure>
+后面的<a href="mailto:&#x79;&#111;&#x75;&#114;&#x5f;&#101;&#x6d;&#x61;&#x69;&#x6c;&#x40;&#x79;&#111;&#117;&#x72;&#101;&#109;&#97;&#105;&#108;&#46;&#x63;&#x6f;&#109;">&#x79;&#111;&#x75;&#114;&#x5f;&#101;&#x6d;&#x61;&#x69;&#x6c;&#x40;&#x79;&#111;&#117;&#x72;&#101;&#109;&#97;&#105;&#108;&#46;&#x63;&#x6f;&#109;</a>改为你在github上注册的邮箱，之后会要求确认路径和输入密码。成功后会在~&#x2F;下生成.ssh文件夹，进去，打开id_rsa.pub，复制里面的key。</li>
+</ul>
+<p>回到github上，进入Acount Settings，左边选择SSH Keys，Add SSH Key,粘贴刚刚生成的key<br><img src="/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/4.png"><br>*设置username和email<br> <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;your_name&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;your_email@youremail.com&quot;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>新建github仓库</strong><br> Repository name<strong>必须</strong>是你的用户名加 “.github.io”<br> 例如: symcreg.github.io</li>
+<li>**将hexo博客上传到github<br> 首先安装deploy-git插件 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></li>
+<li><strong>修改hexo配置文件指定仓库地址</strong><br> 即myblog目录下的_config.yml 通过记事本打开即可<br> 找到Deployment改为 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line"> type: git</span><br><span class="line"> repo: 你的仓库路径</span><br><span class="line"> branch: master</span><br></pre></td></tr></table></figure>
+ <strong>注意，repo:等后面有一空格</strong></li>
+<li><strong>推送博客文件</strong><br> 现在可以将本地的博客文件push到github上了 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<strong>现在可以通过访问your_username.github.io来访问你的博客啦</strong></li>
+</ul>
+<h2 id="四、写文章"><a href="#四、写文章" class="headerlink" title="四、写文章"></a>四、写文章</h2><ul>
+<li>在博客目录下git bash输入 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">&quot;blog title&quot;</span></span><br></pre></td></tr></table></figure>
+ 之后可以通过文字编辑软件打开source&#x2F;_post目录下对应的md文件进行编写。</li>
+<li>部署到github <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp;hexo d</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>clean为清理文件，g为generate，构建静态文件，d为deploy，部署到github。</p>
+</blockquote>
+</li>
+</ul>
+<p>之后的域名解析和更换主题请自行百度罢~</p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>golang jwt</title>
     <url>/2022/10/15/golang-jwt/</url>
     <content><![CDATA[<h2 id="总结一下jwt的使用"><a href="#总结一下jwt的使用" class="headerlink" title="总结一下jwt的使用"></a>总结一下jwt的使用</h2><p>前端时间就学习了jwt的使用，现在搭建好了博客，对jwt进行一下总结</p>
@@ -40,6 +103,30 @@
       </tags>
   </entry>
   <entry>
+    <title>关于博客</title>
+    <url>/2022/10/15/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h2 id="第一篇博客"><a href="#第一篇博客" class="headerlink" title="第一篇博客"></a>第一篇博客</h2><blockquote>
+<p>本来打算用服务器+域名+halo的方式来搭建博客，后来发现服务器有点贵，于是采用了现在的github.io+域名+hexo的方式来搭建了…</p>
+</blockquote>
+<p>嗯，一句话总结就是hexo有点舒服。</p>
+<span id="more"></span>
+
+<hr>
+<h3 id="对于博客内容的规划"><a href="#对于博客内容的规划" class="headerlink" title="对于博客内容的规划:"></a>对于博客内容的规划:</h3><ul>
+<li>一些算法的总结(虽然啥也不会，可以预料，这是很少部分的内容</li>
+<li>在学习时遇到的一些奇奇怪怪的问题</li>
+<li>对部分学习内容的总结笔记</li>
+<li>对人生的思考  <del>(bushi</del></li>
+<li>对阅读的一些书籍的思考</li>
+</ul>
+<hr>
+<p>暂且是这些，以后有想到再加。(嗯，首先要学习一下linux的操作<br>PS:Markdown真好用…</p>
+]]></content>
+      <tags>
+        <tag>关于</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>凡所有相皆是虚妄，若见诸相非相，即见如来</title>
     <url>/2022/10/15/%E5%87%A1%E6%89%80%E6%9C%89%E7%9B%B8%E7%9A%86%E6%98%AF%E8%99%9A%E5%A6%84%EF%BC%8C%E8%8B%A5%E8%A7%81%E8%AF%B8%E7%9B%B8%E9%9D%9E%E7%9B%B8%EF%BC%8C%E5%8D%B3%E8%A7%81%E5%A6%82%E6%9D%A5/</url>
     <content><![CDATA[<p>金刚经中提到“凡所有相皆是虚妄，若见诸相非相，即见如来”，但又何以见相非相，何以无相。</p>
@@ -65,30 +152,6 @@
 ]]></content>
       <tags>
         <tag>佛经</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于博客</title>
-    <url>/2022/10/15/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h2 id="第一篇博客"><a href="#第一篇博客" class="headerlink" title="第一篇博客"></a>第一篇博客</h2><blockquote>
-<p>本来打算用服务器+域名+halo的方式来搭建博客，后来发现服务器有点贵，于是采用了现在的github.io+域名+hexo的方式来搭建了…</p>
-</blockquote>
-<p>嗯，一句话总结就是hexo有点舒服。</p>
-<span id="more"></span>
-
-<hr>
-<h3 id="对于博客内容的规划"><a href="#对于博客内容的规划" class="headerlink" title="对于博客内容的规划:"></a>对于博客内容的规划:</h3><ul>
-<li>一些算法的总结(虽然啥也不会，可以预料，这是很少部分的内容</li>
-<li>在学习时遇到的一些奇奇怪怪的问题</li>
-<li>对部分学习内容的总结笔记</li>
-<li>对人生的思考  <del>(bushi</del></li>
-<li>对阅读的一些书籍的思考</li>
-</ul>
-<hr>
-<p>暂且是这些，以后有想到再加。(嗯，首先要学习一下linux的操作<br>PS:Markdown真好用…</p>
-]]></content>
-      <tags>
-        <tag>关于</tag>
       </tags>
   </entry>
   <entry>
