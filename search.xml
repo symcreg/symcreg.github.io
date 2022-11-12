@@ -37,7 +37,7 @@
 <h2 id="三、github建站"><a href="#三、github建站" class="headerlink" title="三、github建站"></a>三、github建站</h2><ul>
 <li>首先需要github账号，此处不再赘述，默认以已经登录账号。</li>
 <li><strong>配置git</strong><br> 首先创建ssh key，在git bash中输入 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;your_email@youremail.com&quot;</span></span><br></pre></td></tr></table></figure>
-后面的<a href="mailto:&#x79;&#111;&#x75;&#114;&#x5f;&#101;&#x6d;&#x61;&#105;&#108;&#64;&#x79;&#x6f;&#117;&#114;&#x65;&#109;&#x61;&#105;&#108;&#x2e;&#x63;&#111;&#109;">&#x79;&#111;&#x75;&#114;&#x5f;&#101;&#x6d;&#x61;&#105;&#108;&#64;&#x79;&#x6f;&#117;&#114;&#x65;&#109;&#x61;&#105;&#108;&#x2e;&#x63;&#111;&#109;</a>改为你在github上注册的邮箱，之后会要求确认路径和输入密码。成功后会在~&#x2F;下生成.ssh文件夹，进去，打开id_rsa.pub，复制里面的key。</li>
+后面的<a href="mailto:&#x79;&#111;&#x75;&#114;&#x5f;&#x65;&#109;&#x61;&#x69;&#108;&#x40;&#121;&#111;&#x75;&#x72;&#101;&#x6d;&#97;&#105;&#108;&#x2e;&#x63;&#x6f;&#109;">&#x79;&#111;&#x75;&#114;&#x5f;&#x65;&#109;&#x61;&#x69;&#108;&#x40;&#121;&#111;&#x75;&#x72;&#101;&#x6d;&#97;&#105;&#108;&#x2e;&#x63;&#x6f;&#109;</a>改为你在github上注册的邮箱，之后会要求确认路径和输入密码。成功后会在~&#x2F;下生成.ssh文件夹，进去，打开id_rsa.pub，复制里面的key。</li>
 </ul>
 <p>回到github上，进入Acount Settings，左边选择SSH Keys，Add SSH Key,粘贴刚刚生成的key<br><img src="https://s2.loli.net/2022/10/17/2HMfiOGVaPRD3Sn.jpg" alt="4.png"></p>
 <ul>
@@ -62,6 +62,33 @@
 ]]></content>
       <tags>
         <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>c++学习-light-city</title>
+    <url>/2022/11/01/c-%E5%AD%A6%E4%B9%A0-light-city/</url>
+    <content><![CDATA[<h2 id="关于github上light-city佬c-进阶的学习笔记"><a href="#关于github上light-city佬c-进阶的学习笔记" class="headerlink" title="关于github上light-city佬c++进阶的学习笔记"></a>关于github上light-city佬c++进阶的学习笔记</h2><p>先附上github地址：<a href="https://github.com/Light-City/CPlusPlusThings">https://github.com/Light-City/CPlusPlusThings</a></p>
+<hr>
+<span id="more"></span>
+<ol>
+<li>const的使用</li>
+</ol>
+<ul>
+<li>const和指针 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span> * a;</span><br><span class="line"><span class="type">char</span> <span class="type">const</span> * a;</span><br><span class="line"><span class="comment">//上面两种等价，皆为指向const对象的指针</span></span><br><span class="line"><span class="type">char</span> * <span class="type">const</span> a;<span class="comment">//指向char对象的const指针，或者说常指针、const指针</span></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> * <span class="type">const</span> a;<span class="comment">//指向const对象的const指针</span></span><br></pre></td></tr></table></figure>
+ <strong>即const位于*左边是指向const对象，位于*右边是const指针</strong><br> 允许把非const的对象地址赋值给指向const对象的指针，不能通过指向const对象的指针修改变量的值</li>
+</ul>
+<ol start="2">
+<li>在函数中使用const</li>
+</ol>
+<ul>
+<li>在形参列表中无需使用const修饰变量，因为参数采用“值传递”，由函数自动产生临时变量并复制该参数，该参数无需保护。 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">const</span> <span class="type">int</span> var)</span></span>; <span class="comment">// 传递过来的参数不可变</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span> *<span class="type">const</span> var)</span></span>; <span class="comment">// 指针本身不可变</span></span><br></pre></td></tr></table></figure></li>
+<li>参数指针所指内容为常量不可变 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">StringCopy</span><span class="params">(<span class="type">char</span> *dst, <span class="type">const</span> <span class="type">char</span> *src)</span></span>;</span><br></pre></td></tr></table></figure>
+ 其中src 是输入参数，dst 是输出参数。给src加上const修饰后，如果函数体内的语句试图改动src的内容，编译器将指出错误。这就是加了const的作用之一。</li>
+</ul>
+<p> 。。。</p>
+]]></content>
+      <tags>
+        <tag>c++</tag>
       </tags>
   </entry>
   <entry>
@@ -101,6 +128,22 @@
 ]]></content>
       <tags>
         <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>poem</title>
+    <url>/2022/11/12/poem/</url>
+    <content><![CDATA[<p>##一些曾经</p>
+<span id="more"></span>
+<p><strong>吾爱 我又要踏上征途了<br>吾爱 我又要漂泊人间了<br>纵贯的分离跨越了一个月<br>离别与离别再次相逢<br>就在此时 就在此刻<br>我燃烧了我的灵魂<br>可燃烧过后除了我的思想和些许时间<br>我无法给予你更多<br>——<br>那些对于流逝美好的思念从未中断过<br>无休止地在产出和破灭着<br>无止境地正毁灭又重构着<br>只不过未曾溢出分毫<br>拉扯着我的身躯却又令其聚合在一起<br>剩零星的尘埃也让我吞入腹中<br>苦不堪言<br>而这一切的来者<br>竟却连模样也记不清了<br>所以只能迷离月影<br>所以只能捉月水中<br>时空和时空交错<br>空间与空间叠重<br>视线不曾相逢<br>冷月望穿 冷月无声<br>灵魂趋向天空<br>亦将梦归还给梦<br>却更加恍惚现实<br>夜半惊醒<br>叹故人只剩几梦<br>去多留少<br>可为什么此中我也要失去?<br>长恨追寻往日的幻影<br>而无论向东向西哭<br>仅几缕薄声就敲碎我的梦<br>再难寻影<br>身无长技可我欠下你许多<br>我用真心偿还<br>时光流逝而今只轮得到你<br>欠一次名称再相逢<br>你总是跳出我的工于心计<br>你自谓情话无人出右<br>可这坚韧的情感造物<br>你是否再能一眼望穿<br>无需三行情书<br>只以真心做笔以情感做纸<br>绵长的时间由我刺穿<br>浩荡长夜 自此而终<br>惊情无需四百年<br>一瞬足矣</strong></p>
+<blockquote>
+<blockquote>
+<p>啊，这好像是我的曾经。<br>嘿嘿 <em>Fortune and love favor the brave</em></p>
+</blockquote>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>poem</tag>
       </tags>
   </entry>
   <entry>
