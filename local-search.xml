@@ -4,6 +4,56 @@
   
   
   <entry>
+    <title>CLF-CBF</title>
+    <link href="/2024/09/04/CLF-CBF/"/>
+    <url>/2024/09/04/CLF-CBF/</url>
+    
+    <content type="html"><![CDATA[<span id="more"></span><h3 id="1-动态控制仿射系统-Dynamics-Control-Affine-System"><a href="#1-动态控制仿射系统-Dynamics-Control-Affine-System" class="headerlink" title="1.动态控制仿射系统(Dynamics Control Affine System)"></a>1.动态控制仿射系统(Dynamics Control Affine System)</h3><hr><p>对于$\dot{x} &#x3D; F(t,x,u)$，其中系统状态$x\in{\mathbb{R}^n}$，系统输入$u \in{\mathbb{R}^m}$，如果$F$对于$x$和$u$是Lipschitz连续的，时间$t$是piecewise连续的，那么在给定的初始条件$x_0$下，轨迹$x(t)$是存在并且unique的。</p><p>一般写成如下形式：</p><p>$$\dot{x} &#x3D; f(x) + g(x)u$$</p><p>其中$f:\mathbb{R}^n\rightarrow{\mathbb{R}^n}, g:\mathbb{R}^n\rightarrow{\mathbb{R}^{n*m}}$，$x$是Lipschitz连续，$x_e &#x3D; 0$。</p><h3 id="2-CLF-Control-Lyapunov-Function"><a href="#2-CLF-Control-Lyapunov-Function" class="headerlink" title="2.CLF(Control Lyapunov Function)"></a>2.CLF(Control Lyapunov Function)</h3><hr><p>Lyapunove Function数学定义如下：</p><p>$$V(x)$$<br>$$s.t. V(x_e) &#x3D; 0, V(x) &gt; 0 \ for \ x \neq x_e$$<br>$$\dot{V(x)} &#x3D; \frac{\partial V}{\partial x}f(x) &lt; 0 \ for \ x \neq x_e$$ </p><p>$V(x)$是定义的Lyapunov函数，下面的是约束条件，当满足上述两个约束时，我们可以认为x渐近稳定。</p><p>将输入$u$引入到Lyapunove Function，得到新的方程。<br>使$V(x):\mathbb{R}^n\rightarrow{\mathbb{R}}$是连续Differential函数，如果存在一个常数$c&gt;0$使得$V(x)$满足如下条件，那么$V(x)$就是一个关于$x$的Control Lyapunov Function。</p><p>$1)\ \Omega :&#x3D; {x \in{\mathbb{R}^n}:V(x)\le{c}}$，$V(x)$是有界的</p><p>$2)\ V(x)&gt;0$，对于所有的$s\in{R^n}\backslash {x_e}$，$V(e_e)&#x3D;0$</p><p>$3)\ inf_{u\in{U}}\dot{V}(x,u)&lt;0$，对于所有的$x\in{\Omega_c}\backslash{x_e}$</p><p>为了简化$\dot{V}(x,u)$的表达，用Lie括号描述：</p><p>$$\dot{V}(x,u) &#x3D; \nabla{V}(x) * \dot{x} &#x3D; \nabla{V}(x) * f(x) + \nabla{V}(x) * g(x)*u &#x3D; L_fV(x) + L_gV(x)u$$<br>$$(L_pq(x):&#x3D;\nabla{q(x)}*p(x))$$</p><p>CLF保证系统最终会稳定，但不能确定多快才能稳定，这时候引入指数稳定CLF(ESCLF)。</p><p>如果存在常数$\lambda &gt; 0$使得$inf_{u \in{U}}\dot{V}(x,u)+{\lambda}{V(x)}\le0$ ，那么$V(x)$就是ESCLF。</p><p><img src="/img/CLF-CBF/ESCLF.png"></p><h3 id="3-CLF-QP"><a href="#3-CLF-QP" class="headerlink" title="3.CLF-QP"></a>3.CLF-QP</h3><hr><p>将CLF转化为QP问题，搜索满足CLF-QP问题的输入u。</p><p>$$argmin \  (u-u_ref)^{T}{H(u-u_ref)}+p\delta^2$$<br>$$subject\ to :\ L_fV(x)+L_gV(x)u+\lambda{V(x)}\le{\delta}$$</p><p>其中$\delta$是松弛变量，$p$是惩罚因子，设置松弛变量的目的是在实际搜索中，较难找到一个合适的解，增加松弛变量后会放松CLF条件，在允许的情况下不满足CLF约束，但获得一个解。</p><p>另外，这里的H是Hassian矩阵，表示二次项系数，将$(u-u_ref)^{T}{H(u-u_ref)}$理解为二次的cost函数(或者能量函数？)，是人为构建的，二次保证解的u的输入使系统收敛较快。</p><h3 id="4-CBF"><a href="#4-CBF" class="headerlink" title="4.CBF"></a>4.CBF</h3><hr><p>CLF约束确保系统渐趋稳定，而CBF的作用是确保系统安全，使系统处于规定的安全集合约束内。</p><pre><code class="hljs">//TODO:补充CBF原理</code></pre><p>当$B(x):\mathbb{R}^n \rightarrow \mathbb{R}$是连续可微的，零超水平集(zero-superlevel)为$C$，$C&#x3D;{x|B(x)\ge0}$，对于所有$x\in{\partial{C}}$，$\nabla{B(x)\ne0}$，如果存在一个扩展$Class \ K_\infty$函数$\alpha$（工程中一般使用正常数和$B(x)$的线性组合获取，如：$\gamma{B(x)},\gamma&gt;0$），存在一个集合$D\subset{\mathbb{R}^n}$，使得$C\subset{D}$满足：</p><p>$$sup_{u\in{U}}[L_f{B(x)}+L_g{B(x)}u]+\alpha({B(x)})\ge0$$</p><p>那么对于所有$x\in{D}$，$B(x)$是一个CBF。</p><p><img src="/img/CLF-CBF/CBF.png"></p><h3 id="5-CLF-CBF-QP"><a href="#5-CLF-CBF-QP" class="headerlink" title="5.CLF-CBF-QP"></a>5.CLF-CBF-QP</h3><hr><p>将CLF和CBF都转化为QP问题的约束条件，其中CLF保证控制器稳定，CBF保证控制满足安全条件。</p><p>$$argmin \  (u-u_ref)^{T}{H(u-u_ref)}+p\delta^2$$<br>$$subject\ to :$$<br>$$\ L_fV(x)+L_gV(x)u+\lambda{V(x)}\le{\delta}$$<br>$$L_f{B(x)}+L_g{B(x)}u]+\gamma{B(x)}\ge0$$</p><h3 id="links"><a href="#links" class="headerlink" title="links"></a>links</h3><hr><ul><li><em><a href="https://zhuanlan.zhihu.com/p/568328445">根据自适应巡航系统(ACC)来理解CBF(Control Barrier Function)-入门知识</a></em>  </li><li><em><a href="https://zhuanlan.zhihu.com/p/277326421">CLF-CBF Controller</a></em>  </li><li><em><a href="https://github.com/HybridRobotics/CBF-CLF-Helper">HybridRobotics&#x2F;CBF-CLF-Helper</a></em>  </li><li><em><a href="https://www.youtube.com/watch?v=_Tkn_Hzo4AA">Jason Choi – Introduction to Control Lyapunov Functions and Control Barrier Functions</a></em></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>控制</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>理论</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>反步控制</title>
+    <link href="/2024/09/04/%E5%8F%8D%E6%AD%A5%E6%8E%A7%E5%88%B6/"/>
+    <url>/2024/09/04/%E5%8F%8D%E6%AD%A5%E6%8E%A7%E5%88%B6/</url>
+    
+    <content type="html"><![CDATA[<span id="more"></span><h3 id="1-1-物理模型"><a href="#1-1-物理模型" class="headerlink" title="1.1 物理模型"></a>1.1 物理模型</h3><hr><p>令期望轨迹为$sint$曲线：<br>$$x_d &#x3D; \sin{t}$$<br>$$\dot{x_d} &#x3D; \cos{t}$$</p><p>写出状态方程：<br>$$\dot{x_1} &#x3D; x_2 + f_1(x_1)$$<br>$$\dot{x_2} &#x3D; u + f_2(x_1,x_2) &#x3D; u + \frac{(M * g * l)}{J} * \sin{x_1} - \frac{D}{J} * x_2$$</p><p>$$f_1(x_1) &#x3D; 0$$<br>$$f_2(x_1,x_2) &#x3D; \frac{(M * g * l)}{J} * \sin{x_1} - \frac{D}{J} * x_2$$<br>其中第一项为重力对系统的影响，第二项为摩擦力对系统的影响。</p><p><em>其中M为质量，g为重力加速度，l为臂长，J为转动惯量，D为阻尼系数。</em><br><em>$\dot{x_1}$为角速度，$\dot{x_2}$为角加速度，$x_1$为角度，$x_2$为角速度。</em></p><h3 id="1-2-知识补充"><a href="#1-2-知识补充" class="headerlink" title="1.2 知识补充"></a>1.2 知识补充</h3><hr><p>力矩$M &#x3D; |F| * |r| * \sin{\varphi}$<br>力矩除以转动惯量可以描述一个物体收到的外部力矩对其角加速度的影响。<br>阻尼系数除以转动惯量乘以角速度描述了在转动运动中由阻尼产生的转动摩擦力的效应。这个物理量通常被称为阻尼比。</p><p><em>*部分解释来自chatgpt</em></p><h3 id="2-1-反步控制"><a href="#2-1-反步控制" class="headerlink" title="2.1 反步控制"></a>2.1 反步控制</h3><hr><p>构造误差<br>$$e_1 &#x3D; x_1 - x_d$$<br>$$e_2 &#x3D; x_2 - \alpha_1$$<br>其中$\alpha_1$为虚拟控制律，即中间状态的控制量。</p><p>构造Lyapunov函数<br>$$V_1 &#x3D; \frac{1}{2}{e_1}^2$$<br>$$V_2 &#x3D; \frac{1}{2}{e_1}^2 + \frac{1}{2}{e_2}^2$$</p><p>由Lyapunov方法可知，需令$\dot{V_1}$ ,$\dot{V_2}$负定使得系统渐趋稳定。</p><p>$$\dot{V_1} &#x3D; {e_1}\dot{e_1} &#x3D; {e_1}(\dot{x_1} - \dot{x_d}) &#x3D; {e_1}(x_2 + f_1(x_1) - \cos{t})$$</p><p>故令$\alpha_1 &#x3D; \cos{t} - e_1 - f_1(x_1)$，注意此时$\alpha_1$为虚拟控制律，$x_2$为实际控制</p><p>$$\dot{V_1} &#x3D; {e_1}\dot{e_1} &#x3D; {e_1}(\dot{x_1} - \dot{x_d})$$<br>$$ &#x3D; {e_1}(x_2 + f_1(x_1) - \cos{t}) &#x3D; {e_1}(e_2 + \alpha_1 + f_1(x_1) - \cos{t}) &#x3D; {e_1}(e_2 - e_1)$$</p><p>$$\dot{e_2} &#x3D; \dot{x_2} - \dot{\alpha_1} &#x3D; u + f_2(x_1,x_2) - \dot{\alpha_1}$$</p><p>$$\dot{V_2} &#x3D; e_1(e_2 - e_1) + {e_2}\dot{e_2} &#x3D; -{e_1}^2 + {e_2}({e_1} + \dot{e_2})$$</p><p>需令$\dot{V_2}$负定，令$e_1 + \dot{e_2} &#x3D; -e_2$即可，此时$\dot{V_2} &#x3D; -{e_1}^2 - {e_2}^2$负定<br>代入得<br>$e_1 + u + f_2(x_1,x_2) - \alpha_1 &#x3D; -e_2$<br>得到最终控制量$u &#x3D; -e_1 - e_2 - f_2(x_1,x_2) + \dot{\alpha_1}$</p><p>上面得到<br>$$f_1(x_1) &#x3D; 0$$<br>$$f_2(x_1,x_2) &#x3D; \frac{(M * g * l)}{J} * \sin{x_1} - \frac{D}{J} * x_2$$</p><p>所以$$u &#x3D; -e_1 - e_2 + \dot{\alpha_1} - (\frac{(M * g * l)}{J} * \sin{x_1} - \frac{D}{J} * x_2)$$</p><h3 id="links"><a href="#links" class="headerlink" title="links"></a>links</h3><hr><ul><li><em><a href="https://haosutopia.github.io/2018/01/Backstepping-01/">Backstepping（反步控制）</a></em></li><li><em><a href="https://zh.wikipedia.org/wiki/%E5%8F%8D%E6%8E%A8%E6%8E%A7%E5%88%B6">wiki反推控制</a></em></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>控制</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>理论</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>裂痕</title>
     <link href="/2024/09/03/%E8%A3%82%E7%97%95/"/>
     <url>/2024/09/03/%E8%A3%82%E7%97%95/</url>
