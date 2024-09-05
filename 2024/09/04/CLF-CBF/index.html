@@ -19,21 +19,21 @@
   <meta name="author" content="sam">
   <meta name="keywords" content="">
   
-    <meta name="description" content="### 1.动态控制仿射系统(Dynamics Control Affine System) 对于\(\dot{x} &#x3D; F(t,x,u)\)，其中系统状态\(x\in{\mathbb{R}^n}\)，系统输入\(u \in{\mathbb{R}^m}\)，如果\(F\)对于\(x\)和\(u\)是Lipschitz连续的，时间\(t\)是piecewise连续的，那么在给定的初始条件\">
+    <meta name="description" content="1.动态控制仿射系统(Dynamics Control Affine System) 对于\(\dot{x} &#x3D; F(t,x,u)\)，其中系统状态\(x\in{\mathbb{R}^n}\)，系统输入\(u \in{\mathbb{R}^m}\)，如果\(F\)对于\(x\)和\(u\)是Lipschitz连续的，时间\(t\)是piecewise连续的，那么在给定的初始条件\(x_0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CLF-CBF">
 <meta property="og:url" content="https://symcreg.github.io/2024/09/04/CLF-CBF/index.html">
 <meta property="og:site_name" content="symc">
-<meta property="og:description" content="### 1.动态控制仿射系统(Dynamics Control Affine System) 对于\(\dot{x} &#x3D; F(t,x,u)\)，其中系统状态\(x\in{\mathbb{R}^n}\)，系统输入\(u \in{\mathbb{R}^m}\)，如果\(F\)对于\(x\)和\(u\)是Lipschitz连续的，时间\(t\)是piecewise连续的，那么在给定的初始条件\">
+<meta property="og:description" content="1.动态控制仿射系统(Dynamics Control Affine System) 对于\(\dot{x} &#x3D; F(t,x,u)\)，其中系统状态\(x\in{\mathbb{R}^n}\)，系统输入\(u \in{\mathbb{R}^m}\)，如果\(F\)对于\(x\)和\(u\)是Lipschitz连续的，时间\(t\)是piecewise连续的，那么在给定的初始条件\(x_0">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://symcreg.github.io/2024/09/04/CLF-CBF/img/CLF-CBF/ESCLF.png">
-<meta property="og:image" content="https://symcreg.github.io/2024/09/04/CLF-CBF/img/CLF-CBF/CBF.png">
+<meta property="og:image" content="https://symcreg.github.io/img/CLF-CBF/ESCLF.png">
+<meta property="og:image" content="https://symcreg.github.io/img/CLF-CBF/CBF.png">
 <meta property="article:published_time" content="2024-09-04T04:29:44.000Z">
-<meta property="article:modified_time" content="2024-09-05T09:22:38.570Z">
+<meta property="article:modified_time" content="2024-09-05T09:47:49.851Z">
 <meta property="article:author" content="sam">
 <meta property="article:tag" content="理论">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://symcreg.github.io/2024/09/04/CLF-CBF/img/CLF-CBF/ESCLF.png">
+<meta name="twitter:image" content="https://symcreg.github.io/img/CLF-CBF/ESCLF.png">
   
   
   
@@ -317,8 +317,9 @@
               <div class="markdown-body">
                 
                 <span id="more"></span>
-<h2 id="动态控制仿射系统dynamics-control-affine-system">###
-1.动态控制仿射系统(Dynamics Control Affine System)</h2>
+<h2
+id="动态控制仿射系统dynamics-control-affine-system">1.动态控制仿射系统(Dynamics
+Control Affine System)</h2>
 <p>对于<span class="math inline">\(\dot{x} =
 F(t,x,u)\)</span>，其中系统状态<span
 class="math inline">\(x\in{\mathbb{R}^n}\)</span>，系统输入<span
@@ -336,7 +337,7 @@ class="math inline">\(f:\mathbb{R}^n\rightarrow{\mathbb{R}^n},
 g:\mathbb{R}^n\rightarrow{\mathbb{R}^{n*m}}\)</span>，<span
 class="math inline">\(x\)</span>是Lipschitz连续，<span
 class="math inline">\(x_e = 0\)</span>。</p>
-<h2 id="clfcontrol-lyapunov-function">### 2.CLF(Control Lyapunov
+<h2 id="clfcontrol-lyapunov-function">2.CLF(Control Lyapunov
 Function)</h2>
 <p>Lyapunove Function数学定义如下：</p>
 <p><span class="math display">\[V(x)\]</span> <span
@@ -372,8 +373,8 @@ class="math display">\[(L_pq(x):=\nabla{q(x)}*p(x))\]</span></p>
 0\)</span>使得<span class="math inline">\(inf_{u
 \in{U}}\dot{V}(x,u)+{\lambda}{V(x)}\le0\)</span> ，那么<span
 class="math inline">\(V(x)\)</span>就是ESCLF。</p>
-<p><img src="img/CLF-CBF/ESCLF.png" srcset="/img/loading.gif" lazyload /></p>
-<h2 id="clf-qp">### 3.CLF-QP</h2>
+<p><img src="/img/CLF-CBF/ESCLF.png" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="clf-qp">3.CLF-QP</h2>
 <p>将CLF转化为QP问题，搜索满足CLF-QP问题的输入u。</p>
 <p><span class="math display">\[argmin
 \  (u-u_ref)^{T}{H(u-u_ref)}+p\delta^2\]</span> <span
@@ -383,7 +384,7 @@ L_fV(x)+L_gV(x)u+\lambda{V(x)}\le{\delta}\]</span></p>
 class="math inline">\(p\)</span>是惩罚因子，设置松弛变量的目的是在实际搜索中，较难找到一个合适的解，增加松弛变量后会放松CLF条件，在允许的情况下不满足CLF约束，但获得一个解。</p>
 <p>另外，这里的H是Hassian矩阵，表示二次项系数，将<span
 class="math inline">\((u-u_ref)^{T}{H(u-u_ref)}\)</span>理解为二次的cost函数(或者能量函数？)，是人为构建的，二次保证解的u的输入使系统收敛较快。</p>
-<h2 id="cbf">### 4.CBF</h2>
+<h2 id="cbf">4.CBF</h2>
 <p>CLF约束确保系统渐趋稳定，而CBF的作用是确保系统安全，使系统处于规定的安全集合约束内。</p>
 <pre><code class="hljs">//TODO:补充CBF原理</code></pre>
 <p>当<span class="math inline">\(B(x):\mathbb{R}^n \rightarrow
@@ -402,8 +403,8 @@ class="math inline">\(C\subset{D}\)</span>满足：</p>
 class="math display">\[sup_{u\in{U}}[L_f{B(x)}+L_g{B(x)}u]+\alpha({B(x)})\ge0\]</span></p>
 <p>那么对于所有<span class="math inline">\(x\in{D}\)</span>，<span
 class="math inline">\(B(x)\)</span>是一个CBF。</p>
-<p><img src="img/CLF-CBF/CBF.png" srcset="/img/loading.gif" lazyload /></p>
-<h2 id="clf-cbf-qp">### 5.CLF-CBF-QP</h2>
+<p><img src="/img/CLF-CBF/CBF.png" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="clf-cbf-qp">5.CLF-CBF-QP</h2>
 <p>将CLF和CBF都转化为QP问题的约束条件，其中CLF保证控制器稳定，CBF保证控制满足安全条件。</p>
 <p><span class="math display">\[argmin
 \  (u-u_ref)^{T}{H(u-u_ref)}+p\delta^2\]</span> <span
@@ -411,7 +412,7 @@ class="math display">\[subject\ to :\]</span> <span
 class="math display">\[\
 L_fV(x)+L_gV(x)u+\lambda{V(x)}\le{\delta}\]</span> <span
 class="math display">\[L_f{B(x)}+L_g{B(x)}u]+\gamma{B(x)}\ge0\]</span></p>
-<h2 id="links">### links ###</h2>
+<h2 id="links">links</h2>
 <ul>
 <li><em><a
 target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/568328445">根据自适应巡航系统(ACC)来理解CBF(Control
