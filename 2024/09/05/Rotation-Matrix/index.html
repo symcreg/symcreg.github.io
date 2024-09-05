@@ -19,22 +19,22 @@
   <meta name="author" content="sam">
   <meta name="keywords" content="">
   
-    <meta name="description" content="### 1.1 物理模型 ### 令期望轨迹为\(sint\)曲线： \[x_d &#x3D; \sin{t}\] \[\dot{x_d} &#x3D; \cos{t}\] 写出状态方程： \[\dot{x_1} &#x3D; x_2 + f_1(x_1)\] \[\dot{x_2} &#x3D; u + f_2(x_1,x_2) &#x3D; u + \frac{(M * g * l)}{J} * \sin{x_1} - \fra">
+    <meta name="description" content="### 性质和结论 从B frame相对于A frame的旋转矩阵的转置即为A frame相对于B frame的旋转矩阵，同时等于其逆矩阵： \[^{A}_{B}R &#x3D; ^{B}_{A}A^{T}&#x3D;^{B}_{A}A^{-1}\] 旋转矩阵可以将一个点(P)从一个frame(B)变换到另一个frame(A)： \[^{A}P&#x3D;^{A}_{B}R \cdot ^{B}P\] 用坐标轴绕">
 <meta property="og:type" content="article">
-<meta property="og:title" content="反步控制">
-<meta property="og:url" content="https://symcreg.github.io/2024/09/04/%E5%8F%8D%E6%AD%A5%E6%8E%A7%E5%88%B6/index.html">
+<meta property="og:title" content="Rotation Matrix">
+<meta property="og:url" content="https://symcreg.github.io/2024/09/05/Rotation-Matrix/index.html">
 <meta property="og:site_name" content="symc">
-<meta property="og:description" content="### 1.1 物理模型 ### 令期望轨迹为\(sint\)曲线： \[x_d &#x3D; \sin{t}\] \[\dot{x_d} &#x3D; \cos{t}\] 写出状态方程： \[\dot{x_1} &#x3D; x_2 + f_1(x_1)\] \[\dot{x_2} &#x3D; u + f_2(x_1,x_2) &#x3D; u + \frac{(M * g * l)}{J} * \sin{x_1} - \fra">
+<meta property="og:description" content="### 性质和结论 从B frame相对于A frame的旋转矩阵的转置即为A frame相对于B frame的旋转矩阵，同时等于其逆矩阵： \[^{A}_{B}R &#x3D; ^{B}_{A}A^{T}&#x3D;^{B}_{A}A^{-1}\] 旋转矩阵可以将一个点(P)从一个frame(B)变换到另一个frame(A)： \[^{A}P&#x3D;^{A}_{B}R \cdot ^{B}P\] 用坐标轴绕">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-09-04T04:19:14.000Z">
-<meta property="article:modified_time" content="2024-09-04T04:51:05.443Z">
+<meta property="article:published_time" content="2024-09-05T09:11:01.000Z">
+<meta property="article:modified_time" content="2024-09-05T09:25:14.941Z">
 <meta property="article:author" content="sam">
 <meta property="article:tag" content="理论">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>反步控制 - symc</title>
+  <title>Rotation Matrix - symc</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -237,7 +237,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="反步控制"></span>
+            <span id="subtitle" data-typed-text="Rotation Matrix"></span>
           
         </div>
 
@@ -248,8 +248,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-04 12:19" pubdate>
-          2024年9月4日 中午
+        <time datetime="2024-09-05 17:11" pubdate>
+          2024年9月5日 下午
         </time>
       </span>
     
@@ -260,7 +260,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          518 字
+          1.3k 字
         
       </span>
     
@@ -271,7 +271,7 @@
         
         
         
-          5 分钟
+          12 分钟
         
       </span>
     
@@ -308,78 +308,148 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">反步控制</h1>
+            <h1 id="seo-header">Rotation Matrix</h1>
             
             
               <div class="markdown-body">
                 
                 <span id="more"></span>
-<h2 id="物理模型">### 1.1 物理模型 ###</h2>
-<p>令期望轨迹为<span class="math inline">\(sint\)</span>曲线：<br />
-<span class="math display">\[x_d = \sin{t}\]</span> <span
-class="math display">\[\dot{x_d} = \cos{t}\]</span></p>
-<p>写出状态方程：<br />
-<span class="math display">\[\dot{x_1} = x_2 + f_1(x_1)\]</span> <span
-class="math display">\[\dot{x_2} = u + f_2(x_1,x_2) = u + \frac{(M * g *
-l)}{J} * \sin{x_1} - \frac{D}{J} * x_2\]</span></p>
-<p><span class="math display">\[f_1(x_1) = 0\]</span> <span
-class="math display">\[f_2(x_1,x_2) = \frac{(M * g * l)}{J} * \sin{x_1}
-- \frac{D}{J} * x_2\]</span>
-其中第一项为重力对系统的影响，第二项为摩擦力对系统的影响。</p>
-<p><em>其中M为质量，g为重力加速度，l为臂长，J为转动惯量，D为阻尼系数。</em>
-<em><span class="math inline">\(\dot{x_1}\)</span>为角速度，<span
-class="math inline">\(\dot{x_2}\)</span>为角加速度，<span
-class="math inline">\(x_1\)</span>为角度，<span
-class="math inline">\(x_2\)</span>为角速度。</em></p>
-<h2 id="知识补充">### 1.2 知识补充</h2>
-<p>力矩<span class="math inline">\(M = |F| * |r| *
-\sin{\varphi}\)</span>
-力矩除以转动惯量可以描述一个物体收到的外部力矩对其角加速度的影响。
-阻尼系数除以转动惯量乘以角速度描述了在转动运动中由阻尼产生的转动摩擦力的效应。这个物理量通常被称为阻尼比。</p>
-<p><em>*部分解释来自chatgpt</em></p>
-<h2 id="反步控制">### 2.1 反步控制</h2>
-<p>构造误差 <span class="math display">\[e_1 = x_1 - x_d\]</span> <span
-class="math display">\[e_2 = x_2 - \alpha_1\]</span> 其中<span
-class="math inline">\(\alpha_1\)</span>为虚拟控制律，即中间状态的控制量。</p>
-<p>构造Lyapunov函数 <span class="math display">\[V_1 =
-\frac{1}{2}{e_1}^2\]</span> <span class="math display">\[V_2 =
-\frac{1}{2}{e_1}^2 + \frac{1}{2}{e_2}^2\]</span></p>
-<p>由Lyapunov方法可知，需令<span
-class="math inline">\(\dot{V_1}\)</span> ,<span
-class="math inline">\(\dot{V_2}\)</span>负定使得系统渐趋稳定。</p>
-<p><span class="math display">\[\dot{V_1} = {e_1}\dot{e_1} =
-{e_1}(\dot{x_1} - \dot{x_d}) = {e_1}(x_2 + f_1(x_1) -
-\cos{t})\]</span></p>
-<p>故令<span class="math inline">\(\alpha_1 = \cos{t} - e_1 -
-f_1(x_1)\)</span>，注意此时<span
-class="math inline">\(\alpha_1\)</span>为虚拟控制律，<span
-class="math inline">\(x_2\)</span>为实际控制</p>
-<p><span class="math display">\[\dot{V_1} = {e_1}\dot{e_1} =
-{e_1}(\dot{x_1} - \dot{x_d})\]</span> <span class="math display">\[ =
-{e_1}(x_2 + f_1(x_1) - \cos{t}) = {e_1}(e_2 + \alpha_1 + f_1(x_1) -
-\cos{t}) = {e_1}(e_2 - e_1)\]</span></p>
-<p><span class="math display">\[\dot{e_2} = \dot{x_2} - \dot{\alpha_1} =
-u + f_2(x_1,x_2) - \dot{\alpha_1}\]</span></p>
-<p><span class="math display">\[\dot{V_2} = e_1(e_2 - e_1) +
-{e_2}\dot{e_2} = -{e_1}^2 + {e_2}({e_1} + \dot{e_2})\]</span></p>
-<p>需令<span class="math inline">\(\dot{V_2}\)</span>负定，令<span
-class="math inline">\(e_1 + \dot{e_2} = -e_2\)</span>即可，此时<span
-class="math inline">\(\dot{V_2} = -{e_1}^2 - {e_2}^2\)</span>负定 代入得
-<span class="math inline">\(e_1 + u + f_2(x_1,x_2) - \alpha_1 =
--e_2\)</span> 得到最终控制量<span class="math inline">\(u = -e_1 - e_2 -
-f_2(x_1,x_2) + \dot{\alpha_1}\)</span></p>
-<p>上面得到 <span class="math display">\[f_1(x_1) = 0\]</span> <span
-class="math display">\[f_2(x_1,x_2) = \frac{(M * g * l)}{J} * \sin{x_1}
-- \frac{D}{J} * x_2\]</span></p>
-<p>所以<span class="math display">\[u = -e_1 - e_2 + \dot{\alpha_1} -
-(\frac{(M * g * l)}{J} * \sin{x_1} - \frac{D}{J} * x_2)\]</span></p>
-<h2 id="links">### links ###</h2>
-<ul>
-<li><em><a
-target="_blank" rel="noopener" href="https://haosutopia.github.io/2018/01/Backstepping-01/">Backstepping（反步控制）</a></em></li>
-<li><em><a
-target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8F%8D%E6%8E%A8%E6%8E%A7%E5%88%B6">wiki反推控制</a></em></li>
-</ul>
+<h2 id="性质和结论">### 性质和结论</h2>
+<p><strong>从B frame相对于A frame的旋转矩阵的转置即为A frame相对于B
+frame的旋转矩阵，同时等于其逆矩阵：</strong> <span
+class="math display">\[^{A}_{B}R = ^{B}_{A}A^{T}=^{B}_{A}A^{-1}\]</span>
+<strong>旋转矩阵可以将一个点(P)从一个frame(B)变换到另一个frame(A)：</strong>
+<span class="math display">\[^{A}P=^{A}_{B}R \cdot ^{B}P\]</span>
+<strong>用坐标轴绕参考坐标系旋转角度来确定旋转矩阵：</strong> <span
+class="math display">\[R_{Z_{A}}({\theta})=\left[\begin{matrix}
+cos{\theta} &amp; -sin\theta &amp; 0 \\ sin{\theta} &amp; cos{\theta}
+&amp; 0 \\ 0 &amp; 0 &amp; 1 \end{matrix}\right]=\left[\begin{matrix}
+c{\theta} &amp; -s\theta &amp; 0 \\ s{\theta} &amp; c{\theta} &amp; 0 \\
+0 &amp; 0 &amp; 1 \end{matrix}\right]\]</span> <span
+class="math display">\[R_{X_{A}}({\theta})=\left[\begin{matrix} 1 &amp;
+0 &amp; 0 \\ 0 &amp; cos{\theta} &amp; -sin{\theta} \\ 0 &amp;
+sin{\theta} &amp; cos{\theta} \end{matrix}\right]=\left[\begin{matrix} 1
+&amp; 0 &amp; 0 \\ 0 &amp; c{\theta} &amp; -s{\theta} \\ 0 &amp;
+s{\theta} &amp; c{\theta} \end{matrix}\right]\]</span> <span
+class="math display">\[R_{Y_{A}}({\theta})=\left[\begin{matrix}
+cos{\theta} &amp; 0 &amp; sin{\theta} \\ 0 &amp; 1 &amp; 0 \\
+-sin{\theta} &amp; 0 &amp; cos{\theta}
+\end{matrix}\right]=\left[\begin{matrix} c{\theta} &amp; 0 &amp;
+s{\theta} \\ 0 &amp; 1 &amp; 0 \\ -s{\theta} &amp; 0 &amp; c{\theta}
+\end{matrix}\right]\]</span> <em>A表示A
+frame，参考坐标系，即世界坐标系，B表示Body
+frame，本地坐标系，即物体坐标系。</em></p>
+<p><strong>描述一个frame(B)相对另一个frame(A)的姿态：</strong> <span
+class="math display">\[^{A}_{B}R=\left[\begin{matrix} | &amp; | &amp; |
+\\ ^{A}X_{B} &amp; ^{A}Y_{B} &amp; ^{A}Z_{B} \\ | &amp; | &amp; |
+\end{matrix}\right]\]</span> <em>其中<span
+class="math inline">\(^{A}X_{B}\)</span>，<span
+class="math inline">\(^{A}Y_{B}\)</span>，<span
+class="math inline">\(^{A}Z_{B}\)</span>分别代表B frame各坐标轴在A
+frame投影的列向量。</em></p>
+<h2 id="fixed-angles">### Fixed Angles</h2>
+<p><strong>针对空间中固定的坐标系XYZ进行旋转操作：</strong> <span
+class="math display">\[^{A}_{B}R_{XYZ}(\gamma,\beta,\alpha)=R_{Z}(\alpha)R_{Y}(\beta)R_{X}(\gamma)\]</span>
+<span class="math display">\[=\left[\begin{matrix} c{\alpha} &amp;
+-s\alpha &amp; 0 \\ s{\alpha} &amp; c{\alpha} &amp; 0 \\ 0 &amp; 0 &amp;
+1 \end{matrix}\right]\left[\begin{matrix} c{\beta} &amp; 0 &amp;
+s{\beta} \\ 0 &amp; 1 &amp; 0 \\ -s{\beta} &amp; 0 &amp; c{\beta}
+\end{matrix}\right]\left[\begin{matrix} 1 &amp; 0 &amp; 0 \\ 0 &amp;
+c{\gamma} &amp; -s{\gamma} \\ 0 &amp; s{\gamma} &amp; c{\gamma}
+\end{matrix}\right]\]</span> <span
+class="math display">\[=\left[\begin{matrix}c{\alpha}c{\beta} &amp;
+c{\alpha}s{\beta}s{\gamma}-s{\alpha}c{\gamma} &amp;
+c{\alpha}s{\beta}c{\gamma}+s{\alpha}s{\gamma} \\ s{\alpha}c{\beta} &amp;
+s{\alpha}s{\beta}s{\gamma}+c{\alpha}c{\gamma} &amp;
+s{\alpha}s{\beta}c{\gamma}-c{\alpha}s{\gamma}  \\-s{\beta} &amp;
+c{\beta}s{\gamma} &amp;
+c{\beta}c{\gamma}\end{matrix}\right]=\left[\begin{matrix}r_{11} &amp;
+r_{12} &amp; r_{13} \\ r_{21} &amp; r_{22} &amp; r_{23} \\ r_{31} &amp;
+r_{32} &amp; r_{33}\end{matrix}\right]\]</span></p>
+<p><em>先转的放在后面，转动的顺序（左乘）是不能互换的。</em></p>
+<p><strong>通过R推算Angles：</strong> <span
+class="math display">\[^{A}_{B}R_{XYZ}(\gamma,\beta,\alpha)=\left[\begin{matrix}c{\alpha}c{\beta}
+&amp; c{\alpha}s{\beta}s{\gamma}-s{\alpha}c{\gamma} &amp;
+c{\alpha}s{\beta}c{\gamma}+s{\alpha}s{\gamma} \\ s{\alpha}c{\beta} &amp;
+s{\alpha}s{\beta}s{\gamma}+c{\alpha}c{\gamma} &amp;
+s{\alpha}s{\beta}c{\gamma}-c{\alpha}s{\gamma}  \\-s{\beta} &amp;
+c{\beta}s{\gamma} &amp;
+c{\beta}c{\gamma}\end{matrix}\right]=\left[\begin{matrix}r_{11} &amp;
+r_{12} &amp; r_{13} \\ r_{21} &amp; r_{22} &amp; r_{23} \\ r_{31} &amp;
+r_{32} &amp; r_{33}\end{matrix}\right]\]</span> <span
+class="math inline">\(if\space{\beta} \neq 90^{\circ}\)</span> <span
+class="math display">\[\beta=Atan2(-r_{31},\sqrt{r_{11}^2+r_{21}^2})\]</span>
+<span
+class="math display">\[\alpha=Atan2(\frac{r_{21}}{c{\beta}},\frac{r_{11}}{c{\beta}})\]</span>
+<span
+class="math display">\[\gamma=Atan2(\frac{r_{32}}{c{\beta}},\frac{r_{33}}{c{\beta}})\]</span>
+<span class="math inline">\(if \space \beta=90^{\circ}\)</span> <span
+class="math display">\[\alpha=0^{\circ}\]</span> <span
+class="math display">\[\gamma=Atan2(r_{12},r_{22})\]</span> <span
+class="math inline">\(if \space \beta=-90^{\circ}\)</span> <span
+class="math display">\[\alpha=0^{\circ}\]</span> <span
+class="math display">\[\gamma=-Atan2(r_{12},r_{22})\]</span> ### Euler
+Angles --- <strong>Z-Y-X</strong> <span
+class="math display">\[^{A}_{B}R_{Z^{&#39;}Y^{&#39;}X^{&#39;}}(\alpha,\beta,\gamma)=^{A}_{B^{&#39;}}R^{B^{&#39;}}_{B^{&#39;&#39;}}R^{B^{&#39;&#39;}}_{B}R=R_{Z^{&#39;}}(\alpha)R_{Y^{&#39;}}(\beta)R_{X^{&#39;}}(\gamma)\]</span>
+<em>先转的放在前面，转动的顺序（左乘）是不能互换的。</em> <em>对Fixed
+Angle以XYZ的顺序转动，相当于对Euler Angle以ZYX的顺序转动。</em>
+<em>Euler Angle的正转和Fixed Angle的反转会得到相同的解。</em></p>
+<h2 id="刚体状态的表达">### 刚体状态的表达</h2>
+<p><strong>Homogeneous transformation matrix (4x4):</strong> <span
+class="math display">\[^{A}_{B}T=\left[\begin{matrix}^{A}_{B}R_{3\times3}
+&amp; ^{A}P_{B_{org}3\times1} \\ 0_{1\times3} &amp;
+1\end{matrix}\right]\]</span> <span
+class="math display">\[=\left[\begin{matrix} | &amp; | &amp; | &amp; |
+\\ ^{A}X_{B} &amp; ^{A}Y_{B} &amp; ^{A}Z_{B} &amp; P_{B_{org}} \\ |
+&amp; | &amp; | &amp; | \\ 0 &amp; 0 &amp; 0 &amp; 1
+\end{matrix}\right]\]</span>
+<em>左上角为旋转矩阵，右上角为移动状态。</em></p>
+<p><strong>移动和转动复合运算：</strong> <span
+class="math display">\[^{A}P_{3\times1}=^{A}_{B}R^{B}P_{3\times1}+^{A}P_{B_{org}3\times1}\]</span>
+<span class="math display">\[\left[\begin{matrix}^{A}P \\
+1\end{matrix}\right]=^{A}_{B}T\left[\begin{matrix}^{B}P \\
+1\end{matrix}\right]\]</span></p>
+<p><strong>可连续操作：</strong> <span
+class="math display">\[^{A}_{B}T=^{A}_{C}T^{C}_{D}T^{D}_{B}T\]</span>
+<em>"sequential transformation"</em></p>
+<p><strong>Mapping and Operator:</strong></p>
+<p>transformation
+matrix既有Mapping（把向量从一个frame转换到另一个frame下来看）的功能也可当作Operator对向量（或点）进行移动或旋转（在同一个frame）。</p>
+<p><span class="math display">\[\left[\begin{matrix}^{A}P_2 \\
+1\end{matrix}\right]=T\left[\begin{matrix}^{A}P_1 \\
+1\end{matrix}\right]\]</span></p>
+<h2 id="homogeneous-transformation-matrix的三种用法">### Homogeneous
+transformation matrix的三种用法</h2>
+<ol type="1">
+<li>描述一个frame（相对于另一个frame）的空间状态。 <span
+class="math display">\[^{A}_{B}T=\left[\begin{matrix} | &amp; | &amp; |
+&amp; | \\ ^{A}X_{B} &amp; ^{A}Y_{B} &amp; ^{A}Z_{B} &amp; P_{B_{org}}
+\\ | &amp; | &amp; | &amp; | \\ 0 &amp; 0 &amp; 0 &amp; 1
+\end{matrix}\right]\]</span></li>
+<li>将point由某一个frame的表达转换到另一个frame来表达。 <span
+class="math display">\[\left[\begin{matrix}^{A}P \\
+1\end{matrix}\right]=^{A}_{B}T\left[\begin{matrix}^{B}P \\
+1\end{matrix}\right]\]</span></li>
+<li>将point(vector)在同一个frame中进行移动和转动。 <span
+class="math display">\[\left[\begin{matrix}^{A}P_2 \\
+1\end{matrix}\right]=T\left[\begin{matrix}^{A}P_1 \\
+1\end{matrix}\right]\]</span></li>
+</ol>
+<h2 id="transformation-matrix运算">### Transformation Matrix运算</h2>
+<p><strong>逆矩阵：</strong></p>
+<p><span
+class="math display">\[^{A}_{B}T^{B}_{A}T=^{A}_{B}T^{A}_{B}T^{-1}=I_{4\times4}\]</span></p>
+<p><span
+class="math display">\[^{A}_{B}T^{-1}=\left[\begin{matrix}^{A}_{B}R^{T}
+&amp; -^{A}_{B}{R^{T}}^{A}P_{B_{org}} \\ 0_{1\times3} &amp;
+1\end{matrix}\right]\]</span> <strong>连续运算法则：</strong></p>
+<ol type="1">
+<li>{B}对{A}的转轴旋转：用"premultiply"，先转的放在后面</li>
+<li>{B}对{B}自身的转轴旋转：用"postmultiply"，先转的放在前面</li>
+</ol>
+<h2 id="links">### links</h2>
+<p><a target="_blank" rel="noopener" href="https://www.coursera.org/learn/robotics1">機器人學一
+(Robotics (1))</a></p>
 
                 
               </div>
@@ -425,8 +495,8 @@ target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8F%8D%E6%
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>反步控制</div>
-      <div>https://symcreg.github.io/2024/09/04/反步控制/</div>
+      <div>Rotation Matrix</div>
+      <div>https://symcreg.github.io/2024/09/05/Rotation-Matrix/</div>
     </div>
     <div class="license-meta">
       
@@ -438,7 +508,7 @@ target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8F%8D%E6%
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年9月4日</div>
+          <div>2024年9月5日</div>
         </div>
       
       
@@ -470,18 +540,12 @@ target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8F%8D%E6%
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/09/04/CLF-CBF/" title="CLF-CBF">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CLF-CBF</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/09/03/%E8%A3%82%E7%97%95/" title="裂痕">
-                        <span class="hidden-mobile">裂痕</span>
+                      <a href="/2024/09/04/CLF-CBF/" title="CLF-CBF">
+                        <span class="hidden-mobile">CLF-CBF</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -504,7 +568,7 @@ target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8F%8D%E6%
         var options = Object.assign(
           {"clientID":"Ov23liugDNyLrIwI2YOT","clientSecret":"c61cdde2c33263524dc52410207af08933347466","repo":"symcreg.github.io","owner":"symcreg","admin":["symcreg"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
           {
-            id: '1043b64ee7296224c7ec423d00ee6609'
+            id: '50b49f73924ad081ba5090ce2c8ae789'
           }
         )
         var gitalk = new Gitalk(options);
