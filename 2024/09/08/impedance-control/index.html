@@ -1,0 +1,764 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/my_icon.png">
+  <link rel="icon" href="/img/my_icon.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="sam">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="代码 根据论文：High-order control barrier functions-based impedance control of a robotic manipulator with time-varying output constraints 的阻抗控制部分编写的代码，不同于visp_ros阻抗控制的官方例程。 123456789101112131415161718">
+<meta property="og:type" content="article">
+<meta property="og:title" content="impedance control">
+<meta property="og:url" content="https://symcreg.github.io/2024/09/08/impedance-control/index.html">
+<meta property="og:site_name" content="symc">
+<meta property="og:description" content="代码 根据论文：High-order control barrier functions-based impedance control of a robotic manipulator with time-varying output constraints 的阻抗控制部分编写的代码，不同于visp_ros阻抗控制的官方例程。 123456789101112131415161718">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-08T11:41:43.000Z">
+<meta property="article:modified_time" content="2024-09-08T12:46:42.037Z">
+<meta property="article:author" content="sam">
+<meta property="article:tag" content="仿真">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>impedance control - symc</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"symcreg.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-0MP4SFZQ6C"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-0MP4SFZQ6C", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-0MP4SFZQ6C');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>symc</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/my_banner.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="impedance control"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-08 19:41" pubdate>
+          2024年9月8日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          895 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          8 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">impedance control</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+<h2 id="代码">代码</h2>
+<p>根据论文：<a
+target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/abs/pii/S0019057822000726"><em>High-order
+control barrier functions-based impedance control of a robotic
+manipulator with time-varying output constraints</em></a>
+的阻抗控制部分编写的代码，不同于visp_ros阻抗控制的官方例程。</p>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br></pre></td><td class="code"><pre><code class="hljs zephir">#include &lt;visp3/gui/vpPlot.h&gt;<br>#include <span class="hljs-string">&quot;../control_proj/base_tool_func.h&quot;</span><br>vpPlot* CreatePlot();<br>void DestroyPlot(vpPlot* plotter);<br><span class="hljs-keyword">int</span> main( <span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> **argv )&#123;<br>    symc::OptSettings opt_settings;<br>    <span class="hljs-keyword">if</span>(symc::ArgHandle(argc, argv, opt_settings) == <span class="hljs-number">1</span>)&#123;<br>        <span class="hljs-keyword">return</span> EXIT_SUCCESS;<br>    &#125;<br><br>    vpROSRobotFrankaCoppeliasim robot;<br>    <span class="hljs-keyword">try</span><br>    &#123;<br>        symc::SignalManager::RegisterSignalHandlers();<br>        <span class="hljs-comment">//init ros node</span><br>        ros::init( argc, argv, <span class="hljs-string">&quot;visp_ros&quot;</span>, ros::init_options::NoSigintHandler );<br>        ros::NodeHandlePtr n = boost::make_shared&lt; ros::NodeHandle &gt;();<br>        ros::Rate loop_rate(<span class="hljs-number">1000</span>);<br>        ros::spinOnce();<br>        robot.setVerbose( opt_settings.verbose);<br>        robot.connect();<br>        symc::ResetSimulation(robot);<br>        vpColVector q_init( &#123; <span class="hljs-number">0</span>, vpMath::rad( <span class="hljs-number">-45</span> ), <span class="hljs-number">0</span>, vpMath::rad( <span class="hljs-number">-135</span> ), <span class="hljs-number">0</span>, vpMath::rad( <span class="hljs-number">90</span> ), vpMath::rad( <span class="hljs-number">45</span> ) &#125; );<br>        symc::InitRobotPosition(robot, q_init);<br>        <span class="hljs-comment">//draw</span><br>        vpPlot *plotter = CreatePlot();<br>        vpColVector q(<span class="hljs-number">7</span>,<span class="hljs-number">0</span>);<br>        robot.getPosition(vpRobot::JOINT_STATE, q);<br>        std::cout &lt;&lt; <span class="hljs-string">&quot;Initial joint position: &quot;</span> &lt;&lt; q.t() &lt;&lt; std::endl;<br>        robot.setRobotState(vpRobot::STATE_FORCE_TORQUE_CONTROL);<br>        robot.setCoppeliasimSyncMode(opt_settings.coppeliasim_sync_mode);<br><br>        <span class="hljs-keyword">bool</span> should_quit  = <span class="hljs-keyword">false</span>;<br>        vpColVector  tau_d(<span class="hljs-number">7</span>,<span class="hljs-number">0</span>), tau_cmd(<span class="hljs-number">7</span>, <span class="hljs-number">0</span>), F_tip(<span class="hljs-number">6</span>,<span class="hljs-number">0</span>);<br>        vpColVector x_e(<span class="hljs-number">6</span>,<span class="hljs-number">0</span>), dx_e(<span class="hljs-number">6</span>,<span class="hljs-number">0</span>), x_d(<span class="hljs-number">6</span>,<span class="hljs-number">0</span>), dx_d(<span class="hljs-number">6</span>,<span class="hljs-number">0</span>), ddx_d(<span class="hljs-number">6</span>,<span class="hljs-number">0</span>);<br>        vpColVector  x_xd(<span class="hljs-number">6</span>,<span class="hljs-number">0</span>), pose_err(<span class="hljs-number">4</span>,<span class="hljs-number">0</span>), p_x(<span class="hljs-number">1</span>,<span class="hljs-number">0</span>), p_y(<span class="hljs-number">1</span>,<span class="hljs-number">0</span>);<br>        vpMatrix   Bd(<span class="hljs-number">6</span>,<span class="hljs-number">6</span>), Kd(<span class="hljs-number">6</span>, <span class="hljs-number">6</span>);<br>        Bd.eye();<br>        Kd.eye();<br>        vpHomogeneousMatrix bTe, fMe_d;<br>        <span class="hljs-comment">// initial pose</span><br>        fMe_d  = robot.get_fMe();<br>        <span class="hljs-comment">//tune</span><br>        Bd = <span class="hljs-number">20</span>*Bd;<br>        Kd = <span class="hljs-number">250</span>*Kd;<br>        symc::SystemInfo sys_info;<br>        symc::RobotInfo robot_info;<br>        <span class="hljs-keyword">while</span> (!should_quit &amp;&amp; !symc::SignalManager::ShouldExit())&#123;<br>            sys_info.UpdateTime(robot);<br>            robot_info.Update(robot, sys_info.dt_);<br>            <br>            <span class="hljs-comment">// Compute Cartesian trajectories</span><br>            fMe_d[<span class="hljs-number">0</span>][<span class="hljs-number">3</span>] = robot_info.fMe0_[<span class="hljs-number">0</span>][<span class="hljs-number">3</span>] + (sys_info.is_trajectory_started_ ? (<span class="hljs-number">0.15</span>*sin(<span class="hljs-number">2</span>*M_PI*(sys_info.time_current_ - sys_info.time_start_trajectory_))) : <span class="hljs-number">0</span>);<br>            fMe_d[<span class="hljs-number">1</span>][<span class="hljs-number">3</span>] = robot_info.fMe0_[<span class="hljs-number">1</span>][<span class="hljs-number">3</span>] + (sys_info.is_trajectory_started_ ? (<span class="hljs-number">0.15</span>*cos(<span class="hljs-number">2</span>*M_PI*(sys_info.time_current_ - sys_info.time_start_trajectory_))) : <span class="hljs-number">0</span>);<br>            <span class="hljs-comment">// fMe_d[2][3] = bTe0[2][3]  + ( start_trajectory ? ( 0.15*sin(fre*( time_cur - time_start_trajectory  ) )) : 0) ;</span><br>            x_d = (vpColVector)vpPoseVector(fMe_d);<br>            dx_d[<span class="hljs-number">0</span>] = (sys_info.is_trajectory_started_ ? (<span class="hljs-number">0.15</span>*<span class="hljs-number">2</span>*M_PI*cos(<span class="hljs-number">2</span>*M_PI*(sys_info.time_current_ - sys_info.time_start_trajectory_))) : <span class="hljs-number">0</span>);<br>            dx_d[<span class="hljs-number">1</span>] = (sys_info.is_trajectory_started_ ? (<span class="hljs-number">-0.15</span>*<span class="hljs-number">2</span>*M_PI*sin(<span class="hljs-number">2</span>*M_PI*(sys_info.time_current_ - sys_info.time_start_trajectory_))) : <span class="hljs-number">0</span>);<br>            <span class="hljs-comment">// dx_d[2] = ( start_trajectory ? (fre*0.15*cos(fre*( time_cur - time_start_trajectory  ) ) ) : 0) ;</span><br>            ddx_d[<span class="hljs-number">0</span>] = (sys_info.is_trajectory_started_ ? (<span class="hljs-number">-0.15</span>*<span class="hljs-number">2</span>*M_PI*<span class="hljs-number">2</span>*M_PI*sin(<span class="hljs-number">2</span>*M_PI*(sys_info.time_current_ - sys_info.time_start_trajectory_ ))) : <span class="hljs-number">0</span>);<br>            ddx_d[<span class="hljs-number">1</span>] = (sys_info.is_trajectory_started_ ? (<span class="hljs-number">-0.15</span>*<span class="hljs-number">2</span>*M_PI*<span class="hljs-number">2</span>*M_PI*cos(<span class="hljs-number">2</span>*M_PI*(sys_info.time_current_ - sys_info.time_start_trajectory_ ))) : <span class="hljs-number">0</span>);<br>            <span class="hljs-comment">// ddx_d[2] = ( start_trajectory ? (-fre*fre*0.15*sin(fre*( time_cur - time_start_trajectory  ) ) ) : 0) ;</span><br><br>            bTe = robot.get_fMe();<br>            x_e = (vpColVector)vpPoseVector(bTe*fMe_d.inverse() ); <span class="hljs-comment">// x - xd</span><br>            dx_e = robot_info.Ja_*robot_info.q_dot_ - dx_d ; <span class="hljs-comment">// x_dot - x_dot_d</span><br>            F_tip = robot_info.M_x_*(-Kd*(x_e)-Bd*(dx_e)+ddx_d) + robot_info.C_x_*robot_info.x_dot_;<br>            tau_d = robot_info.Ja_.t()*F_tip;<br><br><br>            tau_cmd = tau_d*(<span class="hljs-number">1</span>-std::exp(<span class="hljs-number">-4</span>*(sys_info.time_current_ - sys_info.time_start_trajectory_)));<br>            robot.setForceTorque(vpRobot::JOINT_STATE, tau_cmd);<br>            <br>            <br>            <span class="hljs-keyword">if</span>(opt_settings.verbose)<br>            &#123;<br>                std::cout &lt;&lt; <span class="hljs-string">&quot;dt: &quot;</span> &lt;&lt; sys_info.dt_ &lt;&lt; std::endl;<br>            &#125;<br>            <br>            <span class="hljs-comment">//draw plot</span><br>            x_xd[<span class="hljs-number">0</span>] = robot_info.x_[<span class="hljs-number">0</span>];<br>            x_xd[<span class="hljs-number">1</span>] = x_d[<span class="hljs-number">0</span>];<br>            x_xd[<span class="hljs-number">2</span>] = robot_info.x_[<span class="hljs-number">1</span>];<br>            x_xd[<span class="hljs-number">3</span>] =x_d[<span class="hljs-number">1</span>];<br>            x_xd[<span class="hljs-number">4</span>] = robot_info.x_[<span class="hljs-number">2</span>];<br>            x_xd[<span class="hljs-number">5</span>] = x_d[<span class="hljs-number">2</span>];<br>            pose_err[<span class="hljs-number">0</span>] = std::abs(x_d[<span class="hljs-number">0</span>]-robot_info.x_[<span class="hljs-number">0</span>]);<br>            pose_err[<span class="hljs-number">1</span>] = std::abs(x_d[<span class="hljs-number">1</span>]-robot_info.x_[<span class="hljs-number">1</span>]);<br>            pose_err[<span class="hljs-number">2</span>] = std::abs(x_d[<span class="hljs-number">2</span>]-robot_info.x_[<span class="hljs-number">2</span>]);<br>            pose_err[<span class="hljs-number">3</span>] = sqrt(x_e.extract(<span class="hljs-number">3</span>,<span class="hljs-number">3</span> ).sumSquare());<br>            p_x = robot_info.x_[<span class="hljs-number">0</span>];<br>            p_y = robot_info.x_[<span class="hljs-number">1</span>];<br>            plotter-&gt;plot(<span class="hljs-number">0</span>, sys_info.time_current_, x_xd);<br>            plotter-&gt;plot(<span class="hljs-number">1</span>, <span class="hljs-keyword">double</span>(robot_info.x_[<span class="hljs-number">0</span>]), p_y);<br>            plotter-&gt;plot(<span class="hljs-number">2</span>, sys_info.time_current_, robot_info.tau_);<br>            plotter-&gt;plot(<span class="hljs-number">3</span>, sys_info.time_current_, pose_err);<br><br>            <span class="hljs-comment">//exit by clicking right mouse button</span><br>            vpMouseButton::vpMouseButtonType button;<br>            <span class="hljs-keyword">if</span>(vpDisplay::getClick(plotter-&gt;I, button, <span class="hljs-keyword">false</span>))&#123;<br>                <span class="hljs-keyword">if</span>(button==vpMouseButton::button3)&#123;<br>                    should_quit = <span class="hljs-keyword">true</span>;<br>                    tau_cmd = <span class="hljs-number">0</span>;<br>                &#125;<br>            &#125;<br>            robot.wait(sys_info.time_current_, <span class="hljs-number">0.001</span>);<br>        &#125;<br>        <span class="hljs-comment">//save data</span><br>        <span class="hljs-keyword">if</span>(opt_settings.save_data)&#123;<br>            plotter-&gt;saveData(<span class="hljs-number">0</span>, <span class="hljs-string">&quot;impedance-control-position_desire.txt&quot;</span>, <span class="hljs-string">&quot;# &quot;</span> );<br>            plotter-&gt;saveData(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;impedance-control-x_y_position.txt&quot;</span>, <span class="hljs-string">&quot;# &quot;</span> );<br>            plotter-&gt;saveData(<span class="hljs-number">3</span>, <span class="hljs-string">&quot;impedance-control-error.txt&quot;</span>, <span class="hljs-string">&quot;# &quot;</span> );<br>        &#125;<br>        DestroyPlot(plotter);<br>        symc::StopSimulation(robot);<br>    &#125;<br>    <span class="hljs-keyword">catch</span> ( <span class="hljs-keyword">const</span> vpException &amp;e )&#123;<br>        std::cout &lt;&lt; <span class="hljs-string">&quot;ViSP exception: &quot;</span> &lt;&lt; e.what() &lt;&lt; std::endl;<br>        symc::StopSimulation(robot);<br>        <span class="hljs-keyword">return</span> EXIT_FAILURE;<br>    &#125;<br>    <span class="hljs-keyword">return</span> EXIT_SUCCESS;<br>&#125;<br>vpPlot* CreatePlot()&#123;<br>    vpPlot* plotter = nullptr;<br>    plotter = <span class="hljs-keyword">new</span> vpPlot(<span class="hljs-number">4</span>, <span class="hljs-number">800</span>, <span class="hljs-number">800</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-string">&quot;Real time curves plotter&quot;</span> );<br>    plotter-&gt;setTitle(<span class="hljs-number">0</span>, <span class="hljs-string">&quot;x/xd y/yd z/zd[m]&quot;</span> );<br>    plotter-&gt;initGraph(<span class="hljs-number">0</span>, <span class="hljs-number">6</span> );<br>    plotter-&gt;setLegend(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;x&quot;</span> );<br>    plotter-&gt;setLegend(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;xd&quot;</span> );<br>    plotter-&gt;setLegend(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-string">&quot;y&quot;</span> );<br>    plotter-&gt;setLegend(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-string">&quot;yd&quot;</span> );<br>    plotter-&gt;setLegend(<span class="hljs-number">0</span>, <span class="hljs-number">4</span>, <span class="hljs-string">&quot;z&quot;</span> );<br>    plotter-&gt;setLegend(<span class="hljs-number">0</span>, <span class="hljs-number">5</span>, <span class="hljs-string">&quot;zd&quot;</span> );<br>    plotter-&gt;setTitle(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;x/y [m]&quot;</span> );<br>    plotter-&gt;initGraph(<span class="hljs-number">1</span>, <span class="hljs-number">1</span> );<br>    plotter-&gt;setTitle(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;Joint torques measure [Nm]&quot;</span> );<br>    plotter-&gt;initGraph(<span class="hljs-number">2</span>, <span class="hljs-number">7</span> );<br>    plotter-&gt;setLegend( <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;Tau1&quot;</span> );<br>    plotter-&gt;setLegend( <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;Tau2&quot;</span> );<br>    plotter-&gt;setLegend( <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-string">&quot;Tau3&quot;</span> );<br>    plotter-&gt;setLegend( <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-string">&quot;Tau4&quot;</span> );<br>    plotter-&gt;setLegend( <span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-string">&quot;Tau5&quot;</span> );<br>    plotter-&gt;setLegend( <span class="hljs-number">2</span>, <span class="hljs-number">5</span>, <span class="hljs-string">&quot;Tau6&quot;</span> );<br>    plotter-&gt;setLegend( <span class="hljs-number">2</span>, <span class="hljs-number">6</span>, <span class="hljs-string">&quot;Tau7&quot;</span> );<br>    plotter-&gt;setTitle( <span class="hljs-number">3</span>, <span class="hljs-string">&quot;Cartesian EE pose error [m] &quot;</span> );<br>    plotter-&gt;initGraph( <span class="hljs-number">3</span>, <span class="hljs-number">4</span> );<br>    plotter-&gt;setLegend( <span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;e_x&quot;</span> );<br>    plotter-&gt;setLegend( <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;e_y&quot;</span> );<br>    plotter-&gt;setLegend( <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-string">&quot;e_z&quot;</span> );<br>    plotter-&gt;setLegend( <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-string">&quot;||e_o||&quot;</span> );<br><br>    <span class="hljs-keyword">return</span> plotter;<br>&#125;<br><br>void DestroyPlot(vpPlot* plotter)&#123;<br>    <span class="hljs-keyword">if</span> ( plotter != nullptr )<br>    &#123;<br>        delete plotter;<br>        plotter = nullptr;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="推导">推导</h2>
+<p>后面补充，好累。。。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8E%A7%E5%88%B6/" class="category-chain-item">控制</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E4%BB%BF%E7%9C%9F/" class="print-no-link">#仿真</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>impedance control</div>
+      <div>https://symcreg.github.io/2024/09/08/impedance-control/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>sam</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年9月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/06/impedance-control-with-visp-ros/" title="impedance control with visp_ros">
+                        <span class="hidden-mobile">impedance control with visp_ros</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"Ov23liugDNyLrIwI2YOT","clientSecret":"c61cdde2c33263524dc52410207af08933347466","repo":"symcreg.github.io","owner":"symcreg","admin":["symcreg"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: '72e5f93259f4d28da44809a98ea2bbe5'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
