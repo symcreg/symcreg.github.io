@@ -27,7 +27,7 @@
 <meta property="og:description" content="0. 创建catkin工作空间 创建一个新的catkin工作空间： 1mkdir -p ~&#x2F;catkin_franka_ws&#x2F;src 切换到工作空间的src目录： 1cd ~&#x2F;catkin_franka_ws&#x2F;src 初始化工作空间： 1catkin_init_workspace 编译一下： 12cd ~&#x2F;catkin_franka_wscatkin_make -j$(nproc)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-12T05:40:21.000Z">
-<meta property="article:modified_time" content="2024-09-12T06:11:41.246Z">
+<meta property="article:modified_time" content="2024-09-12T06:20:00.789Z">
 <meta property="article:author" content="sam">
 <meta property="article:tag" content="franka">
 <meta name="twitter:card" content="summary_large_image">
@@ -260,7 +260,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          979 字
+          1.2k 字
         
       </span>
     
@@ -271,7 +271,7 @@
         
         
         
-          9 分钟
+          11 分钟
         
       </span>
     
@@ -366,6 +366,14 @@ symc_test_node了。<br />
 将franka::Robot
 robot("robot_ip");注释掉或者修改为真实franka控制柜的IP地址即可正常运行输出Hello
 World!。</p>
+<h1 id="optional">- Optional</h1>
+<p>如果要用vscode进行开发，可以安装vscode的ros插件，这样可以方便的进行代码补全和调试。</p>
+<p>另外如果不对vscode进行配置代码可能会报错无法找到头文件，也无法补全，我们需要手动配置：</p>
+<p>在.vscode/c_cpp_properties.json中添加所需的头文件路径。<br />
+这里给出我的配置文件：<br />
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;configurations&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>      <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;browse&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>          <span class="hljs-attr">&quot;databaseFilename&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$&#123;default&#125;&quot;</span><span class="hljs-punctuation">,</span><br>          <span class="hljs-attr">&quot;limitSymbolsToIncludedHeaders&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><br>        <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;includePath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>          <span class="hljs-string">&quot;/home/symc/catkin_ws/devel/include/**&quot;</span><span class="hljs-punctuation">,</span><br>          <span class="hljs-string">&quot;/opt/ros/melodic/include/**&quot;</span><span class="hljs-punctuation">,</span><br>          <span class="hljs-string">&quot;/usr/include/**&quot;</span><span class="hljs-punctuation">,</span><br>          <span class="hljs-string">&quot;/usr/local/include/**&quot;</span><br>        <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ROS&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;intelliSenseMode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;gcc-x64&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;compilerPath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/usr/bin/gcc&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;cStandard&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;gnu11&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;cppStandard&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;c++14&quot;</span><br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><br>  <span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+/home/symc/catkin_ws/devel/include是我们的工作空间的include路径，/opt/ros/melodic/include是ros的include路径，其他的路径是系统的include路径。<br />
+通过apt安装的libfranka和franka_ros的头文件被安装在了/opt/ros/melodic/include/目录下，如果是源代码安装的则可能在其他目录下。</p>
 <h1 id="links">4. Links</h1>
 <ul>
 <li><a
