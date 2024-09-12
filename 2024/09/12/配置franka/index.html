@@ -27,7 +27,7 @@
 <meta property="og:description" content="0. 创建catkin工作空间 创建一个新的catkin工作空间： 1mkdir -p ~&#x2F;catkin_franka_ws&#x2F;src 切换到工作空间的src目录： 1cd ~&#x2F;catkin_franka_ws&#x2F;src 初始化工作空间： 1catkin_init_workspace 编译一下： 12cd ~&#x2F;catkin_franka_wscatkin_make -j$(nproc)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-12T05:40:21.000Z">
-<meta property="article:modified_time" content="2024-09-12T06:20:00.789Z">
+<meta property="article:modified_time" content="2024-09-12T06:30:14.307Z">
 <meta property="article:author" content="sam">
 <meta property="article:tag" content="franka">
 <meta name="twitter:card" content="summary_large_image">
@@ -324,9 +324,8 @@
 <p>根据<a
 target="_blank" rel="noopener" href="https://frankaemika.github.io/docs/installation_linux.html">官方文档</a>安装libfranka和franka_ros即可。<br />
 注意选择对应的版本。</p>
-<p>实测在Ubuntu 18.04下，可直接使用apt安装ros-kinetic-libfranka
-ros-melodic-franka-ros和ros-kinetic-libfranka
-ros-melodic-franka-ros。</p>
+<p>实测在Ubuntu
+18.04下，可直接使用apt安装ros-melodic-libfranka和ros-melodic-franka-ros。</p>
 <h1 id="创建新项目并配置">2. 创建新项目并配置</h1>
 <h2 id="创建软件包">0. 创建软件包</h2>
 <p>在工作空间的src目录下创建一个新的软件包：<br />
