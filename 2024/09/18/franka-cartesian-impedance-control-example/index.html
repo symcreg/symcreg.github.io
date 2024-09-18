@@ -1,0 +1,801 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/my_icon.png">
+  <link rel="icon" href="/img/my_icon.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="sam">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1.代码 franka官方给出的笛卡尔空间下的阻抗控制例程。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687">
+<meta property="og:type" content="article">
+<meta property="og:title" content="franka cartesian impedance control example">
+<meta property="og:url" content="https://symcreg.github.io/2024/09/18/franka-cartesian-impedance-control-example/index.html">
+<meta property="og:site_name" content="symc">
+<meta property="og:description" content="1.代码 franka官方给出的笛卡尔空间下的阻抗控制例程。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-18T08:14:44.000Z">
+<meta property="article:modified_time" content="2024-09-18T08:43:28.336Z">
+<meta property="article:author" content="sam">
+<meta property="article:tag" content="franka">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>franka cartesian impedance control example - symc</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"symcreg.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-0MP4SFZQ6C"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-0MP4SFZQ6C", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-0MP4SFZQ6C');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>symc</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/my_banner.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="franka cartesian impedance control example"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-18 16:14" pubdate>
+          2024年9月18日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">franka cartesian impedance control example</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+<h1 id="代码">1.代码</h1>
+<p>franka官方给出的笛卡尔空间下的阻抗控制例程。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// Copyright (c) 2023 Franka Robotics GmbH</span><br><span class="hljs-comment">// Use of this source code is governed by the Apache-2.0 license, see LICENSE</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;array&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;functional&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br> <br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;Eigen/Dense&gt;</span></span><br> <br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;franka/duration.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;franka/exception.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;franka/model.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;franka/robot.h&gt;</span></span><br> <br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;examples_common.h&quot;</span></span><br> <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>** argv)</span> </span>&#123;<br>  <span class="hljs-comment">// Check whether the required arguments were passed</span><br>  <span class="hljs-keyword">if</span> (argc != <span class="hljs-number">2</span>) &#123;<br>    std::cerr &lt;&lt; <span class="hljs-string">&quot;Usage: &quot;</span> &lt;&lt; argv[<span class="hljs-number">0</span>] &lt;&lt; <span class="hljs-string">&quot; &lt;robot-hostname&gt;&quot;</span> &lt;&lt; std::endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>  &#125;<br> <br>  <span class="hljs-comment">// Compliance parameters</span><br>  <span class="hljs-type">const</span> <span class="hljs-type">double</span> translational_stiffness&#123;<span class="hljs-number">150.0</span>&#125;;<br>  <span class="hljs-type">const</span> <span class="hljs-type">double</span> rotational_stiffness&#123;<span class="hljs-number">10.0</span>&#125;;<br>  <span class="hljs-function">Eigen::MatrixXd <span class="hljs-title">stiffness</span><span class="hljs-params">(<span class="hljs-number">6</span>, <span class="hljs-number">6</span>)</span>, <span class="hljs-title">damping</span><span class="hljs-params">(<span class="hljs-number">6</span>, <span class="hljs-number">6</span>)</span></span>;<br>  stiffness.<span class="hljs-built_in">setZero</span>();<br>  stiffness.<span class="hljs-built_in">topLeftCorner</span>(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>) &lt;&lt; translational_stiffness * Eigen::MatrixXd::<span class="hljs-built_in">Identity</span>(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>);<br>  stiffness.<span class="hljs-built_in">bottomRightCorner</span>(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>) &lt;&lt; rotational_stiffness * Eigen::MatrixXd::<span class="hljs-built_in">Identity</span>(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>);<br>  damping.<span class="hljs-built_in">setZero</span>();<br>  damping.<span class="hljs-built_in">topLeftCorner</span>(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>) &lt;&lt; <span class="hljs-number">2.0</span> * <span class="hljs-built_in">sqrt</span>(translational_stiffness) *<br>                                     Eigen::MatrixXd::<span class="hljs-built_in">Identity</span>(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>);<br>  damping.<span class="hljs-built_in">bottomRightCorner</span>(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>) &lt;&lt; <span class="hljs-number">2.0</span> * <span class="hljs-built_in">sqrt</span>(rotational_stiffness) *<br>                                         Eigen::MatrixXd::<span class="hljs-built_in">Identity</span>(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>);<br> <br>  <span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-comment">// connect to robot</span><br>    <span class="hljs-function">franka::Robot <span class="hljs-title">robot</span><span class="hljs-params">(argv[<span class="hljs-number">1</span>])</span></span>;<br>    <span class="hljs-built_in">setDefaultBehavior</span>(robot);<br>    <span class="hljs-comment">// load the kinematics and dynamics model</span><br>    franka::Model model = robot.<span class="hljs-built_in">loadModel</span>();<br> <br>    franka::RobotState initial_state = robot.<span class="hljs-built_in">readOnce</span>();<br> <br>    <span class="hljs-comment">// equilibrium point is the initial position</span><br>    <span class="hljs-function">Eigen::Affine3d <span class="hljs-title">initial_transform</span><span class="hljs-params">(Eigen::Matrix4d::Map(initial_state.O_T_EE.data()))</span></span>;<br>    <span class="hljs-function">Eigen::Vector3d <span class="hljs-title">position_d</span><span class="hljs-params">(initial_transform.translation())</span></span>;<br>    <span class="hljs-function">Eigen::Quaterniond <span class="hljs-title">orientation_d</span><span class="hljs-params">(initial_transform.rotation())</span></span>;<br> <br>    <span class="hljs-comment">// set collision behavior</span><br>    robot.<span class="hljs-built_in">setCollisionBehavior</span>(&#123;&#123;<span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>&#125;&#125;,<br>                               &#123;&#123;<span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>&#125;&#125;,<br>                               &#123;&#123;<span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>&#125;&#125;,<br>                               &#123;&#123;<span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>&#125;&#125;);<br> <br>    <span class="hljs-comment">// define callback for the torque control loop</span><br>    std::function&lt;franka::Torques(<span class="hljs-type">const</span> franka::RobotState&amp;, franka::Duration)&gt;<br>        impedance_control_callback = [&amp;](<span class="hljs-type">const</span> franka::RobotState&amp; robot_state,<br>                                         franka::Duration <span class="hljs-comment">/*duration*/</span>) -&gt; franka::Torques &#123;<br>      <span class="hljs-comment">// get state variables</span><br>      std::array&lt;<span class="hljs-type">double</span>, <span class="hljs-number">7</span>&gt; coriolis_array = model.<span class="hljs-built_in">coriolis</span>(robot_state);<br>      std::array&lt;<span class="hljs-type">double</span>, 42&gt; jacobian_array =<br>          model.<span class="hljs-built_in">zeroJacobian</span>(franka::Frame::kEndEffector, robot_state);<br> <br>      <span class="hljs-comment">// convert to Eigen</span><br>      Eigen::Map&lt;<span class="hljs-type">const</span> Eigen::Matrix&lt;<span class="hljs-type">double</span>, <span class="hljs-number">7</span>, <span class="hljs-number">1</span>&gt;&gt; <span class="hljs-built_in">coriolis</span>(coriolis_array.<span class="hljs-built_in">data</span>());<br>      Eigen::Map&lt;<span class="hljs-type">const</span> Eigen::Matrix&lt;<span class="hljs-type">double</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>&gt;&gt; <span class="hljs-built_in">jacobian</span>(jacobian_array.<span class="hljs-built_in">data</span>());<br>      Eigen::Map&lt;<span class="hljs-type">const</span> Eigen::Matrix&lt;<span class="hljs-type">double</span>, <span class="hljs-number">7</span>, <span class="hljs-number">1</span>&gt;&gt; <span class="hljs-built_in">q</span>(robot_state.q.<span class="hljs-built_in">data</span>());<br>      Eigen::Map&lt;<span class="hljs-type">const</span> Eigen::Matrix&lt;<span class="hljs-type">double</span>, <span class="hljs-number">7</span>, <span class="hljs-number">1</span>&gt;&gt; <span class="hljs-built_in">dq</span>(robot_state.dq.<span class="hljs-built_in">data</span>());<br>      <span class="hljs-function">Eigen::Affine3d <span class="hljs-title">transform</span><span class="hljs-params">(Eigen::Matrix4d::Map(robot_state.O_T_EE.data()))</span></span>;<br>      <span class="hljs-function">Eigen::Vector3d <span class="hljs-title">position</span><span class="hljs-params">(transform.translation())</span></span>;<br>      <span class="hljs-function">Eigen::Quaterniond <span class="hljs-title">orientation</span><span class="hljs-params">(transform.rotation())</span></span>;<br> <br>      <span class="hljs-comment">// compute error to desired equilibrium pose</span><br>      <span class="hljs-comment">// position error</span><br>      Eigen::Matrix&lt;<span class="hljs-type">double</span>, <span class="hljs-number">6</span>, <span class="hljs-number">1</span>&gt; error;<br>      error.<span class="hljs-built_in">head</span>(<span class="hljs-number">3</span>) &lt;&lt; position - position_d;<br> <br>      <span class="hljs-comment">// orientation error</span><br>      <span class="hljs-comment">// &quot;difference&quot; quaternion</span><br>      <span class="hljs-keyword">if</span> (orientation_d.<span class="hljs-built_in">coeffs</span>().<span class="hljs-built_in">dot</span>(orientation.<span class="hljs-built_in">coeffs</span>()) &lt; <span class="hljs-number">0.0</span>) &#123;<br>        orientation.<span class="hljs-built_in">coeffs</span>() &lt;&lt; -orientation.<span class="hljs-built_in">coeffs</span>();<br>      &#125;<br>      <span class="hljs-comment">// &quot;difference&quot; quaternion</span><br>      <span class="hljs-function">Eigen::Quaterniond <span class="hljs-title">error_quaternion</span><span class="hljs-params">(orientation.inverse() * orientation_d)</span></span>;<br>      error.<span class="hljs-built_in">tail</span>(<span class="hljs-number">3</span>) &lt;&lt; error_quaternion.<span class="hljs-built_in">x</span>(), error_quaternion.<span class="hljs-built_in">y</span>(), error_quaternion.<span class="hljs-built_in">z</span>();<br>      <span class="hljs-comment">// Transform to base frame</span><br>      error.<span class="hljs-built_in">tail</span>(<span class="hljs-number">3</span>) &lt;&lt; -transform.<span class="hljs-built_in">rotation</span>() * error.<span class="hljs-built_in">tail</span>(<span class="hljs-number">3</span>);<br> <br>      <span class="hljs-comment">// compute control</span><br>      <span class="hljs-function">Eigen::VectorXd <span class="hljs-title">tau_task</span><span class="hljs-params">(<span class="hljs-number">7</span>)</span>, <span class="hljs-title">tau_d</span><span class="hljs-params">(<span class="hljs-number">7</span>)</span></span>;<br> <br>      <span class="hljs-comment">// Spring damper system with damping ratio=1</span><br>      tau_task &lt;&lt; jacobian.<span class="hljs-built_in">transpose</span>() * (-stiffness * error - damping * (jacobian * dq));<br>      tau_d &lt;&lt; tau_task + coriolis;<br> <br>      std::array&lt;<span class="hljs-type">double</span>, 7&gt; tau_d_array&#123;&#125;;<br>      Eigen::VectorXd::<span class="hljs-built_in">Map</span>(&amp;tau_d_array[<span class="hljs-number">0</span>], <span class="hljs-number">7</span>) = tau_d;<br>      <span class="hljs-keyword">return</span> tau_d_array;<br>    &#125;;<br> <br>    <span class="hljs-comment">// start real-time control loop</span><br>    std::cout &lt;&lt; <span class="hljs-string">&quot;WARNING: Collision thresholds are set to high values. &quot;</span><br>              &lt;&lt; <span class="hljs-string">&quot;Make sure you have the user stop at hand!&quot;</span> &lt;&lt; std::endl<br>              &lt;&lt; <span class="hljs-string">&quot;After starting try to push the robot and see how it reacts.&quot;</span> &lt;&lt; std::endl<br>              &lt;&lt; <span class="hljs-string">&quot;Press Enter to continue...&quot;</span> &lt;&lt; std::endl;<br>    std::cin.<span class="hljs-built_in">ignore</span>();<br>    robot.<span class="hljs-built_in">control</span>(impedance_control_callback);<br> <br>  &#125; <span class="hljs-built_in">catch</span> (<span class="hljs-type">const</span> franka::Exception&amp; ex) &#123;<br>    <span class="hljs-comment">// print exception</span><br>    std::cout &lt;&lt; ex.<span class="hljs-built_in">what</span>() &lt;&lt; std::endl;<br>  &#125;<br> <br>  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="说明">2.说明</h1>
+<p>记录一下关键代码的部分。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">franka::Robot <span class="hljs-title">robot</span><span class="hljs-params">(argv[<span class="hljs-number">1</span>])</span></span>;<br><span class="hljs-built_in">setDefaultBehavior</span>(robot);<br><span class="hljs-comment">// load the kinematics and dynamics model</span><br>franka::Model model = robot.<span class="hljs-built_in">loadModel</span>();<br><br>franka::RobotState initial_state = robot.<span class="hljs-built_in">readOnce</span>();<br></code></pre></td></tr></table></figure>
+<p>使用<code>franka::Robot</code>类初始化机械臂，设置默认行为，加载机械臂的运动学和动力学模型，读取机械臂的初始状态。<br />
+官方文档给的ip是172.16.0.2。<br />
+这里有个坑是，如果用apt安装libfranka和franka_ros库的话，examples_common.h头文件会找不到，需要在libfranka的GitHub仓库手动下载examples_common.h和对应的cpp文件，放到工程目录下。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">Eigen::Affine3d <span class="hljs-title">initial_transform</span><span class="hljs-params">(Eigen::Matrix4d::Map(initial_state.O_T_EE.data()))</span></span>;<br><span class="hljs-function">Eigen::Vector3d <span class="hljs-title">position_d</span><span class="hljs-params">(initial_transform.translation())</span></span>;<br><span class="hljs-function">Eigen::Quaterniond <span class="hljs-title">orientation_d</span><span class="hljs-params">(initial_transform.rotation())</span></span>;<br></code></pre></td></tr></table></figure>
+<p>将机械臂的初始位姿转换为Eigen的Affine3d类型，分别提取出位置和四元数表示的姿态。<br />
+这里需要注意initial_state.O_T_EE.data()，libfranka提供的机械臂状态数据是全部是以列优先的array数组。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">std::function&lt;franka::Torques(<span class="hljs-type">const</span> franka::RobotState&amp;, franka::Duration)&gt;<br>    impedance_control_callback = [&amp;](<span class="hljs-type">const</span> franka::RobotState&amp; robot_state, franka::Duration <span class="hljs-comment">/*duration*/</span>) -&gt; franka::Torques &#123;&#125;<br></code></pre></td></tr></table></figure>
+<p>前面的function是cpp11的函数容器，后面的lambda表达式是函数体。<br />
+简单说明function的用法，&lt;&gt;中间外层是函数的返回值类型，内层是参数类型（括号内）。<br />
+lambda表达式的写法是<code>[capture](parameters) -&gt; return_type &#123;body&#125;</code>。<br />
+其中capture是捕获列表，parameters是参数列表，return_type是返回值类型，body是函数体。<br />
+capture可以是<code>[]</code>，<code>[&amp;]</code>，<code>[=]</code>，<code>[this]</code>，<code>[&amp;a, b]</code>等。<br />
+<code>[&amp;]</code>表示引用捕获，<code>[=]</code>表示值捕获，<code>[this]</code>表示捕获当前对象的this指针。<br />
+<code>-&gt; return_type</code>是返回值类型，可以省略。<br />
+<code>&#123;body&#125;</code>是函数体，可以省略。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">error.<span class="hljs-built_in">head</span>(<span class="hljs-number">3</span>) &lt;&lt; position - position_d;<br></code></pre></td></tr></table></figure>
+<p>对于位移的误差，直接相减即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// &quot;difference&quot; quaternion</span><br><span class="hljs-keyword">if</span> (orientation_d.<span class="hljs-built_in">coeffs</span>().<span class="hljs-built_in">dot</span>(orientation.<span class="hljs-built_in">coeffs</span>()) &lt; <span class="hljs-number">0.0</span>) &#123;<br>orientation.<span class="hljs-built_in">coeffs</span>() &lt;&lt; -orientation.<span class="hljs-built_in">coeffs</span>();<br>&#125;<br><span class="hljs-comment">// &quot;difference&quot; quaternion</span><br><span class="hljs-function">Eigen::Quaterniond <span class="hljs-title">error_quaternion</span><span class="hljs-params">(orientation.inverse() * orientation_d)</span></span>;<br>error.<span class="hljs-built_in">tail</span>(<span class="hljs-number">3</span>) &lt;&lt; error_quaternion.<span class="hljs-built_in">x</span>(), error_quaternion.<span class="hljs-built_in">y</span>(), error_quaternion.<span class="hljs-built_in">z</span>();<br><span class="hljs-comment">// Transform to base frame</span><br>error.<span class="hljs-built_in">tail</span>(<span class="hljs-number">3</span>) &lt;&lt; -transform.<span class="hljs-built_in">rotation</span>() * error.<span class="hljs-built_in">tail</span>(<span class="hljs-number">3</span>);<br></code></pre></td></tr></table></figure>
+<p>首先判断两个四元数的点积是否小于0，如果小于0，说明两个四元数的方向相反，需要取反。</p>
+<p>然后通过orientation.inverse() *
+orientation_d计算姿态误差，这里可以通过旋转矩阵来理解，以<span
+class="math inline">\(^{0}{R}_{c}\)</span>(代表当前姿态)和<span
+class="math inline">\(^{0}{R}_{d}\)</span>(代表目标姿态)举例，都是相对于基坐标系的表示，那么姿态误差可以表示为<span
+class="math inline">\(^{c}{R}_{d} = ^{0}{R}_{c}^{-1} \cdot
+^{0}{R}_{d}\)</span>，也就是目标姿态相对于当前姿态的表示，四元数应该也是一样（的吧？）。</p>
+<p>最后通过左乘旋转矩阵将姿态误差转换到基坐标系下。</p>
+<p>chatgpt给出了另一种做法：<br />
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">Eigen::AngleAxisd <span class="hljs-title">angle_axis_error</span><span class="hljs-params">(error_quaternion)</span></span>;<br>error.<span class="hljs-built_in">tail</span>(<span class="hljs-number">3</span>) &lt;&lt; angle_axis_error.<span class="hljs-built_in">axis</span>() * angle_axis_error.<span class="hljs-built_in">angle</span>();<br></code></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">tau_task &lt;&lt; jacobian.<span class="hljs-built_in">transpose</span>() * (-stiffness * error - damping * (jacobian * dq));<br>tau_d &lt;&lt; tau_task + coriolis;<br></code></pre></td></tr></table></figure>
+<p>计算力矩，左乘雅可比矩阵的转置将末端力转换为关节力，然后计算阻抗控制力矩，最后加上科里奥利力。<br />
+这里的例子没有乘以质量矩阵，大概是为了简化。</p>
+<h1 id="links">3. Links</h1>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://frankaemika.github.io/docs/installation_linux.html">libfranka</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://frankaemika.github.io/docs/installation_linux.html">franka_ros</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://frankaemika.github.io/libfranka/0.14.1/examples.html">libfranka_examples</a></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8E%A7%E5%88%B6/" class="category-chain-item">控制</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/franka/" class="print-no-link">#franka</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>franka cartesian impedance control example</div>
+      <div>https://symcreg.github.io/2024/09/18/franka-cartesian-impedance-control-example/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>sam</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年9月18日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/12/%E9%85%8D%E7%BD%AEfranka/" title="配置franka">
+                        <span class="hidden-mobile">配置franka</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"Ov23liugDNyLrIwI2YOT","clientSecret":"c61cdde2c33263524dc52410207af08933347466","repo":"symcreg.github.io","owner":"symcreg","admin":["symcreg"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: '47acd8d34d3e53afe7f8d77eb554db39'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
