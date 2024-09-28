@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>high order control barrier functions with time varying output constraints</title>
+    <link href="/2024/09/28/high-order-control-barrier-functions-with-time-varying-output-constraints/"/>
+    <url>/2024/09/28/high-order-control-barrier-functions-with-time-varying-output-constraints/</url>
+    
+    <content type="html"><![CDATA[<span id="more"></span><p>记录一下拖了一周的HOCBF设计过程。</p><h2 id="问题描述">问题描述</h2><p>给定一个非线性系统：<br /><span class="math display">\[\dot{x} = f(x) + g(x)u\]</span></p><p>其中<spanclass="math inline">\(x\in\mathbb{R}^n\)</span>是系统状态，<spanclass="math inline">\(u\in\mathbb{R}^m\)</span>是控制输入，<spanclass="math inline">\(f(x)\)</span>和<spanclass="math inline">\(g(x)\)</span>是已知的连续函数。</p><p>CBF：<br /><span class="math display">\[h(x) \geq 0\]</span> 其约束为：<br /><span class="math display">\[L_fh(x) + L_gh(x)u \geq -\alpha(h(x))\]</span></p><p>其中<span class="math inline">\(h(x)\)</span>是已知的连续函数。</p><p>设h(t,x)是时间t的函数，其相关度为<spanclass="math inline">\(\lambda\)</span>，则HOCBF约束为：<br /><span class="math display">\[L_f^{\lambda}h(t,x) + L_gL_f^{\lambda-1}h(t,x)u +\frac{\partial^{\lambda} h(t,x)}{\partial t^{\lambda}} \geq-K_{\alpha}(\mu(t,x))\]</span> 其中：<br /><span class="math display">\[K_{\alpha} = \left[\begin{matrix} \alpha_0 &amp; \alpha_1 &amp; \cdots&amp; \alpha_{\lambda-1} \end{matrix} \right]\]</span> <span class="math display">\[\mu(t,x) = \left[\begin{matrix} h(t,x) &amp; L_fh(t,x)+\frac{\partialh(t,x)}{\partial t} &amp; \cdots &amp; L_f^{\lambda-1}h(t,x)+\frac{\partial^{\lambda-1} h(t,x)}{\partial t^{\lambda-1}} \end{matrix}\right]^T\]</span></p><p>确定<spanclass="math inline">\(\alpha_i\)</span>的值，使得HOCBF约束成立。</p><p><span class="math inline">\(\alpha_i\)</span>应满足：<br /><span class="math display">\[s^{\lambda} + \alpha_{\lambda-1}s^{\lambda-1} + \cdots + \alpha_1s +\alpha_0\]</span> <span class="math display">\[\gamma_i &lt; 0\]</span> 其中<spanclass="math inline">\(\gamma_i\)</span>是系统的特征值。</p><h2 id="设计过程">设计过程</h2><p>以三维空间的障碍物避障为例，系统状态为：<br /><span class="math display">\[x = \left[\begin{matrix} x &amp; y &amp; z \end{matrix}\right]^T\]</span> 仿射系统：<br /><span class="math display">\[\dot{x} = f(x) + g(x)u\]</span> 障碍物位置：<br /><span class="math display">\[p_{obs} = \left[\begin{matrix} x_{obs} &amp; y_{obs} &amp; z_{obs}\end{matrix}\right]^T\]</span> 定义CBF：<br /><span class="math display">\[h(x) = (x-x_{obs})^T(x-x_{obs}) - r^2\]</span> 其中r是障碍物半径。</p><p>设相关度<spanclass="math inline">\(\lambda=2\)</span>，则HOCBF约束为：<br /><span class="math display">\[L_f^{2}h(t,x) + L_gL_fh(t,x)u + \frac{\partial^{2} h(t,x)}{\partialt^{2}} \geq -K_{\alpha}(\mu(t,x))\]</span> 其中：<br /><span class="math display">\[K_{\alpha} = \left[\begin{matrix} \alpha_0 &amp; \alpha_1 \end{matrix}\right]\]</span> <span class="math display">\[\mu(t,x) = \left[\begin{matrix} h(t,x) &amp; L_fh(t,x)+\frac{\partialh(t,x)}{\partial t} \end{matrix} \right]^T\]</span></p><p>分别计算<span class="math inline">\(L_f^{2}h(t,x), L_gL_fh(t,x),\frac{\partial^{2} h(t,x)}{\partial t^{2}}\)</span>：<br /><span class="math display">\[L_fh(t,x) = \nabla h(x) \cdot f(x) = 2(x-x_{obs}) \cdot f(x)\]</span> <span class="math display">\[L_f^{2}h(t,x) = \nabla L_fh(x) \cdot f(x) = 2f(x) \cdot f(x) +2(x-x_{obs}) \cdot \nabla f(x) \cdot f(x)\]</span> <span class="math display">\[L_gL_fh(t,x) = \nabla L_fh(x) \cdot g(x) = 2f(x) \cdot g(x) +2(x-x_{obs}) \cdot \nabla f(x) \cdot g(x)\]</span> <span class="math display">\[\frac{\partial h(t,x)}{\partial t} = 2(x-x_{obs}) \cdot \dot{x}\]</span> <span class="math display">\[\frac{\partial^{2} h(t,x)}{\partial t^{2}} = 2(\dot{x} \cdot \dot{x} +(x-x_{obs}) \cdot \ddot{x})\]</span> 此处<span class="math inline">\(\cdot\)</span>都是点乘。</p><p>代入HOCBF约束中，得到：<br /><span class="math display">\[2f(x) \cdot f(x) + 2(x-x_{obs}) \cdot \nabla f(x) \cdot f(x) + 2f(x)\cdot g(x) + 2(x-x_{obs}) \cdot \nabla f(x) \cdot g(x) \cdot u +2(\dot{x} \cdot \dot{x} + (x-x_{obs}) \cdot \ddot{x}) \geq-K_{\alpha}(\mu(t,x))\]</span></p><h2 id="qp问题">QP问题</h2><p>标准QP问题：<br /><span class="math display">\[x = argmin \frac{1}{2}x^THx + F^Tx\]</span> <span class="math display">\[s.t. Ax \geq b\]</span> 将HOCBF约束转化为QP问题：<br /><span class="math display">\[u = argmin \frac{1}{2} ||u - u_{ref}||^2\]</span> <span class="math display">\[s.t. L_f^{2}h(t,x) + L_gL_fh(t,x)u + \frac{\partial^{2} h(t,x)}{\partialt^{2}} \geq -K_{\alpha}(\mu(t,x))\]</span> 其中<spanclass="math inline">\(u_{ref}\)</span>是控制输入的参考值。<br />对于正定矩阵H和常数项F，由于：<br /><span class="math display">\[||u - u_{ref}||^2 = (u - u_{ref})^T(u - u_{ref}) = u^Tu - 2u^Tu_{ref} +u_{ref}^Tu_{ref}\]</span> 忽略常数项，得到：<br /><span class="math display">\[H = I\]</span> <span class="math display">\[F = -2u_{ref}\]</span></p><p>再对QP进行求解，得到控制输入u。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>控制</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>理论</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>franka cartesian impedance control example</title>
     <link href="/2024/09/18/franka-cartesian-impedance-control-example/"/>
     <url>/2024/09/18/franka-cartesian-impedance-control-example/</url>
