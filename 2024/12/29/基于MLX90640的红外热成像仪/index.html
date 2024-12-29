@@ -26,24 +26,24 @@
 <meta property="og:site_name" content="symc">
 <meta property="og:description" content="基于MLX90640的红外热成像仪 1. 引言 红外热成像技术近年来在工业检测、医疗诊断、消防救援和自动化领域得到了广泛应用。作为一种非接触式温度测量和图像生成技术，红外热成像仪能够实时捕获物体表面的温度分布，并以可视化的形式直观呈现。这种特性使其在环境复杂、温度变化敏感的场景中具有不可替代的优势。 MLX90640是一款高性能的红外热成像传感器，采用 32×24 的像素阵列，能够在较">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://symcreg.github.io/2024/12/29/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/MLX90640.png">
-<meta property="og:image" content="https://symcreg.github.io/2024/12/29/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/LVGL.png">
-<meta property="og:image" content="https://symcreg.github.io/2024/12/29/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/SG90.png">
-<meta property="og:image" content="https://symcreg.github.io/2024/12/29/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84.png">
-<meta property="og:image" content="https://symcreg.github.io/2024/12/29/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84.png">
-<meta property="og:image" content="https://symcreg.github.io/2024/12/29/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/%E6%B8%A9%E5%BA%A6%E7%9F%A9%E9%98%B5.png">
-<meta property="og:image" content="https://symcreg.github.io/2024/12/29/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/double_buffer.png">
-<meta property="og:image" content="https://symcreg.github.io/2024/12/29/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/layout.png">
-<meta property="og:image" content="https://symcreg.github.io/2024/12/29/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/chart.png">
-<meta property="og:image" content="https://symcreg.github.io/2024/12/29/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/interface.png">
-<meta property="og:image" content="https://symcreg.github.io/2024/12/29/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/stm32.png">
-<meta property="og:image" content="https://symcreg.github.io/2024/12/29/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/camera.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/MLX90640.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/LVGL.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/SG90.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/%E6%B8%A9%E5%BA%A6%E7%9F%A9%E9%98%B5.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/double_buffer.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/layout.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/chart.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/interface.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/stm32.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/camera.png">
 <meta property="article:published_time" content="2024-12-29T08:36:31.000Z">
-<meta property="article:modified_time" content="2024-12-29T14:21:36.251Z">
+<meta property="article:modified_time" content="2024-12-29T14:24:34.761Z">
 <meta property="article:author" content="sam">
 <meta property="article:tag" content="红外热成像仪">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://symcreg.github.io/2024/12/29/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/MLX90640.png">
+<meta name="twitter:image" content="https://symcreg.github.io/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/MLX90640.png">
   
   
   
@@ -364,7 +364,7 @@
 <li>通过 I2C 接口与主控芯片通信，传输红外图像数据。</li>
 </ul>
 <figure>
-<img src="../img/基于MLX90640的红外热成像仪/MLX90640.png" srcset="/img/loading.gif" lazyload
+<img src="/img/基于MLX90640的红外热成像仪/MLX90640.png" srcset="/img/loading.gif" lazyload
 alt="MLX90640" />
 <figcaption aria-hidden="true">MLX90640</figcaption>
 </figure>
@@ -376,7 +376,7 @@ Library）是一个开源的嵌入式图形界面库，用于开发低资源占�
 - 可运行在 STM32F407 上，与 TFT LCD
 显示屏结合，实现热成像的实时图形化显示。</p>
 <figure>
-<img src="../img/基于MLX90640的红外热成像仪/LVGL.png" srcset="/img/loading.gif" lazyload alt="LVGL" />
+<img src="/img/基于MLX90640的红外热成像仪/LVGL.png" srcset="/img/loading.gif" lazyload alt="LVGL" />
 <figcaption aria-hidden="true">LVGL</figcaption>
 </figure>
 <h3 id="显示屏与外设模块">2.4 显示屏与外设模块</h3>
@@ -392,7 +392,7 @@ Library）是一个开源的嵌入式图形界面库，用于开发低资源占�
 <li>电源模块：提供稳定的3.3V和5V电压，用于驱动 STM32 和 MLX90640。</li>
 </ul>
 <figure>
-<img src="../img/基于MLX90640的红外热成像仪/SG90.png" srcset="/img/loading.gif" lazyload alt="SG90" />
+<img src="/img/基于MLX90640的红外热成像仪/SG90.png" srcset="/img/loading.gif" lazyload alt="SG90" />
 <figcaption aria-hidden="true">SG90</figcaption>
 </figure>
 <h2 id="硬件连接">3. 硬件连接</h2>
@@ -434,7 +434,7 @@ Library）是一个开源的嵌入式图形界面库，用于开发低资源占�
 <h2 id="系统架构">5. 系统架构</h2>
 <h3 id="硬件架构">5.1 硬件架构</h3>
 <figure>
-<img src="../img/基于MLX90640的红外热成像仪/硬件架构.png" srcset="/img/loading.gif" lazyload
+<img src="/img/基于MLX90640的红外热成像仪/硬件架构.png" srcset="/img/loading.gif" lazyload
 alt="硬件架构" />
 <figcaption aria-hidden="true">硬件架构</figcaption>
 </figure>
@@ -453,7 +453,7 @@ alt="硬件架构" />
 </ul>
 <h3 id="软件架构">5.2 软件架构</h3>
 <figure>
-<img src="../img/基于MLX90640的红外热成像仪/软件架构.png" srcset="/img/loading.gif" lazyload
+<img src="/img/基于MLX90640的红外热成像仪/软件架构.png" srcset="/img/loading.gif" lazyload
 alt="软件架构" />
 <figcaption aria-hidden="true">软件架构</figcaption>
 </figure>
@@ -548,7 +548,7 @@ TA = (byte1541 * 256 + byte1540) / 100<br />
 <li>温度解码</li>
 </ol>
 <figure>
-<img src="../img/基于MLX90640的红外热成像仪/温度矩阵.png" srcset="/img/loading.gif" lazyload
+<img src="/img/基于MLX90640的红外热成像仪/温度矩阵.png" srcset="/img/loading.gif" lazyload
 alt="温度矩阵" />
 <figcaption aria-hidden="true">温度矩阵</figcaption>
 </figure>
@@ -669,7 +669,7 @@ target="_blank" rel="noopener" href="https://github.com/symcreg/lvgl_mlx90640/bl
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">update_buffer</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span>* src)</span>&#123;<br>    <span class="hljs-keyword">if</span>(updating_buffer_flag == <span class="hljs-number">0</span>)&#123;<br>        <span class="hljs-built_in">memcpy</span>(buffer_a, src, SRC_WIDTH * SRC_HEIGHT * <span class="hljs-number">2</span>);<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>        <span class="hljs-built_in">memcpy</span>(buffer_b, src, SRC_WIDTH * SRC_HEIGHT * <span class="hljs-number">2</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>这里引入了双缓冲机制，我们定义两个缓冲区buffer_a和buffer_b，一个用于显示，一个用于更新，这样可以避免显示时的闪烁问题。将显示和更新解耦，通过disp_finish_flag和updating_buffer_flag两个flag来标记当前状态，完成绘制操作后，将更新缓冲区中的数据拷贝到显示缓冲区中，然后再绘制显示缓冲区中的数据，这样就可以实现无闪烁的显示效果。为了提高显示效率，我们不进行拷贝操作，而是交换缓冲区，直接更新显示缓冲区的指针，这样就可以直接绘制更新缓冲区中的数据。</p>
 <figure>
-<img src="../img/基于MLX90640的红外热成像仪/double_buffer.png" srcset="/img/loading.gif" lazyload
+<img src="/img/基于MLX90640的红外热成像仪/double_buffer.png" srcset="/img/loading.gif" lazyload
 alt="double_buffer" />
 <figcaption aria-hidden="true">double_buffer</figcaption>
 </figure>
@@ -700,7 +700,7 @@ alt="double_buffer" />
 <p>再设置两个菜单按钮，用于切换显示模式，控制显示参数。</p>
 <p>示意图如下：</p>
 <figure>
-<img src="../img/基于MLX90640的红外热成像仪/layout.png" srcset="/img/loading.gif" lazyload alt="layout" />
+<img src="/img/基于MLX90640的红外热成像仪/layout.png" srcset="/img/loading.gif" lazyload alt="layout" />
 <figcaption aria-hidden="true">layout</figcaption>
 </figure>
 <h4 id="控件设计">6.2.2 控件设计</h4>
@@ -722,7 +722,7 @@ alt="double_buffer" />
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">chart_draw_event_cb</span><span class="hljs-params">(<span class="hljs-type">lv_event_t</span> * e)</span>&#123;<br>    <span class="hljs-type">lv_obj_draw_part_dsc_t</span>* chart_dsc = lv_event_get_draw_part_dsc(e);<br>    <span class="hljs-comment">/* 检查绘制的部分是否是柱状条 */</span><br>    <span class="hljs-keyword">if</span> (chart_dsc-&gt;part == LV_PART_ITEMS) &#123;<br>        <span class="hljs-type">uint16_t</span> index = chart_dsc-&gt;id; <span class="hljs-comment">// 获取当前柱子的索引</span><br>        <span class="hljs-type">lv_coord_t</span> value = chart_dsc-&gt;value; <span class="hljs-comment">// 获取当前柱子的值</span><br>        <span class="hljs-comment">/* 根据值设置不同颜色 */</span><br>        <span class="hljs-comment">// uint16_t ratio = value * 255 / 100;</span><br>        <span class="hljs-comment">// chart_dsc-&gt;rect_dsc-&gt;bg_color = lv_color_make(ratio, 0, (255-ratio)/2);</span><br>		chart_dsc-&gt;rect_dsc-&gt;bg_color = map_temperature_to_color(value, chart_min_value, chart_max_value);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></p>
 <p>这样就能根据温度值设置不同的颜色，更容易区分温度分布情况。</p>
 <figure>
-<img src="../img/基于MLX90640的红外热成像仪/chart.png" srcset="/img/loading.gif" lazyload alt="chart" />
+<img src="/img/基于MLX90640的红外热成像仪/chart.png" srcset="/img/loading.gif" lazyload alt="chart" />
 <figcaption aria-hidden="true">chart</figcaption>
 </figure>
 <p>同时，我们在update_chart_task的回调函数中更新动画效果：</p>
@@ -746,7 +746,7 @@ snapshot和streaming用于切换显示模式，info用于显示温度信息，�
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-built_in">sprintf</span>(output_max_min_temp, <span class="hljs-string">&quot;max T: %.2f \tmin T: %.2f&quot;</span>, max_temp, min_temp);<br><span class="hljs-built_in">sprintf</span>(output_max_min_temp_xy, <span class="hljs-string">&quot;max x: %d y: %d \tmin x: %d y: %d&quot;</span>, max_temp_x, max_temp_y, min_temp_x, min_temp_y);<br><span class="hljs-built_in">sprintf</span>(output_servo_angle, <span class="hljs-string">&quot;servo 0: %d \tdegree\nservo 1: %d \tdegree&quot;</span>, (<span class="hljs-type">int</span>)(<span class="hljs-number">90</span> * (<span class="hljs-type">float</span>)max_temp_x / <span class="hljs-number">32</span>), (<span class="hljs-type">int</span>)(<span class="hljs-number">45</span> * (<span class="hljs-type">float</span>)max_temp_y / <span class="hljs-number">24</span>));<br><span class="hljs-built_in">sprintf</span>(output_mean_variance, <span class="hljs-string">&quot;mean: %.2f \tvariance: %.2f&quot;</span>, mean_temp, variance_temp);<br><span class="hljs-built_in">sprintf</span>(output_time_stamp, <span class="hljs-string">&quot;time: %d s %d ms&quot;</span>, time_s, time_ms);<br>lv_label_set_text(label_max_min_temp, output_max_min_temp);<br>lv_label_set_text(label_max_min_temp_xy, output_max_min_temp_xy);<br>lv_label_set_text(label_servo_angle, output_servo_angle);<br>lv_label_set_text(label_mean_variance, output_mean_variance);<br>lv_label_set_text(label_time_stamp, output_time_stamp);<br></code></pre></td></tr></table></figure>
 <p>完成了图形界面的设计后，我们就可以实现热成像图的显示、温度统计信息的显示、温度直方图的显示、舵机瞄准示意图的显示等功能。</p>
 <figure>
-<img src="../img/基于MLX90640的红外热成像仪/interface.png" srcset="/img/loading.gif" lazyload
+<img src="/img/基于MLX90640的红外热成像仪/interface.png" srcset="/img/loading.gif" lazyload
 alt="interface" />
 <figcaption aria-hidden="true">interface</figcaption>
 </figure>
@@ -757,11 +757,11 @@ alt="interface" />
 <p>定时更新舵机的角度即可。</p>
 <h2 id="实验效果">7. 实验效果</h2>
 <figure>
-<img src="../img/基于MLX90640的红外热成像仪/stm32.png" srcset="/img/loading.gif" lazyload alt="stm32" />
+<img src="/img/基于MLX90640的红外热成像仪/stm32.png" srcset="/img/loading.gif" lazyload alt="stm32" />
 <figcaption aria-hidden="true">stm32</figcaption>
 </figure>
 <figure>
-<img src="../img/基于MLX90640的红外热成像仪/camera.png" srcset="/img/loading.gif" lazyload alt="camera" />
+<img src="/img/基于MLX90640的红外热成像仪/camera.png" srcset="/img/loading.gif" lazyload alt="camera" />
 <figcaption aria-hidden="true">camera</figcaption>
 </figure>
 <p>上图为实验效果，我们可以看到，通过MLX90640红外热成像模块，我们可以实时显示热成像图，显示温度直方图，显示温度统计信息等，成功实现了一个简单的红外热成像仪。</p>
