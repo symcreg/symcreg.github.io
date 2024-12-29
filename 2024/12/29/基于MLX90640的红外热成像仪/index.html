@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://symcreg.github.io/2024/12/29/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/stm32.png">
 <meta property="og:image" content="https://symcreg.github.io/2024/12/29/img/%E5%9F%BA%E4%BA%8EMLX90640%E7%9A%84%E7%BA%A2%E5%A4%96%E7%83%AD%E6%88%90%E5%83%8F%E4%BB%AA/camera.png">
 <meta property="article:published_time" content="2024-12-29T08:36:31.000Z">
-<meta property="article:modified_time" content="2024-12-29T14:17:13.057Z">
+<meta property="article:modified_time" content="2024-12-29T14:21:36.251Z">
 <meta property="article:author" content="sam">
 <meta property="article:tag" content="红外热成像仪">
 <meta name="twitter:card" content="summary_large_image">
@@ -572,16 +572,18 @@ Byte4~ Byte1539---表示上图中768 个点的温度数据，输出顺序一次�
 </p></li>
 <li><p>例子<br />
 一帧数据 5A5A-0206-6E0E-690E-5A0E-XXXX-050E-8D0E-D540</p>
-<p><!-- $$
-  T_{Col1, Row1} = frac{0x0E*256+0x6E}{100} = 36.94 \\
-  T_{Col2, Row1} = frac{0x0E*256+0x69}{100} = 36.89 \\
+<p><span class="math display">\[
+  \begin{align*}
+  T_{Col1, Row1} = \frac{0x0E*256+0x6E}{100} = 36.94 \\
+  T_{Col2, Row1} = \frac{0x0E*256+0x69}{100} = 36.89 \\
   \dots \\
-  T_{Col32, Row24} = frac{0x0E*256+0x50}{100} = 36.64
-  $$ --></p>
+  T_{Col32, Row24} = \frac{0x0E*256+0x50}{100} = 36.64
+  \end{align*}
+  \]</span></p>
 <p>Byte1540---Byte1541表示MLX90640自身温度数据。</p>
-<p><!-- $$
-  TA = frac{0x0E*256+0x8D}{100} = 37.25
-  $$ --></p>
+<p><span class="math display">\[
+  TA = \frac{0x0E*256+0x8D}{100} = 37.25
+  \]</span></p>
 <p>Byte1542---Byte1543表示前771个字的累加和, 每个字为16bit。<br />
 字 1=0x5A5A<br />
 字2=0x0602(即数据量)<br />
