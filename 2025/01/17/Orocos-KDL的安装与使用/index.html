@@ -1,0 +1,776 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/my_icon.png">
+  <link rel="icon" href="/img/my_icon.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="sam">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Orocos KDL的安装与使用 1. 安装 1.1 克隆KDL的仓库 1git clone https:&#x2F;&#x2F;github.com&#x2F;orocos&#x2F;orocos_kinematics_dynamics.git 1.2 编译以及安装 进入orocos_kinematics_dynamics下的orocos_kdl文件夹，创建build文件夹，然后进入build文件夹： 123cd or">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Orocos KDL的安装与使用">
+<meta property="og:url" content="https://symcreg.github.io/2025/01/17/Orocos-KDL%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="symc">
+<meta property="og:description" content="Orocos KDL的安装与使用 1. 安装 1.1 克隆KDL的仓库 1git clone https:&#x2F;&#x2F;github.com&#x2F;orocos&#x2F;orocos_kinematics_dynamics.git 1.2 编译以及安装 进入orocos_kinematics_dynamics下的orocos_kdl文件夹，创建build文件夹，然后进入build文件夹： 123cd or">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-01-17T08:29:06.000Z">
+<meta property="article:modified_time" content="2025-01-17T08:32:53.131Z">
+<meta property="article:author" content="sam">
+<meta property="article:tag" content="KDL">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Orocos KDL的安装与使用 - symc</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"symcreg.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-0MP4SFZQ6C"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-0MP4SFZQ6C", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-0MP4SFZQ6C');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>symc</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/my_banner.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Orocos KDL的安装与使用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-01-17 16:29" pubdate>
+          2025年1月17日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Orocos KDL的安装与使用</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+<h1 id="orocos-kdl的安装与使用">Orocos KDL的安装与使用</h1>
+<h2 id="安装">1. 安装</h2>
+<h3 id="克隆kdl的仓库">1.1 克隆KDL的仓库</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/orocos/orocos_kinematics_dynamics.git<br></code></pre></td></tr></table></figure>
+<h3 id="编译以及安装">1.2 编译以及安装</h3>
+<p>进入orocos_kinematics_dynamics下的orocos_kdl文件夹，创建build文件夹，然后进入build文件夹：<br />
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> orocos_kinematics_dynamics/orocos_kdl<br><span class="hljs-built_in">mkdir</span> build<br><span class="hljs-built_in">cd</span> build<br></code></pre></td></tr></table></figure></p>
+<p>使用cmake编译：<br />
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">cmake ..<br>make<br></code></pre></td></tr></table></figure></p>
+<p>安装：<br />
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> make install<br></code></pre></td></tr></table></figure> 这里的安装路径是默认的/usr/local/include。</p>
+<h3 id="配置cmakelists.txt">1.3 配置CMakeLists.txt</h3>
+<p>在CMakeLists.txt中添加以下内容：<br />
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">find_package</span>(orocos_kdl REQUIRED)<br><span class="hljs-keyword">include_directories</span>(<span class="hljs-variable">$&#123;orocos_kdl_INCLUDE_DIRS&#125;</span>) <span class="hljs-comment"># 添加头文件路径，其实这一步可以不用做，在源代码中直接引用头文件即可</span><br></code></pre></td></tr></table></figure></p>
+<p>在target_link_libraries()中添加${orocos_kdl_LIBRARIES}</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">target_link_libraries</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> <span class="hljs-comment"># 项目名</span><br>  <span class="hljs-variable">$&#123;catkin_LIBRARIES&#125;</span><br>  <span class="hljs-variable">$&#123;orocos_kdl_LIBRARIES&#125;</span><br>)<br></code></pre></td></tr></table></figure>
+<p>有的博客中链接的是orocos-kdl
+orocos-kdl-models，这里visp_ros仿真环境中使用的是${orocos_kdl_LIBRARIES}。</p>
+<h2 id="使用">2. 使用</h2>
+<h3 id="引用头文件">2.1 引用头文件</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;kdl/chain.hpp&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;kdl/chainfksolver.hpp&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;kdl/chainfksolverpos_recursive.hpp&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;kdl/chainiksolverpos_nr.hpp&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;kdl/chainiksolverpos_nr_jl.hpp&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;kdl/chainiksolvervel_pinv.hpp&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;kdl/chainjnttojacsolver.hpp&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;kdl/chainidsolver_recursive_newton_euler.hpp&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;kdl/chaindynparam.hpp&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;kdl/frames_io.hpp&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;kdl/solveri.hpp&gt;</span></span><br></code></pre></td></tr></table></figure>
+<h3 id="创建机器人模型">2.2 创建机器人模型</h3>
+<p>初始化KDL的chain需要机械臂的DH参数，这里以franka机械臂为例，其DH参数可以在<a
+target="_blank" rel="noopener" href="https://tq-franka.cn/FCI/control_parameters.html">官方文档</a>中找到。</p>
+<p>我们首先定义好相关变量：<br />
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp">KDL::Chain chain_; <span class="hljs-comment">// 机械臂的KDL模型</span><br>KDL::ChainFkSolverPos_recursive* fksolver_; <span class="hljs-comment">// 正运动学求解器</span><br>KDL::ChainJntToJacSolver* jacobian_solver_; <span class="hljs-comment">// 雅克比矩阵求解器</span><br>KDL::ChainDynParam* dyn_param_solver_; <span class="hljs-comment">// 动力学参数求解器</span><br></code></pre></td></tr></table></figure></p>
+<p>通过franka机械臂的DH参数初始化机械臂的KDL模型，调用addSegment()函数添加每个关节的DH参数。(这里是从visp_ros中的vpRobotFrankaSim类中获取的DH参数，实际使用时可能需要根据自己的机械臂进行修改)<br />
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp">chain_.<span class="hljs-built_in">addSegment</span>(<br>    KDL::<span class="hljs-built_in">Segment</span>( KDL::<span class="hljs-built_in">Joint</span>( KDL::Joint::None ), KDL::Frame::<span class="hljs-built_in">DH_Craig1989</span>( <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.333</span>, <span class="hljs-number">0.0</span> ) ) );<br>chain_.<span class="hljs-built_in">addSegment</span>(<br>    KDL::<span class="hljs-built_in">Segment</span>( KDL::<span class="hljs-built_in">Joint</span>( KDL::Joint::RotZ ), KDL::Frame::<span class="hljs-built_in">DH_Craig1989</span>( <span class="hljs-number">0.0</span>, -M_PI_2, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span> ) ) );<br>chain_.<span class="hljs-built_in">addSegment</span>(<br>    KDL::<span class="hljs-built_in">Segment</span>( KDL::<span class="hljs-built_in">Joint</span>( KDL::Joint::RotZ ), KDL::Frame::<span class="hljs-built_in">DH_Craig1989</span>( <span class="hljs-number">0.0</span>, M_PI_2, <span class="hljs-number">0.316</span>, <span class="hljs-number">0.0</span> ) ) );<br>chain_.<span class="hljs-built_in">addSegment</span>(<br>    KDL::<span class="hljs-built_in">Segment</span>( KDL::<span class="hljs-built_in">Joint</span>( KDL::Joint::RotZ ), KDL::Frame::<span class="hljs-built_in">DH_Craig1989</span>( <span class="hljs-number">0.0825</span>, M_PI_2, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span> ) ) );<br>chain_.<span class="hljs-built_in">addSegment</span>(<br>    KDL::<span class="hljs-built_in">Segment</span>( KDL::<span class="hljs-built_in">Joint</span>( KDL::Joint::RotZ ), KDL::Frame::<span class="hljs-built_in">DH_Craig1989</span>( <span class="hljs-number">-0.0825</span>, -M_PI_2, <span class="hljs-number">0.384</span>, <span class="hljs-number">0.0</span> ) ) );<br>chain_.<span class="hljs-built_in">addSegment</span>(<br>    KDL::<span class="hljs-built_in">Segment</span>( KDL::<span class="hljs-built_in">Joint</span>( KDL::Joint::RotZ ), KDL::Frame::<span class="hljs-built_in">DH_Craig1989</span>( <span class="hljs-number">0.0</span>, M_PI_2, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span> ) ) );<br>chain_.<span class="hljs-built_in">addSegment</span>(<br>    KDL::<span class="hljs-built_in">Segment</span>( KDL::<span class="hljs-built_in">Joint</span>( KDL::Joint::RotZ ), KDL::Frame::<span class="hljs-built_in">DH_Craig1989</span>( <span class="hljs-number">0.088</span>, M_PI_2, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span> ) ) );<br>chain_.<span class="hljs-built_in">addSegment</span>(<br>    KDL::<span class="hljs-built_in">Segment</span>( KDL::<span class="hljs-built_in">Joint</span>( KDL::Joint::RotZ ), KDL::Frame::<span class="hljs-built_in">DH_Craig1989</span>( <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.107</span>, <span class="hljs-number">0.0</span> ) ) );<br></code></pre></td></tr></table></figure></p>
+<p>初始化机械臂的正运动学求解器、雅克比矩阵求解器和动力学参数求解器：<br />
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp">fksolver_ = <span class="hljs-keyword">new</span> KDL::<span class="hljs-built_in">ChainFkSolverPos_recursive</span>( chain_ );<br>jacobian_solver_ = <span class="hljs-keyword">new</span> KDL::<span class="hljs-built_in">ChainJntToJacSolver</span>( chain_ );<br>dyn_param_solver_ = <span class="hljs-keyword">new</span> KDL::<span class="hljs-built_in">ChainDynParam</span>( chain_, KDL::<span class="hljs-built_in">Vector</span>( <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">-9.81</span> ) );<br></code></pre></td></tr></table></figure></p>
+<h3 id="正运动学求解">2.3 正运动学求解</h3>
+<p>通过机械臂的正运动学求解器求解机械臂的末端位姿：<br />
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">KDL::JntArray <span class="hljs-title">q</span><span class="hljs-params">(<span class="hljs-number">7</span>)</span></span>; <span class="hljs-comment">// 机械臂的关节角度</span><br>KDL::Frame p_out; <span class="hljs-comment">// 机械臂的末端位姿</span><br>fksolver_-&gt;<span class="hljs-built_in">JntToCart</span>( q, p_out ); <span class="hljs-comment">// 调用正运动学求解器求解机械臂的末端位姿</span><br></code></pre></td></tr></table></figure>
+这里的q是机械臂的关节角度，p_out是机械臂的末端位姿。使用时需要将机械臂的关节角度赋值给q，然后调用fksolver_-&gt;JntToCart(
+q, p_out )即可得到机械臂的末端位姿。</p>
+<p>p_out是一个4x4的矩阵，可以通过p_out.M和p_out.p分别获取旋转矩阵和平移向量。而机械臂的关节角度q一般可以通过机械臂的驱动器获取。</p>
+<h3 id="雅克比矩阵求解">2.4 雅克比矩阵求解</h3>
+<p>通过机械臂的雅克比矩阵求解器求解机械臂的雅克比矩阵：<br />
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">KDL::JntArray <span class="hljs-title">q</span><span class="hljs-params">(<span class="hljs-number">7</span>)</span></span>; <span class="hljs-comment">// 机械臂的关节角度</span><br>KDL::Jacobian J; <span class="hljs-comment">// 机械臂的雅克比矩阵</span><br>jacobian_solver_-&gt;<span class="hljs-built_in">JntToJac</span>( q, J );<br></code></pre></td></tr></table></figure>
+可以看到，我们只需要得到机械臂的关节角度q，然后调用jacobian_solver_-&gt;JntToJac(
+q, J
+)即可得到机械臂的雅克比矩阵J，这里的J是一个6x7的矩阵，可以通过J.data获取雅克比矩阵的数据，或者直接访问J(i,j)获取雅克比矩阵的第i行第j列的元素。</p>
+<p>JntToJac()函数的第一个参数是机械臂的关节角度，第二个参数是机械臂的雅克比矩阵，第三个参数segmentNR是要计算雅克比矩阵的末端关节的编号，默认为机械臂的末端关节(-1)，如果需要计算其他关节的雅克比矩阵，可以指定segmentNR。官方给出的函数原型如下：<br />
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* Calculate the jacobian expressed in the base frame of the</span><br><span class="hljs-comment">* chain, with reference point at the end effector of the</span><br><span class="hljs-comment">* *chain. The alghoritm is similar to the one used in</span><br><span class="hljs-comment">* KDL::ChainFkSolverVel_recursive</span><br><span class="hljs-comment">*</span><br><span class="hljs-comment">* @param q_in input joint positions</span><br><span class="hljs-comment">* @param jac output jacobian</span><br><span class="hljs-comment">*</span><br><span class="hljs-comment">* @return success/error code</span><br><span class="hljs-comment">*/</span><br><span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">int</span> <span class="hljs-title">JntToJac</span><span class="hljs-params">(<span class="hljs-type">const</span> JntArray&amp; q_in, Jacobian&amp; jac, <span class="hljs-type">int</span> segmentNR=<span class="hljs-number">-1</span>)</span></span>;<br></code></pre></td></tr></table></figure></p>
+<h3 id="动力学参数求解">2.5 动力学参数求解</h3>
+<p>通过机械臂的动力学参数求解器求解机械臂的动力学参数：<br />
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">KDL::JntArray <span class="hljs-title">q</span><span class="hljs-params">(<span class="hljs-number">7</span>)</span></span>; <span class="hljs-comment">// 机械臂的关节角度</span><br><span class="hljs-function">KDL::JntArray <span class="hljs-title">q_dot</span><span class="hljs-params">(<span class="hljs-number">7</span>)</span></span>; <span class="hljs-comment">// 机械臂的关节速度</span><br><span class="hljs-function">KDL::JntArray <span class="hljs-title">coriolis</span><span class="hljs-params">(<span class="hljs-number">7</span>)</span></span>; <span class="hljs-comment">// 机械臂的科里奥利力矩</span><br><span class="hljs-function">KDL::JntSpaceInertiaMatrix <span class="hljs-title">mass</span><span class="hljs-params">(<span class="hljs-number">7</span>)</span></span>; <span class="hljs-comment">// 机械臂的惯性力矩</span><br>dyn_param_solver_-&gt;<span class="hljs-built_in">JntToCoriolis</span>( q, q_dot, coriolis ); <span class="hljs-comment">// 调用动力学参数求解器求解机械臂的科里奥利力矩</span><br>dyn_param_solver_-&gt;<span class="hljs-built_in">JntToMass</span>( q, mass ); <span class="hljs-comment">// 调用动力学参数求解器求解机械臂的惯性力矩</span><br></code></pre></td></tr></table></figure></p>
+<p>计算机械臂的动力学参数时，需要机械臂的关节角度q和关节速度q_dot，然后调用dyn_param_solver_-&gt;JntToCoriolis(
+q, q_dot, coriolis
+)即可得到机械臂的科里奥利力矩coriolis，调用dyn_param_solver_-&gt;JntToMass(
+q, mass
+)即可得到机械臂的惯性力矩mass。这里的coriolis和mass都是7维的向量，可以通过coriolis.data和mass.data获取数据，或者直接访问coriolis(i)和mass(i)获取第i个关节的科里奥利力矩和惯性力矩。</p>
+<p>在仿真环境中测试时，发现通过这样的方式求解的科里奥利力矩和惯性力矩是空的，暂时还不清楚原因。</p>
+<p>函数原型如下：<br />
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">int</span> <span class="hljs-title">JntToCoriolis</span><span class="hljs-params">(<span class="hljs-type">const</span> JntArray &amp;q, <span class="hljs-type">const</span> JntArray &amp;q_dot, JntArray &amp;coriolis)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">int</span> <span class="hljs-title">JntToMass</span><span class="hljs-params">(<span class="hljs-type">const</span> JntArray &amp;q, JntSpaceInertiaMatrix&amp; H)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">int</span> <span class="hljs-title">JntToGravity</span><span class="hljs-params">(<span class="hljs-type">const</span> JntArray &amp;q,JntArray &amp;gravity)</span></span>;<br></code></pre></td></tr></table></figure></p>
+<p>最后不要忘记释放内存：<br />
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">delete</span> fksolver_;<br><span class="hljs-keyword">delete</span> jacobian_solver_;<br><span class="hljs-keyword">delete</span> dyn_param_solver_;<br></code></pre></td></tr></table></figure></p>
+<h2 id="参考资料">3. 参考资料</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.orocos.org/kdl.html">KDL官方网站</a><br />
+</li>
+<li><a
+target="_blank" rel="noopener" href="https://github.com/orocos/orocos_kinematics_dynamics">KDL的github仓库</a><br />
+</li>
+<li><a
+target="_blank" rel="noopener" href="https://tq-franka.cn/FCI/control_parameters.html">Franka机械臂的DH参数</a><br />
+</li>
+<li><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/fqianqian96/article/details/130410510">KDL库安装与使用</a></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8E%A7%E5%88%B6/" class="category-chain-item">控制</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/KDL/" class="print-no-link">#KDL</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Orocos KDL的安装与使用</div>
+      <div>https://symcreg.github.io/2025/01/17/Orocos-KDL的安装与使用/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>sam</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年1月17日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/01/01/%E9%AB%98%E7%BA%A7%E6%8C%81%E7%BB%AD%E6%80%A7%E5%A8%81%E8%83%81%E4%B8%8E%E6%A3%80%E6%B5%8B%E6%8A%80%E6%9C%AF%E7%AE%80%E8%BF%B0/" title="高级持续性威胁与检测技术简述">
+                        <span class="hidden-mobile">高级持续性威胁与检测技术简述</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"Ov23liugDNyLrIwI2YOT","clientSecret":"c61cdde2c33263524dc52410207af08933347466","repo":"symcreg.github.io","owner":"symcreg","admin":["symcreg"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: '7ef646b96da111e72eb163fc24c1848b'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
