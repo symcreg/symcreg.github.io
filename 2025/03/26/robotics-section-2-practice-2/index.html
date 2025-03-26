@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://symcreg.github.io/img/robotics-section-2-practice-2/result_c_ii.png">
 <meta property="og:image" content="https://symcreg.github.io/img/robotics-section-2-practice-2/result_d.png">
 <meta property="article:published_time" content="2025-03-26T14:17:00.000Z">
-<meta property="article:modified_time" content="2025-03-26T15:12:52.511Z">
+<meta property="article:modified_time" content="2025-03-26T16:20:09.079Z">
 <meta property="article:author" content="sam">
 <meta property="article:tag" content="理论">
 <meta name="twitter:card" content="summary_large_image">
@@ -396,10 +396,10 @@ P_{A} \\ 0 &amp; 1 \end{bmatrix} \begin{bmatrix} R_{B} &amp; P_{B} \\ 0
 \]</span></li>
 </ol>
 <p><span class="math display">\[
-^{C}T_{A} = ^{B}T_{A}^{-1} = (^{A}T_{B} \cdot ^{B}T_{C})^{-1} =
-(^{A}T_{C})^{-1} = \begin{bmatrix} R_{A} \cdot R_{B} &amp; R_{A} \cdot
-P_{B} + P_{A} \\ 0 &amp; 1 \end{bmatrix}^{-1} = \begin{bmatrix}
-R_{B}^{T} &amp; -R_{B}^{T} \cdot P_{B} \\ 0 &amp; 1 \end{bmatrix}
+^{C}T_{A} = (^{A}T_{C})^{-1} = (^{A}T_{B} \cdot ^{B}T_{C})^{-1} =
+\begin{bmatrix} R_{A} \cdot R_{B} &amp; R_{A} \cdot P_{B} + P_{A} \\ 0
+&amp; 1 \end{bmatrix}^{-1} = \begin{bmatrix} R_{B}^{T} &amp; -R_{B}^{T}
+\cdot P_{B} \\ 0 &amp; 1 \end{bmatrix}
 \]</span></p>
 <ol start="2" type="i">
 <li><p><span class="math display">\[
