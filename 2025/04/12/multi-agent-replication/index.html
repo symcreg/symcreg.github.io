@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://symcreg.github.io/img/multi-agent-replication/z.png">
 <meta property="article:published_time" content="2025-04-12T10:40:41.000Z">
-<meta property="article:modified_time" content="2025-04-24T06:37:54.572Z">
+<meta property="article:modified_time" content="2025-04-24T06:41:30.699Z">
 <meta property="article:author" content="sam">
 <meta property="article:tag" content="论文复现">
 <meta name="twitter:card" content="summary_large_image">
@@ -388,11 +388,6 @@ z的更新也是采用了Runge-Kutta方法. 这个问题已经修复了. <figure
 <h4 id="agent-3">Agent-3</h4>
 <p>仿真结果得到z是满足一致性要求的,
 但是agent-3的状态输出y却没办法收敛到z3. 暂时没有找到原因.</p>
-<hr />
-<p>github仓库:<a
-target="_blank" rel="noopener" href="https://github.com/symcreg/multi_agent">multi_agent</a><br />
-博客:<a
-target="_blank" rel="noopener" href="https://symc.wang/multi-agent-replication/">multi-agent-replication</a></p>
 <h2 id="理论分析">理论分析</h2>
 <h3 id="理论基础">1. 理论基础</h3>
 对于多智能体系统, 考虑高阶线性系统:<br />
@@ -487,6 +482,11 @@ v_i = \alpha \beta \int_0^t \sum_{j \in N_i} (z_i - z_j) dt
 v_j\)</span>可以理解为历史中一致性误差反馈,
 根据历史中邻居agent作用的大小来判断当前是要"缓一缓"还是要"加速",
 从而更柔和和稳定, 快速达到一致性.</p>
+<hr />
+<p>github仓库:<a
+target="_blank" rel="noopener" href="https://github.com/symcreg/multi_agent">multi_agent</a><br />
+博客:<a
+target="_blank" rel="noopener" href="https://symc.wang/multi-agent-replication/">multi-agent-replication</a></p>
 
                 
               </div>
