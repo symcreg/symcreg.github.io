@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>robotics section 4 matlab practice</title>
+    <link href="/2025/04/24/robotics-section-4-matlab-practice/"/>
+    <url>/2025/04/24/robotics-section-4-matlab-practice/</url>
+    
+    <content type="html"><![CDATA[<span id="more"></span><h1 id="robotics-section-4-matlab-practice">robotics section 4 matlabpractice</h1><p>使用matlab robot toolbox工具箱编程求解工作空间</p><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs matlab"><span class="hljs-comment">% 加载内置的 Puma560 模型</span><br>mdl_puma560<br>robot = p560;<br><br><span class="hljs-comment">% 获取每个关节的范围（这里假设是 +-160° 的范围，单位转为弧度）</span><br>q1 = deg2rad(<span class="hljs-built_in">linspace</span>(<span class="hljs-number">-160</span>, <span class="hljs-number">160</span>, <span class="hljs-number">20</span>));<br>q2 = deg2rad(<span class="hljs-built_in">linspace</span>(<span class="hljs-number">-110</span>, <span class="hljs-number">110</span>, <span class="hljs-number">20</span>));<br>q3 = deg2rad(<span class="hljs-built_in">linspace</span>(<span class="hljs-number">-135</span>, <span class="hljs-number">135</span>, <span class="hljs-number">20</span>));<br>q4 = deg2rad(<span class="hljs-built_in">linspace</span>(<span class="hljs-number">-266</span>, <span class="hljs-number">266</span>, <span class="hljs-number">10</span>));<br>q5 = deg2rad(<span class="hljs-built_in">linspace</span>(<span class="hljs-number">-100</span>, <span class="hljs-number">100</span>, <span class="hljs-number">10</span>));<br>q6 = deg2rad(<span class="hljs-built_in">linspace</span>(<span class="hljs-number">-266</span>, <span class="hljs-number">266</span>, <span class="hljs-number">10</span>));<br><br>workspace = [];<br><br><span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span> = <span class="hljs-number">1</span>:<span class="hljs-built_in">length</span>(q1)<br>    <span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span> = <span class="hljs-number">1</span>:<span class="hljs-built_in">length</span>(q2)<br>        <span class="hljs-keyword">for</span> k = <span class="hljs-number">1</span>:<span class="hljs-built_in">length</span>(q3)<br>            T = robot.fkine([q1(<span class="hljs-built_in">i</span>), q2(<span class="hljs-built_in">j</span>), q3(k), <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>]);<br>            position = transl(T); <span class="hljs-comment">% 提取平移部分</span><br>            workspace = [workspace; position];<br>        <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-built_in">figure</span>;<br><span class="hljs-built_in">plot3</span>(workspace(:,<span class="hljs-number">1</span>), workspace(:,<span class="hljs-number">2</span>), workspace(:,<span class="hljs-number">3</span>), <span class="hljs-string">&#x27;.&#x27;</span>, <span class="hljs-string">&#x27;MarkerSize&#x27;</span>, <span class="hljs-number">1</span>);<br>xlabel(<span class="hljs-string">&#x27;X (m)&#x27;</span>);<br>ylabel(<span class="hljs-string">&#x27;Y (m)&#x27;</span>);<br>zlabel(<span class="hljs-string">&#x27;Z (m)&#x27;</span>);<br>title(<span class="hljs-string">&#x27;Puma560 Robot Workspace&#x27;</span>);<br>grid on;<br>axis equal;<br></code></pre></td></tr></table></figure><p>得到结果:</p><figure><img src="/img/robotics-section-4-matlab-practice/result.png"alt="result" /><figcaption aria-hidden="true">result</figcaption></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>控制</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>理论</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>工业双臂机器人国内外发展技术概况</title>
     <link href="/2025/04/21/%E5%B7%A5%E4%B8%9A%E5%8F%8C%E8%87%82%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%9B%BD%E5%86%85%E5%A4%96%E5%8F%91%E5%B1%95%E6%8A%80%E6%9C%AF%E6%A6%82%E5%86%B5/"/>
     <url>/2025/04/21/%E5%B7%A5%E4%B8%9A%E5%8F%8C%E8%87%82%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%9B%BD%E5%86%85%E5%A4%96%E5%8F%91%E5%B1%95%E6%8A%80%E6%9C%AF%E6%A6%82%E5%86%B5/</url>
