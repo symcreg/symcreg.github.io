@@ -19,22 +19,22 @@
   <meta name="author" content="sam">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这是哪？   什么时候我又来到了这里？   身体自己动了起来。   在找什么呢？   却一直徘徊在这无端的河岸。   没有桥没有船。   只有我。   只有我吗？   那是谁？   有人伫立着，   就在对岸。   过去了多久？   好像有什么东西藏着，   我踯躅着不敢上前。   你是谁？   迷雾">
+    <meta name="description" content="总结一下jwt的使用 从22年旧博客贴过来的文，稍微进行了整理。 1. 安装 终端安装即可： 1go get github.com&#x2F;dgrijalva&#x2F;jwt-go 2. 使用 首先定义结构体用来生成token 12345type Claim struct &#123;	Id   int	User string	jwt.StandardClaims&#125; 其中jwt.St">
 <meta property="og:type" content="article">
-<meta property="og:title" content="彼岸无人">
-<meta property="og:url" content="https://symcreg.github.io/2025/06/12/%E5%BD%BC%E5%B2%B8%E6%97%A0%E4%BA%BA/index.html">
+<meta property="og:title" content="golang jwt鉴权">
+<meta property="og:url" content="https://symcreg.github.io/2025/06/27/golang-jwt%E9%89%B4%E6%9D%83/index.html">
 <meta property="og:site_name" content="symc">
-<meta property="og:description" content="这是哪？   什么时候我又来到了这里？   身体自己动了起来。   在找什么呢？   却一直徘徊在这无端的河岸。   没有桥没有船。   只有我。   只有我吗？   那是谁？   有人伫立着，   就在对岸。   过去了多久？   好像有什么东西藏着，   我踯躅着不敢上前。   你是谁？   迷雾">
+<meta property="og:description" content="总结一下jwt的使用 从22年旧博客贴过来的文，稍微进行了整理。 1. 安装 终端安装即可： 1go get github.com&#x2F;dgrijalva&#x2F;jwt-go 2. 使用 首先定义结构体用来生成token 12345type Claim struct &#123;	Id   int	User string	jwt.StandardClaims&#125; 其中jwt.St">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-06-12T05:41:54.000Z">
-<meta property="article:modified_time" content="2025-06-12T06:00:58.109Z">
+<meta property="article:published_time" content="2025-06-27T03:11:32.000Z">
+<meta property="article:modified_time" content="2025-06-27T03:21:00.070Z">
 <meta property="article:author" content="sam">
-<meta property="article:tag" content="poem">
+<meta property="article:tag" content="golang">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>彼岸无人 - symc</title>
+  <title>golang jwt鉴权 - symc</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -237,7 +237,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="彼岸无人"></span>
+            <span id="subtitle" data-typed-text="golang jwt鉴权"></span>
           
         </div>
 
@@ -248,8 +248,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-06-12 13:41" pubdate>
-          2025年6月12日 下午
+        <time datetime="2025-06-27 11:11" pubdate>
+          2025年6月27日 上午
         </time>
       </span>
     
@@ -260,7 +260,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          225 字
+          596 字
         
       </span>
     
@@ -271,7 +271,7 @@
         
         
         
-          2 分钟
+          5 分钟
         
       </span>
     
@@ -308,126 +308,39 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">彼岸无人</h1>
+            <h1 id="seo-header">golang jwt鉴权</h1>
             
             
               <div class="markdown-body">
                 
                 <span id="more"></span>
-<center>
-这是哪？
-</center>
-<center>
-什么时候我又来到了这里？
-</center>
-<center>
-身体自己动了起来。
-</center>
-<center>
-在找什么呢？
-</center>
-<center>
-却一直徘徊在这无端的河岸。
-</center>
-<center>
-没有桥没有船。
-</center>
-<center>
-只有我。
-</center>
-<center>
-只有我吗？
-</center>
-<center>
-那是谁？
-</center>
-<center>
-有人伫立着，
-</center>
-<center>
-就在对岸。
-</center>
-<center>
-过去了多久？
-</center>
-<center>
-好像有什么东西藏着，
-</center>
-<center>
-我踯躅着不敢上前。
-</center>
-<center>
-你是谁？
-</center>
-<center>
-迷雾弥漫不散，
-</center>
-<center>
-模糊间我拼命凝望也看不清你的脸。
-</center>
-<center>
-谁在呼喊？
-</center>
-<center>
-一遍遍从天边传来，
-</center>
-<center>
-张开嘴却是沉默的语言。
-</center>
-<center>
-是因为这里是夜晚？
-</center>
-<center>
-低下头，
-</center>
-<center>
-有腐烂的味道。
-</center>
-<center>
-我看见自己手上沾着血，
-</center>
-<center>
-不是我的。
-</center>
-<center>
-是谁的？
-</center>
-<center>
-这不是梦，
-</center>
-<center>
-梦可以醒来。
-</center>
-<center>
-记忆开始断裂。
-</center>
-<center>
-一阵风吹过我的眼角，
-</center>
-<center>
-冰冷。
-</center>
-<center>
-刺痛。
-</center>
-<center>
-我记起了！
-</center>
-<center>
-我曾见过你，
-</center>
-<center>
-在很久远，
-</center>
-<center>
-很久远以前。
-</center>
-<center>
-我曾唤你名，
-</center>
-<center>
-在你还没流泪之前。
-</center>
+<h2 id="总结一下jwt的使用">总结一下jwt的使用</h2>
+<p>从22年旧博客贴过来的文，稍微进行了整理。</p>
+<h3 id="安装">1. 安装</h3>
+<p>终端安装即可：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">go</span> <span class="hljs-built_in">get</span> github.<span class="hljs-keyword">com</span>/dgrijalva/jwt-<span class="hljs-keyword">go</span><br></code></pre></td></tr></table></figure>
+<h3 id="使用">2. 使用</h3>
+<p>首先定义结构体用来生成token</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Claim <span class="hljs-keyword">struct</span> &#123;<br>	Id   <span class="hljs-type">int</span><br>	User <span class="hljs-type">string</span><br>	jwt.StandardClaims<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>其中jwt.StandardClaims为标准claims结构</p>
+<p>设置过期时间 ExpiretTime=2d</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">claim.ExpiresAt = time.Now().Add(ExpireTime).Unix()<br></code></pre></td></tr></table></figure>
+<p>设置签发人<br />
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">claim.Issuer = <span class="hljs-string">&quot;SYMC&quot;</span><br></code></pre></td></tr></table></figure></p>
+<p>生成token，第一个参数为加密方式，第二个需要传入自定义的结构体，之后加盐</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">token,err:=jwt.NewWithClaims(jwt.SigningMethodHS256, claim).SignedString(<span class="hljs-string">&quot;SYMC&quot;</span>)<br></code></pre></td></tr></table></figure>
+<p>实际上使用是，并不应该将SignedString写到代码中，一是不方便修改，二是在使用代码托管平台上传代码时会泄密。应该使用viper等工具读取配置。</p>
+<p>解析函数，第一个参数为需要解析的token字符串，第二个参数为我们自定义的结构，第三个为固定格式的函数写法</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go">token, err := jwt.ParseWithClaims(tokenStr, &amp;Claim&#123;&#125;, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(token *jwt.Token)</span></span> (<span class="hljs-keyword">interface</span>&#123;&#125;, <span class="hljs-type">error</span>) &#123;<br>		<span class="hljs-keyword">return</span> secret, <span class="hljs-literal">nil</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+<p>通过断言取得claim(我们自定义的结构)指针</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">claim, ok := token.Claims.(*Claim)<br></code></pre></td></tr></table></figure>
+<h3 id="完整代码">3. 完整代码</h3>
+<p>完整代码如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> secret = <span class="hljs-string">&quot;SYMC&quot;</span>                 <span class="hljs-comment">//盐</span><br><span class="hljs-keyword">var</span> ExpireTime = time.Hour * <span class="hljs-number">24</span> * <span class="hljs-number">2</span> <span class="hljs-comment">//过期时间2d</span><br><span class="hljs-keyword">type</span> Jwt <span class="hljs-keyword">struct</span> &#123;<br>	Id   <span class="hljs-type">int</span>    <span class="hljs-string">`json:&quot;id&quot;`</span><br>	User <span class="hljs-type">string</span> <span class="hljs-string">`json:&quot;user&quot;`</span><br>	jwt.StandardClaims<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">GenerateTokenHandler</span><span class="hljs-params">(c *gin.Context)</span></span> &#123;<br>	<span class="hljs-keyword">var</span> claim Jwt<br>	c.ShouldBindJSON(&amp;claim)<br>	claim.ExpiresAt = time.Now().Add(ExpireTime).Unix() <span class="hljs-comment">//过期时间</span><br>	claim.Issuer = <span class="hljs-string">&quot;SYMC&quot;</span>                               <span class="hljs-comment">//签发人</span><br>	token, err := GenToken(claim)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		c.JSON(<span class="hljs-number">400</span>, gin.H&#123;<br>			<span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">400</span>,<br>			<span class="hljs-string">&quot;msg&quot;</span>:  <span class="hljs-string">&quot;error&quot;</span>,<br>		&#125;)<br>	&#125;<br>	c.JSON(<span class="hljs-number">200</span>, gin.H&#123;<br>		<span class="hljs-string">&quot;code&quot;</span>:  <span class="hljs-number">200</span>,<br>		<span class="hljs-string">&quot;msg&quot;</span>:   <span class="hljs-string">&quot;success&quot;</span>,<br>		<span class="hljs-string">&quot;token&quot;</span>: token,<br>	&#125;)<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">GenToken</span><span class="hljs-params">(claim Jwt)</span></span> (<span class="hljs-type">string</span>, <span class="hljs-type">error</span>) &#123;<br>	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claim)<br>	signedToken, err := token.SignedString(<span class="hljs-string">&quot;SYMC&quot;</span>) <span class="hljs-comment">//加盐</span><br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>, err<br>	&#125;<br>	<span class="hljs-keyword">return</span> signedToken, <span class="hljs-literal">nil</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">ParseToken</span><span class="hljs-params">(tokenStr <span class="hljs-type">string</span>)</span></span> (*Jwt, <span class="hljs-type">error</span>) &#123;<br>	token, err := jwt.ParseWithClaims(tokenStr, &amp;Jwt&#123;&#125;, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(token *jwt.Token)</span></span> (<span class="hljs-keyword">interface</span>&#123;&#125;, <span class="hljs-type">error</span>) &#123;<br>		<span class="hljs-keyword">return</span> secret, <span class="hljs-literal">nil</span><br>	&#125;)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, err<br>	&#125;<br>	claim, ok := token.Claims.(*Jwt)<br>	<span class="hljs-keyword">if</span> ok &amp;&amp; token.Valid &#123;<br>		<span class="hljs-keyword">return</span> claim, <span class="hljs-literal">nil</span><br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, errors.New(<span class="hljs-string">&quot;invalid token&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="中间件">4. 中间件</h3>
+<p>用于解析的中间件：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Authorization</span><span class="hljs-params">(c *gin.Context)</span></span> &#123;<br>	token := c.GetHeader(<span class="hljs-string">&quot;Authorization&quot;</span>)<br>	<span class="hljs-keyword">if</span> token == <span class="hljs-string">&quot;&quot;</span> &#123;<br>		c.JSON(<span class="hljs-number">401</span>, gin.H&#123;<br>			<span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">401</span>,<br>			<span class="hljs-string">&quot;msg&quot;</span>:  <span class="hljs-string">&quot;none token&quot;</span>,<br>		&#125;)<br>		c.Abort()<br>		<span class="hljs-keyword">return</span><br>	&#125;<br>	claim, err := utility.ParseToken(token)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		c.JSON(<span class="hljs-number">401</span>, gin.H&#123;<br>			<span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">401</span>,<br>			<span class="hljs-string">&quot;msg&quot;</span>:  <span class="hljs-string">&quot;invalid token&quot;</span>,<br>		&#125;)<br>		c.Abort()<br>		<span class="hljs-keyword">return</span><br>	&#125;<br>	c.Set(<span class="hljs-string">&quot;Id&quot;</span>, claim.Id)<br>	c.Set(<span class="hljs-string">&quot;User&quot;</span>, claim.User)<br>	c.Next()<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>值得注意的是c.set是用于c(Gin.Context类型)中传递数据，通过c.get取得内容</p>
 
                 
               </div>
@@ -446,7 +359,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%8F%91%E7%94%B5/" class="category-chain-item">发电</a>
+  <a href="/categories/%E5%90%8E%E7%AB%AF/" class="category-chain-item">后端</a>
   
   
 
@@ -461,7 +374,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/poem/" class="print-no-link">#poem</a>
+        <a href="/tags/golang/" class="print-no-link">#golang</a>
       
     </div>
   
@@ -473,8 +386,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>彼岸无人</div>
-      <div>https://symcreg.github.io/2025/06/12/彼岸无人/</div>
+      <div>golang jwt鉴权</div>
+      <div>https://symcreg.github.io/2025/06/27/golang-jwt鉴权/</div>
     </div>
     <div class="license-meta">
       
@@ -486,7 +399,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年6月12日</div>
+          <div>2025年6月27日</div>
         </div>
       
       
@@ -518,18 +431,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/06/27/golang-jwt%E9%89%B4%E6%9D%83/" title="golang jwt鉴权">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">golang jwt鉴权</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/06/05/robotics-section-7-matlab-practice/" title="robotics section 7 matlab practice">
-                        <span class="hidden-mobile">robotics section 7 matlab practice</span>
+                      <a href="/2025/06/12/%E5%BD%BC%E5%B2%B8%E6%97%A0%E4%BA%BA/" title="彼岸无人">
+                        <span class="hidden-mobile">彼岸无人</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -552,7 +459,7 @@
         var options = Object.assign(
           {"clientID":"Ov23li5FvPkWxLe96Tkk","clientSecret":"5e38b114f45f4e5129c0b22a376534f39fa170c2","repo":"symcreg.github.io","owner":"symcreg","admin":["symcreg"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
           {
-            id: '62f06b4e58cdc07beb6cb45679a57c4e'
+            id: '2990f531410f1c3e7c3730b3436dec85'
           }
         )
         var gitalk = new Gitalk(options);
