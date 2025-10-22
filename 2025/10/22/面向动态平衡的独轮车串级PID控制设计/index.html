@@ -26,26 +26,27 @@
 <meta property="og:site_name" content="symc">
 <meta property="og:description" content="面向动态平衡的独轮车串级PID控制设计 一、问题描述 1.1 研究背景 随着社会经济与科技的飞速发展，以服务机器人、自动平衡车为代表的智能移动平台在物流、个人出行及特殊作业等领域的应用日趋广泛。在众多平台中，独轮车凭借其结构紧凑、高机动性与零转弯半径等独特优势，在狭窄及复杂环境中展现出巨大的应用潜力，因而受到了学术界与工程界的广泛关注。 然而，制约独轮车发展的核心瓶颈在于其固有的不稳定">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/pitch_control.jpg">
-<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/roll_control.jpg">
-<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/lean.jpg">
-<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/brick.png">
-<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/body.png">
-<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/pid.png">
-<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/re.png">
-<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/architecture.png">
-<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/ekf.png">
-<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/angle_speed.gif">
-<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/angle_control.gif">
-<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/balance_control.gif">
-<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/indoor.png">
-<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/outdoor.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/pitch_control.jpg">
+<meta property="og:image" content="https://symcreg.github.io/img/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/roll_control.jpg">
+<meta property="og:image" content="https://symcreg.github.io/img/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/steering_control.jpg">
+<meta property="og:image" content="https://symcreg.github.io/img/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/lean.jpg">
+<meta property="og:image" content="https://symcreg.github.io/img/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/brick.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/body.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/pid.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/re.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/architecture.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/ekf.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/angle_speed.gif">
+<meta property="og:image" content="https://symcreg.github.io/img/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/angle_control.gif">
+<meta property="og:image" content="https://symcreg.github.io/img/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/balance_control.gif">
+<meta property="og:image" content="https://symcreg.github.io/img/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/indoor.png">
+<meta property="og:image" content="https://symcreg.github.io/img/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/outdoor.png">
 <meta property="article:published_time" content="2025-10-22T08:07:51.000Z">
-<meta property="article:modified_time" content="2025-10-22T08:19:07.053Z">
+<meta property="article:modified_time" content="2025-10-22T08:28:59.126Z">
 <meta property="article:author" content="sam">
 <meta property="article:tag" content="独轮车">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/pitch_control.jpg">
+<meta name="twitter:image" content="https://symcreg.github.io/img/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/pitch_control.jpg">
   
   
   
@@ -360,7 +361,7 @@ TC377）、IMU、编码器等硬件的物理样机上，完整部署串级PID控
 <div data-align="center">
 <figure>
 <img
-src="/imgs/面向动态平衡的独轮车串级PID控制设计/inverted_pendulum.jpg" srcset="/img/loading.gif" lazyload
+src="/img/面向动态平衡的独轮车串级PID控制设计/inverted_pendulum.jpg" srcset="/img/loading.gif" lazyload
 alt="Inverted Pendulum" />
 <figcaption aria-hidden="true">Inverted Pendulum</figcaption>
 </figure>
@@ -412,7 +413,7 @@ class="math inline">\(\theta\)</span>。不考虑车轮打滑,
 <div data-align="center">
 <figure>
 <img
-src="/imgs/面向动态平衡的独轮车串级PID控制设计/free_body_diagram.jpg" srcset="/img/loading.gif" lazyload
+src="/img/面向动态平衡的独轮车串级PID控制设计/free_body_diagram.jpg" srcset="/img/loading.gif" lazyload
 alt="Free Body Diagram" />
 <figcaption aria-hidden="true">Free Body Diagram</figcaption>
 </figure>
@@ -550,7 +551,7 @@ class="math inline">\(x\)</span> 决定。<br />
 </ul>
 <div data-align="center">
 <figure>
-<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/pitch_control.jpg" srcset="/img/loading.gif" lazyload
+<img src="/img/面向动态平衡的独轮车串级PID控制设计/pitch_control.jpg" srcset="/img/loading.gif" lazyload
 alt="Pitch Control" />
 <figcaption aria-hidden="true">Pitch Control</figcaption>
 </figure>
@@ -582,7 +583,7 @@ class="math inline">\(\theta_r &gt;
 class="math inline">\(+\alpha_{flywheel}\)</span>的角加速度）。根据作用力与反作用力矩，飞轮在获得自身角加速度地同时，会给车身施加一个大小相等、方向相反（向右）的反作用力矩。这个力矩就是恢复力矩。</p>
 <div data-align="center">
 <figure>
-<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/roll_control.jpg" srcset="/img/loading.gif" lazyload
+<img src="/img/面向动态平衡的独轮车串级PID控制设计/roll_control.jpg" srcset="/img/loading.gif" lazyload
 alt="Roll Control" />
 <figcaption aria-hidden="true">Roll Control</figcaption>
 </figure>
@@ -592,9 +593,9 @@ alt="Roll Control" />
 <p>独轮车能够保持平衡的在于通过程序精准控制飞轮和行进电机的旋转，根据牛顿第三运动定律：相互作用的两个物体之间的作用力和反作用力总是大小相等，方向相反，作用在同一条直线上。举个简单的例子，飞轮顺时针旋转时，车身将受到围绕旋转轴的逆时针方向的力，并且力的大小和驱动飞轮的力大小一致，此时理论上车身应围绕旋转轴逆时针旋转，但由于小车与地面接触，摩擦力的存在导致本应围绕飞轮旋转轴而旋转的车身变成了围绕小车底部旋转，这恰巧是我们所需要的，能够通过飞轮控制车模进行左右倾斜的操作，只要控制程序足够精细，那么就可以保持左右平衡。同理，通过行进电机亦可完成前后平衡的控制。</p>
 <div data-align="center">
 <p><img
-src="/imgs/面向动态平衡的独轮车串级PID控制设计/balance_analysis1.webp" srcset="/img/loading.gif" lazyload
+src="/img/面向动态平衡的独轮车串级PID控制设计/balance_analysis1.webp" srcset="/img/loading.gif" lazyload
 alt="Balance Analysis" /> <img
-src="/imgs/面向动态平衡的独轮车串级PID控制设计/balance_analysis2.webp" srcset="/img/loading.gif" lazyload
+src="/img/面向动态平衡的独轮车串级PID控制设计/balance_analysis2.webp" srcset="/img/loading.gif" lazyload
 alt="Balance Analysis" /></p>
 </div>
 <p>力是一种有大小和方向的矢量，分析平衡原理时我们主要思考的是力的方向，那么现在再分析一下力的大小，这决定着我们的操作上限。由于我们主要用到了牛三定律，那么只要给飞轮足够的大的力，我们就可以得到足够大的反作用力，而飞轮是连接在无刷电机的转子上的，因此只要无刷电机能够提供更大的力矩，我们所得到的反作用力也更大。在只能使用车模自带的无刷电机的前提下，让无刷电机提供更大力矩的方法可能有两种：</p>
@@ -649,7 +650,7 @@ PID）正是为解决这类问题而生。它将一个复杂的控制任务分�
 <div data-align="center">
 <figure>
 <img
-src="/imgs/面向动态平衡的独轮车串级PID控制设计/cascade_pid_structure.webp" srcset="/img/loading.gif" lazyload
+src="/img/面向动态平衡的独轮车串级PID控制设计/cascade_pid_structure.webp" srcset="/img/loading.gif" lazyload
 alt="Cascade PID Structure" />
 <figcaption aria-hidden="true">Cascade PID Structure</figcaption>
 </figure>
@@ -676,8 +677,7 @@ PWM 输出中引入<span
 class="math inline">\(\pm\)</span>的转向分量，即可产生相应的转向效果。</p>
 <div data-align="center">
 <figure>
-<img
-src="/imgs/面向动态平衡的独轮车串级PID控制设计/steering_control.jpg" srcset="/img/loading.gif" lazyload
+<img src="/img/面向动态平衡的独轮车串级PID控制设计/steering_control.jpg" srcset="/img/loading.gif" lazyload
 alt="Steering Control" />
 <figcaption aria-hidden="true">Steering Control</figcaption>
 </figure>
@@ -690,7 +690,7 @@ alt="Steering Control" />
 <h5 id="压弯机制">2.2.3.2 压弯机制</h5>
 <div data-align="center">
 <figure>
-<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/lean.jpg" srcset="/img/loading.gif" lazyload
+<img src="/img/面向动态平衡的独轮车串级PID控制设计/lean.jpg" srcset="/img/loading.gif" lazyload
 alt="Lean into Turn" />
 <figcaption aria-hidden="true">Lean into Turn</figcaption>
 </figure>
@@ -779,20 +779,20 @@ class="math inline">\(\alpha\to0\)</span>
 <p>使用 brick solid 构建平板刚体，再通过 rigid transform
 进行刚体间的组合。具体如下：</p>
 <div data-align="center">
-<p><img src="/imgs/面向动态平衡的独轮车串级PID控制设计/brick.png" srcset="/img/loading.gif" lazyload
+<p><img src="/img/面向动态平衡的独轮车串级PID控制设计/brick.png" srcset="/img/loading.gif" lazyload
 alt="Brick Solid" /> <img
-src="/imgs/面向动态平衡的独轮车串级PID控制设计/rigid.png" srcset="/img/loading.gif" lazyload
+src="/img/面向动态平衡的独轮车串级PID控制设计/rigid.png" srcset="/img/loading.gif" lazyload
 alt="Rigid Transform" /></p>
 </div>
 <p>按照实体车力学化简后的模型进行构建，采用同等比例，以及配重。建模中主要以长方体、柱体、圆盘、等构建出车体的物理模型。细节如下：</p>
 <div data-align="center">
-<p><img src="/imgs/面向动态平衡的独轮车串级PID控制设计/body.png" srcset="/img/loading.gif" lazyload
+<p><img src="/img/面向动态平衡的独轮车串级PID控制设计/body.png" srcset="/img/loading.gif" lazyload
 alt="Body" /> <img
-src="/imgs/面向动态平衡的独轮车串级PID控制设计/bottom.png" srcset="/img/loading.gif" lazyload
+src="/img/面向动态平衡的独轮车串级PID控制设计/bottom.png" srcset="/img/loading.gif" lazyload
 alt="Bottom" /> <img
-src="/imgs/面向动态平衡的独轮车串级PID控制设计/momentum.png" srcset="/img/loading.gif" lazyload
+src="/img/面向动态平衡的独轮车串级PID控制设计/momentum.png" srcset="/img/loading.gif" lazyload
 alt="Momentum" /> <img
-src="/imgs/面向动态平衡的独轮车串级PID控制设计/wheel.png" srcset="/img/loading.gif" lazyload
+src="/img/面向动态平衡的独轮车串级PID控制设计/wheel.png" srcset="/img/loading.gif" lazyload
 alt="Wheel" /></p>
 </div>
 <p>在控制系统搭建阶段，采用前述串级 PID
@@ -801,16 +801,16 @@ Simulink
 信号线进行连接，实现数据的连续传递和反馈闭环的完整性。在建模过程中，充分考虑各环之间的信号依赖关系和环路耦合特性，以确保系统能够在仿真环境下正确响应各类控制输入和外部扰动。</p>
 <div data-align="center">
 <figure>
-<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/pid.png" srcset="/img/loading.gif" lazyload
+<img src="/img/面向动态平衡的独轮车串级PID控制设计/pid.png" srcset="/img/loading.gif" lazyload
 alt="PID Control" />
 <figcaption aria-hidden="true">PID Control</figcaption>
 </figure>
 </div>
 <h5 id="仿真结果">2.2.4.2 仿真结果</h5>
 <div data-align="center">
-<p><img src="/imgs/面向动态平衡的独轮车串级PID控制设计/re.png" srcset="/img/loading.gif" lazyload
+<p><img src="/img/面向动态平衡的独轮车串级PID控制设计/re.png" srcset="/img/loading.gif" lazyload
 alt="Result" /> <img
-src="/imgs/面向动态平衡的独轮车串级PID控制设计/cur.png" srcset="/img/loading.gif" lazyload
+src="/img/面向动态平衡的独轮车串级PID控制设计/cur.png" srcset="/img/loading.gif" lazyload
 alt="PID Curve" /></p>
 </div>
 <h2 id="三单片机控制系统设计">三、单片机控制系统设计</h2>
@@ -872,10 +872,10 @@ DRV8701 控制的 H 桥来驱动行进电机。灯板上搭载了 TLD7002
 <!-- 
 <div align="center">
 
-![6s To 5V Buck Convertor](/imgs/面向动态平衡的独轮车串级PID控制设计/6-5_buck.png)
-![5V To 3.3V Buck Convertor](/imgs/面向动态平衡的独轮车串级PID控制设计/5-33_buck.png)
-![6s To 12V Buck Convertor](/imgs/面向动态平衡的独轮车串级PID控制设计/6-12_buck.png)
-![Drive Circuit](/imgs/面向动态平衡的独轮车串级PID控制设计/drive.png)
+![6s To 5V Buck Convertor](/img/面向动态平衡的独轮车串级PID控制设计/6-5_buck.png)
+![5V To 3.3V Buck Convertor](/img/面向动态平衡的独轮车串级PID控制设计/5-33_buck.png)
+![6s To 12V Buck Convertor](/img/面向动态平衡的独轮车串级PID控制设计/6-12_buck.png)
+![Drive Circuit](/img/面向动态平衡的独轮车串级PID控制设计/drive.png)
 
 </div>
   -->
@@ -886,7 +886,7 @@ PD 算法结合，实现独轮动态平衡与运动控制任务。</p>
 <p>软件系统整体架构如下图所示，主要包括传感器数据采集与预处理、姿态解算与状态估计、路径规划与跟踪控制、以及底层驱动与通信等模块。各模块通过统一的数据总线进行信息交互，确保系统的实时性与稳定性。</p>
 <div data-align="center">
 <figure>
-<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/architecture.png" srcset="/img/loading.gif" lazyload
+<img src="/img/面向动态平衡的独轮车串级PID控制设计/architecture.png" srcset="/img/loading.gif" lazyload
 alt="Software Architecture" />
 <figcaption aria-hidden="true">Software Architecture</figcaption>
 </figure>
@@ -898,8 +898,7 @@ IMU和轮速编码器等多传感器数据进行融合，提高姿态估算的�
 模块通过预测与更新两个阶段，动态调整状态估计，减小传感器噪声与误差对系统性能的影响。</p>
 <div data-align="center">
 <figure>
-<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/ekf.png" srcset="/img/loading.gif" lazyload
-alt="EKF" />
+<img src="/img/面向动态平衡的独轮车串级PID控制设计/ekf.png" srcset="/img/loading.gif" lazyload alt="EKF" />
 <figcaption aria-hidden="true">EKF</figcaption>
 </figure>
 </div>
@@ -955,7 +954,7 @@ class="math inline">\(P\)</span>
 <p>最内层的角速度环主要用于抑制车体的角速度。在单独调试该环时，可以先设置一个较小的比例增益，并通过手动左右扰动车体来观察响应。如果调试正确，系统应表现出明显的阻尼效应：动量轮会沿倾倒方向旋转，从而产生抑制倾倒的力矩。若实际观察到的是加速倾倒而非阻尼，则说明控制方向设置错误，此时需要在输出端引入符号反转以修正。</p>
 <div data-align="center">
 <figure>
-<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/angle_speed.gif" srcset="/img/loading.gif" lazyload
+<img src="/img/面向动态平衡的独轮车串级PID控制设计/angle_speed.gif" srcset="/img/loading.gif" lazyload
 alt="Angle Speed Control" />
 <figcaption aria-hidden="true">Angle Speed Control</figcaption>
 </figure>
@@ -963,7 +962,7 @@ alt="Angle Speed Control" />
 <p>在角速度环方向确认无误的基础上，可以进一步整定角度环。角度环的目标是将姿态偏差转化为角速度指令，以抵消车体的倾斜。当给予一定比例增益后，若车体被外力倾斜，应能够感受到比单独角速度环更强的阻尼效果。同时，在保持一定倾斜角度的情况下，电机应持续旋转以抵消偏差，而不会出现方向反转现象。由于角速度环与角度环的叠加会显著提高响应速度，实验过程中主要验证其旋转方向与整体效果是否合理。</p>
 <div data-align="center">
 <figure>
-<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/angle_control.gif" srcset="/img/loading.gif" lazyload
+<img src="/img/面向动态平衡的独轮车串级PID控制设计/angle_control.gif" srcset="/img/loading.gif" lazyload
 alt="Angle Control" />
 <figcaption aria-hidden="true">Angle Control</figcaption>
 </figure>
@@ -972,7 +971,7 @@ alt="Angle Control" />
 <p>在完成方向确认后，即可进行各环的具体参数调节。首先是角速度环，作为执行层，其调节目标是产生适度的阻尼效果。阻尼过强会导致系统迟钝，过弱则抑制不足，因此需依赖经验在比例与微分环节中寻找平衡。其次是角度环，其调试需建立在角速度环稳定的前提下。当参数合理时，车体在机械零点附近能够维持数秒平衡再倒下，表明角度环已基本整定完毕。最后是速度环，由于其为正反馈作用，能够进一步增强电机输出。在外两环已具备基本平衡能力的条件下，逐步提高速度环比例系数，可显著延长车体保持平衡的时间。理论上，随着参数增加，系统会表现出更强的抗倾覆能力，但过大的增益会引入显著的超调与震荡，此时需要适当降低角度环或角速度环的增益以重新平衡各环作用。</p>
 <div data-align="center">
 <figure>
-<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/balance_control.gif" srcset="/img/loading.gif" lazyload
+<img src="/img/面向动态平衡的独轮车串级PID控制设计/balance_control.gif" srcset="/img/loading.gif" lazyload
 alt="Balance Control" />
 <figcaption aria-hidden="true">Balance Control</figcaption>
 </figure>
@@ -984,13 +983,14 @@ alt="Balance Control" />
 <p>在室内测试中，独轮车能够依靠动量轮实现稳定的自平衡，即使在受到约一到两度的人为扰动后，也能在极短时间内恢复至直立状态。实验过程中，传感器反馈与控制器的快速响应协同作用，使得车辆在原地静止平衡以及低速直行任务中均展现出良好的稳定性与可控性。在进一步的抗干扰实验中，车辆被主动推撞至目标板。尽管受到外力冲击，车体在短暂倾斜后仍能够恢复平衡，恢复时间较短且姿态超调幅度有限，表明所设计的控制系统在小幅和中等冲击干扰下均具有良好的鲁棒性。</p>
 <div data-align="center">
 <figure>
-<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/indoor.png" srcset="/img/loading.gif" lazyload
+<img src="/img/面向动态平衡的独轮车串级PID控制设计/indoor.png" srcset="/img/loading.gif" lazyload
 alt="Indoor Experiment" />
 <figcaption aria-hidden="true">Indoor Experiment</figcaption>
 </figure>
 </div>
 <div data-align="center">
-<video src="/imgs/面向动态平衡的独轮车串级PID控制设计/indoor.mp4">
+<!-- <video src="/img/面向动态平衡的独轮车串级PID控制设计/indoor.mp4"></video> -->
+<video src="/img/面向动态平衡的独轮车串级PID控制设计/indoor.mp4" controls style="width: 100%; max-width: 800px; height: auto;">
 </video>
 </div>
 <h4 id="室外实验">4.2.2 室外实验</h4>
@@ -999,13 +999,14 @@ RTK
 定位与视觉传感器进行路径识别与修正，车辆的运动轨迹能够较好地贴合目标路线，路径偏差保持在较小范围内，整体运行稳定且姿态曲线变化平顺。实验结果表明，即便在存在地面不平整和复杂路径的条件下，动量轮依然能够有效发挥平衡作用，保证车辆平稳完成加速、减速与转向等运动任务。</p>
 <div data-align="center">
 <figure>
-<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/outdoor.png" srcset="/img/loading.gif" lazyload
+<img src="/img/面向动态平衡的独轮车串级PID控制设计/outdoor.png" srcset="/img/loading.gif" lazyload
 alt="Outdoor Experiment" />
 <figcaption aria-hidden="true">Outdoor Experiment</figcaption>
 </figure>
 </div>
 <div data-align="center">
-<video src="/imgs/面向动态平衡的独轮车串级PID控制设计/outdoor.mp4">
+<!-- <video src="/img/面向动态平衡的独轮车串级PID控制设计/outdoor.mp4"></video> -->
+<video src="/img/面向动态平衡的独轮车串级PID控制设计/outdoor.mp4" controls style="width: 100%; max-width: 800px; height: auto;">
 </video>
 </div>
 <h2 id="五总结">五、总结</h2>
