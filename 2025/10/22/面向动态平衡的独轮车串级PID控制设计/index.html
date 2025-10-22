@@ -1,0 +1,1455 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/my_icon.png">
+  <link rel="icon" href="/img/my_icon.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="sam">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="面向动态平衡的独轮车串级PID控制设计 一、问题描述 1.1 研究背景 随着社会经济与科技的飞速发展，以服务机器人、自动平衡车为代表的智能移动平台在物流、个人出行及特殊作业等领域的应用日趋广泛。在众多平台中，独轮车凭借其结构紧凑、高机动性与零转弯半径等独特优势，在狭窄及复杂环境中展现出巨大的应用潜力，因而受到了学术界与工程界的广泛关注。 然而，制约独轮车发展的核心瓶颈在于其固有的不稳定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向动态平衡的独轮车串级PID控制设计">
+<meta property="og:url" content="https://symcreg.github.io/2025/10/22/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="symc">
+<meta property="og:description" content="面向动态平衡的独轮车串级PID控制设计 一、问题描述 1.1 研究背景 随着社会经济与科技的飞速发展，以服务机器人、自动平衡车为代表的智能移动平台在物流、个人出行及特殊作业等领域的应用日趋广泛。在众多平台中，独轮车凭借其结构紧凑、高机动性与零转弯半径等独特优势，在狭窄及复杂环境中展现出巨大的应用潜力，因而受到了学术界与工程界的广泛关注。 然而，制约独轮车发展的核心瓶颈在于其固有的不稳定">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/pitch_control.jpg">
+<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/roll_control.jpg">
+<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/lean.jpg">
+<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/brick.png">
+<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/body.png">
+<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/pid.png">
+<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/re.png">
+<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/architecture.png">
+<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/ekf.png">
+<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/angle_speed.gif">
+<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/angle_control.gif">
+<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/balance_control.gif">
+<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/indoor.png">
+<meta property="og:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/outdoor.png">
+<meta property="article:published_time" content="2025-10-22T08:07:51.000Z">
+<meta property="article:modified_time" content="2025-10-22T08:19:07.053Z">
+<meta property="article:author" content="sam">
+<meta property="article:tag" content="独轮车">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://symcreg.github.io/imgs/%E9%9D%A2%E5%90%91%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1%E7%9A%84%E7%8B%AC%E8%BD%AE%E8%BD%A6%E4%B8%B2%E7%BA%A7PID%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/pitch_control.jpg">
+  
+  
+  
+  <title>面向动态平衡的独轮车串级PID控制设计 - symc</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"symcreg.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-0MP4SFZQ6C"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-0MP4SFZQ6C", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-0MP4SFZQ6C');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>symc</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/my_banner.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="面向动态平衡的独轮车串级PID控制设计"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-10-22 16:07" pubdate>
+          2025年10月22日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          100 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">面向动态平衡的独轮车串级PID控制设计</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+<h1
+id="面向动态平衡的独轮车串级pid控制设计">面向动态平衡的独轮车串级PID控制设计</h1>
+<h2 id="一问题描述">一、问题描述</h2>
+<h3 id="研究背景">1.1 研究背景</h3>
+<p>随着社会经济与科技的飞速发展，以服务机器人、自动平衡车为代表的智能移动平台在物流、个人出行及特殊作业等领域的应用日趋广泛。在众多平台中，独轮车凭借其结构紧凑、高机动性与零转弯半径等独特优势，在狭窄及复杂环境中展现出巨大的应用潜力，因而受到了学术界与工程界的广泛关注。</p>
+<p>然而，制约独轮车发展的核心瓶颈在于其固有的不稳定性。由于其单点接地的物理特性，独轮车的动力学模型可被高度抽象为一个二维倒立摆。该模型本质上是自然不稳定的，极易受到内外扰动而倾覆。因此，如何设计稳定、可靠的自平衡控制策略，成为该领域亟待解决的核心科学问题。传统的自平衡控制方案主要依赖车轮的加速与减速来产生恢复力矩，但此方法强依赖于地面摩擦力，在应对外部冲击、低摩擦地面或实现静态（零速）平衡时，其控制性能会受到极大限制。</p>
+<p>为突破传统方法的局限性，源于航天器姿态控制的动量轮（Momentum
+Wheel）技术被创新性地引入到独轮车的平衡控制中。动量轮通过高速旋转改变自身角动量，依据动量矩定理，能够为车体提供一个不依赖外部接触力的内力矩。该内力矩可以直接、快速地补偿由扰动引起的倾斜，从而实现更为鲁棒和灵活的自平衡控制，尤其是在静态平衡场景下展现出无与伦比的优势。</p>
+<p>动量轮的引入在提升性能的同时，也显著增加了系统的动力学复杂性。整合后的系统是一个典型的非线性、强耦合且欠驱动（Underactuated）的机电系统。它不仅包含了倒立摆模型固有的非线性与不稳定性，还叠加了飞轮动力学以及电机饱和约束、动态响应等复杂特性。这种复杂性使其成为一个理想的实验平台，可用于验证和探索鲁棒控制、自适应控制及非线性控制等先进控制理论。同时，动量轮带来的电机饱和限制与系统能量管理等问题，也构成了新的科学挑战。</p>
+<p>因此，本项目的研究旨在解决独轮车在实际应用中的关键技术难题。在工程应用层面，基于动量轮的控制策略能显著提升独轮车的环境适应性与稳定性，使其能够在低摩擦、不平坦或拥挤的场景下可靠运行，甚至实现高精度的原地静止，这极大地拓展了其在智能交通、仓储物流、自动化巡检和人机交互等领域的应用潜力。而在学术研究层面，本项目涵盖了从系统动力学建模、基于多传感器（如陀螺仪和编码器）的信息融合、控制算法设计到软硬件协同实现的全过程，不仅为解决一类典型的欠驱动系统控制问题提供了范例，也为相关移动机器人领域的研发工作提供了技术参考与理论支持。</p>
+<h3 id="任务分析">1.2 任务分析</h3>
+<p>本项目的核心任务是为一台基于动量轮的独轮车（unicycle）设计并实现一套完整、鲁棒的自平衡控制系统，使其不仅能维持静态与动态下的稳定，更能实现精确的机动与路径跟踪。</p>
+<p>首要挑战源于独轮车固有的物理不稳定性，其动力学行为高度类似于一个二维倒立摆，对任何扰动都极为敏感。因此，任务的基石在于构建一个能够实时感知姿态偏差并迅速生成恢复力矩的闭环反馈控制系统。这需要对俯仰（Pitch）和横滚（Roll）两个正交方向进行解耦与协同控制：前者依赖行进轮的加减速，后者则利用动量轮产生内部反作用力矩。为确保控制策略的有效性，任务要求首先建立系统动力学模型，为后续的算法设计与仿真提供坚实的理论依据。</p>
+<p>为应对系统中多状态变量（姿态、角速度、线速度）在响应速度上的显著差异，本任务采用了分层递阶的串级PID控制架构。该架构将复杂的控制问题分解为由内到外、由快到慢的多个嵌套闭环（角速度环、角度环、速度环），实现了对系统动态的精细化管理，是保证高稳定性和高响应性的关键。</p>
+<p>在实现基础平衡之上，项目任务进一步拓展至高性能的机动控制。这包括设计精确的转向机制，通过动量轮的差速控制产生偏航力矩。同时，为解决高速转向时离心力可能导致的控制饱和问题，任务还包含了“压弯”前馈补偿机制的开发。该机制通过动态调整横滚角的平衡零点来抵消侧向力，极大提升了车辆在弯道中的稳定性。</p>
+<p>最后，所有理论设计与算法开发都必须通过实践验证。任务涵盖了从仿真环境（MATLAB/Simulink）的搭建与调试，到物理样机的机械结构、硬件电路设计与系统集成的完整工程流程。最终，通过在室内外场景下的实验，对控制系统的平衡性能、抗干扰能力进行评估，从而验证所提方案的有效性与可行性。</p>
+<h3 id="拟完成目标">1.3 拟完成目标</h3>
+<p>本项目旨在设计、构建并验证一套基于动量轮和串级PID控制算法的自平衡独轮车系统。为实现这一总体目标，拟定以下分阶段的具体目标：</p>
+<p>首先，在理论与仿真层面，将完成对独轮车系统的动力学建模，并基于MATLAB/Simulink及Simscape
+Multibody工具箱搭建仿真平台。此目标旨在通过仿真环境验证串级PID控制策略的可行性，并对控制参数进行初步整定，为物理实现奠定理论基础。</p>
+<p>其次，在核心功能实现层面，将在一台集成了微控制器（Infineon
+TC377）、IMU、编码器等硬件的物理样机上，完整部署串级PID控制算法。核心目标是实现车辆在俯仰（Pitch）和横滚（Roll）两个方向上的稳定自平衡。性能指标要求车辆不仅能实现长时间原地静止站立，还能在低速行进中保持姿态稳定，并具备良好的抗干扰能力，能够从外界的轻微推扰中快速恢复。</p>
+<p>在此基础上，项目将进一步实现独轮车的机动控制。这包括利用动量轮差速实现精确的转向（Yaw）控制，并引入“压弯”前馈补偿机制。此目标旨在解决高速转向时因离心力导致的控制饱和问题，显著提升车辆在复杂路径下的动态稳定性与灵活性。</p>
+<p>最终，通过整合机械、硬件与软件系统，将完成一个功能完备、性能可靠的独轮车实验平台。通过在室内及室外复杂环境下的综合测试，评估并验证该平台的平衡稳定性，达成项目预设的各项设计指标。</p>
+<h2 id="二控制系统仿真设计">二、控制系统仿真设计</h2>
+<p>任何成功的控制系统设计都源于对被控对象物理行为的深刻理解。在进行仿真设计之前，我们将通过系统建模，推导独轮车的动力学方程，然后通过线性化处理，最终得到适用于控制器设计的状态空间模型，完成从定性到定量的过程，为后续控制策略的设计提供理论基础。</p>
+<h3 id="被控对象建模与分析">2.1 被控对象建模与分析</h3>
+<p>在深入独轮车的复杂性之前，我们必须先掌握其最核心的不稳定动力学来源，我们可以将独轮车一个方向的平衡问题抽象为一个倒立摆模型。</p>
+<div data-align="center">
+<figure>
+<img
+src="/imgs/面向动态平衡的独轮车串级PID控制设计/inverted_pendulum.jpg" srcset="/img/loading.gif" lazyload
+alt="Inverted Pendulum" />
+<figcaption aria-hidden="true">Inverted Pendulum</figcaption>
+</figure>
+</div>
+<p>想象一个在水平轨道上无摩擦运动的小车，通过一个无质量的刚性杆连接一个质点在顶部。系统仅在二维垂直平面内运动。小车的轮子由电机控制，可以控制小车电机的转动力矩M。同时，也可以获取小车轮子转动的圈数N（可以精确到小数）和杆相对于垂直位置的倾角<span
+class="math inline">\(\theta\)</span>。不考虑车轮打滑,
+小车所受力大小等于电机力矩乘车轮半径, 小车位置可以从转动圈数计算出。</p>
+<div data-align="center">
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">名称</th>
+<th style="text-align: center;">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">小车质量</td>
+</tr>
+<tr>
+<td style="text-align: center;">m</td>
+<td style="text-align: center;">摆的质量</td>
+</tr>
+<tr>
+<td style="text-align: center;">l</td>
+<td style="text-align: center;">摆的重心到关节的距离</td>
+</tr>
+<tr>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;">摆的转动惯量</td>
+</tr>
+<tr>
+<td style="text-align: center;">b</td>
+<td style="text-align: center;">阻尼系数</td>
+</tr>
+<tr>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">作用在小车的力</td>
+</tr>
+<tr>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">小车的位置</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>对摆杆质点进行受力分析，在水平和垂直方向上应用牛顿第二定律。</p>
+<div data-align="center">
+<figure>
+<img
+src="/imgs/面向动态平衡的独轮车串级PID控制设计/free_body_diagram.jpg" srcset="/img/loading.gif" lazyload
+alt="Free Body Diagram" />
+<figcaption aria-hidden="true">Free Body Diagram</figcaption>
+</figure>
+</div>
+<p>对小车水平方向：<br />
+<span class="math display">\[
+M\ddot{x}+b\dot{x}+N=F
+\]</span></p>
+<p>对摆水平方向：<br />
+<span class="math display">\[
+N = m\frac{d^2}{dt}(x+l sin\theta)
+\]</span></p>
+<p>即：<br />
+<span class="math display">\[
+N = m\ddot{x}+m l \ddot{\theta} cos\ddot{\theta} - m l {\dot{\theta}}^2
+sin\theta
+\]</span></p>
+<p>对摆垂直方向：<br />
+<span class="math display">\[
+P = mg + m \frac{d^2}{dt}(l cos\theta)
+\]</span></p>
+<p>即：<br />
+<span class="math display">\[
+P = mg - ml\ddot{\theta}sin\ddot{\theta}-ml{\dot{\theta}}^2cos\theta
+\]</span></p>
+<p>关节力矩：<br />
+<span class="math display">\[
+-Pl sin\theta - N l cos\theta = I \ddot{\theta}
+\]</span></p>
+<p>令<span class="math inline">\(\phi = \pi + \theta\)</span>，
+在工作点<span class="math inline">\(\theta \approx
+0\)</span>进行线性化：<span class="math inline">\(sin\theta =
+0\)</span>，<span class="math inline">\(cos\theta = 1\)</span>，<span
+class="math inline">\(\dot{\theta}^2=0\)</span>，化简之后得到：<br />
+<span class="math display">\[
+\begin{aligned}
+(I = ml^2)\ddot{\phi} - mgl\phi = ml\ddot{x} \\
+(M + m)\ddot{x} + b\dot{x} -ml\ddot{\phi} = F = u
+\end{aligned}
+\]</span></p>
+<p>进行拉普拉斯变换得到：<br />
+<span class="math display">\[
+(I + ml^2)\Phi(s)s^2 - mgl\Phi(s) =
+mlX(s)s^2(M+m)X(s)s^2+bX(s)s-ml\Phi(s)s^2=U(s)
+\]</span></p>
+<p>得到摆的角度的传递函数：<br />
+<span class="math display">\[
+P_{pend}(s)=\frac{\Phi(s)}{U(s)}=\frac{mls}{qs^3+b(I+ml^2)s^2 -
+(M+m)mgls-bmgl}
+\]</span></p>
+<p>小车位置的传递函数：<br />
+<span class="math display">\[
+P_{cart}(s)=\frac{X(s)}{U(s)}=\frac{(I+ml^2)s^2 - mgl}{qs^4+b(I+ml^2)s^3
+- (M+m)mgls^2-bmgls}
+\]</span></p>
+<p>其中<span class="math inline">\(q\)</span>为：<br />
+<span class="math display">\[
+q=(M+m)(I+ml^2)-(ml)^2
+\]</span></p>
+<p>表示为状态空间:<br />
+<span class="math display">\[
+\begin{aligned}
+\dot{x}=Ax+Bu\\
+y=Cx+Du
+\end{aligned}
+\]</span></p>
+<p>其中：<br />
+<span class="math display">\[
+A=
+\left[
+\begin{matrix}
+0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; -\frac{(I+ml^2)b}{p} &amp; \frac{m^2gl^2}{p} &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; -\frac{mlb}{p} &amp; \frac{mgl(M+m)}{p} &amp; 0
+\end{matrix}
+\right]
+\]</span></p>
+<p><span class="math display">\[
+B=
+\left[
+\begin{matrix}
+0 \\
+\frac{I+ml^2}{p} \\
+0 \\
+\frac{ml}{p}
+\end{matrix}
+\right]
+\]</span></p>
+<p><span class="math display">\[
+C=
+\left[
+\begin{matrix}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0
+\end{matrix}
+\right]
+\]</span></p>
+<p><span class="math display">\[
+D=
+\left[
+\begin{matrix}
+0 \\
+0 \\
+\end{matrix}
+\right]
+\]</span></p>
+<p><span class="math display">\[
+x=
+\left[
+\begin{matrix}
+x \\
+\dot{x} \\
+\phi \\
+\dot{\phi}
+\end{matrix}
+\right]
+\]</span></p>
+<p><span class="math display">\[
+p=I(M+m)+Mml^2
+\]</span></p>
+<p>现在，我们将倒立摆模型扩展到独轮车系统。独轮车的平衡可以被视为在水平面上两个正交倒立摆系统的组合。</p>
+<p>在X轴方向上，我们有一个倒立摆系统，表示独轮车前后方向的平衡。在Y轴方向上，我们有另一个倒立摆系统，表示独轮车左右方向的平衡。</p>
+<p>对于X轴方向：</p>
+<ul>
+<li>小车：独轮车的行进轮与地面的接触点。其位置 x
+由行进轮的滚动决定。<br />
+</li>
+<li>摆杆：独轮车的车身部分，其质心位置由摆杆的角度 <span
+class="math inline">\(\theta\)</span> 和小车的位置 <span
+class="math inline">\(x\)</span> 决定。<br />
+</li>
+<li>控制输入：行进轮电机产生的驱动力矩，通过车轮与地面的摩擦力转化为对“小车”（接触点）的等效水平推力
+<span class="math inline">\(F\)</span>。</li>
+</ul>
+<div data-align="center">
+<figure>
+<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/pitch_control.jpg" srcset="/img/loading.gif" lazyload
+alt="Pitch Control" />
+<figcaption aria-hidden="true">Pitch Control</figcaption>
+</figure>
+</div>
+<p>对于Y轴方向：</p>
+<ul>
+<li>基座：在这个平面，基座是固定的（车轮不能侧向移动）。<br />
+</li>
+<li>摆杆：独轮车的车身部分，其质心位置由摆杆的角度 <span
+class="math inline">\(\theta\)</span> 决定。<br />
+</li>
+<li>控制输入：不再是水平力，而是飞轮电机产生的内部力矩。</li>
+</ul>
+<p>Y轴方向的核心控制机理是角动量守恒。这点是与标准倒立摆模型的主要区别。</p>
+<p>想象一个孤立的系统（摆杆+飞轮），其总角动量为 <span
+class="math inline">\(L_{total} = L_{body} +
+L_{flywheel}\)</span>。如果没有外力矩，<span
+class="math inline">\(L_{total}\)</span> 守恒。初始静止时，<span
+class="math inline">\(L_{total} = 0\)</span>。当车身向左（<span
+class="math inline">\(+\theta_r\)</span>）倾斜时，车身获得一个向左的角速度<span
+class="math inline">\(\dot{\theta}_r\)</span>，即<span
+class="math inline">\(L_{body} &gt;
+0\)</span>。为了维持总角动量为零，控制器必须驱动飞轮产生一个相反的角动量<span
+class="math inline">\(L_{flywheel} =
+-L_{body}\)</span>，即飞轮获得一个向右的角速度<span
+class="math inline">\(\dot{\theta}_f\)</span>。更主动地，当检测到<span
+class="math inline">\(\theta_r &gt;
+0\)</span>时，控制器命令飞轮向左加速旋转（产生<span
+class="math inline">\(+\alpha_{flywheel}\)</span>的角加速度）。根据作用力与反作用力矩，飞轮在获得自身角加速度地同时，会给车身施加一个大小相等、方向相反（向右）的反作用力矩。这个力矩就是恢复力矩。</p>
+<div data-align="center">
+<figure>
+<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/roll_control.jpg" srcset="/img/loading.gif" lazyload
+alt="Roll Control" />
+<figcaption aria-hidden="true">Roll Control</figcaption>
+</figure>
+</div>
+<p>横滚控制的本质，就是通过控制内部反作用轮的角加速度来稳定车身姿态。</p>
+<p>另外，独轮车的飞轮并非垂直放置，而是倾斜45°摆放的。垂直摆放飞轮无法完成左右转向，因为缺失了一个维度的分量。这样设计的目的是让飞轮的旋转既能产生横滚方向的力矩，也能产生偏航方向的力矩，所以需要有一个夹角来让垂直和水平都能得到分量。从而实现对独轮车姿态和方向的双重控制。</p>
+<p>独轮车能够保持平衡的在于通过程序精准控制飞轮和行进电机的旋转，根据牛顿第三运动定律：相互作用的两个物体之间的作用力和反作用力总是大小相等，方向相反，作用在同一条直线上。举个简单的例子，飞轮顺时针旋转时，车身将受到围绕旋转轴的逆时针方向的力，并且力的大小和驱动飞轮的力大小一致，此时理论上车身应围绕旋转轴逆时针旋转，但由于小车与地面接触，摩擦力的存在导致本应围绕飞轮旋转轴而旋转的车身变成了围绕小车底部旋转，这恰巧是我们所需要的，能够通过飞轮控制车模进行左右倾斜的操作，只要控制程序足够精细，那么就可以保持左右平衡。同理，通过行进电机亦可完成前后平衡的控制。</p>
+<div data-align="center">
+<p><img
+src="/imgs/面向动态平衡的独轮车串级PID控制设计/balance_analysis1.webp" srcset="/img/loading.gif" lazyload
+alt="Balance Analysis" /> <img
+src="/imgs/面向动态平衡的独轮车串级PID控制设计/balance_analysis2.webp" srcset="/img/loading.gif" lazyload
+alt="Balance Analysis" /></p>
+</div>
+<p>力是一种有大小和方向的矢量，分析平衡原理时我们主要思考的是力的方向，那么现在再分析一下力的大小，这决定着我们的操作上限。由于我们主要用到了牛三定律，那么只要给飞轮足够的大的力，我们就可以得到足够大的反作用力，而飞轮是连接在无刷电机的转子上的，因此只要无刷电机能够提供更大的力矩，我们所得到的反作用力也更大。在只能使用车模自带的无刷电机的前提下，让无刷电机提供更大力矩的方法可能有两种：</p>
+<ul>
+<li>提高PWM占空比，让无刷电机内的电流更大；<br />
+</li>
+<li>增加飞轮的重量，提高转动惯量，让无刷电机需要更大的力矩才能带动飞轮旋转。</li>
+</ul>
+<h3 id="控制器设计与实现">2.2 控制器设计与实现</h3>
+<h4 id="pid算法">2.2.1 PID算法</h4>
+<p>PID（比例-积分-微分）控制器是工业控制领域最常用的反馈控制算法之一。其核心思想是根据系统当前误差，历史误差以及误差变化率，计算控制量以实现系统稳定和快速响应。</p>
+<p>PID控制器的核心思想，是将对误差的考量扩展到三个时间维度：现在、过去与未来。其连续时域下的控制输出
+u(t) 由以下三项线性叠加而成：</p>
+<p><span class="math display">\[
+u(t) = K_p e(t) + K_i \int_0^t e(\tau)d\tau + K_d \frac{de(t)}{dt}
+\]</span></p>
+<p>其中：</p>
+<p><span class="math inline">\(e(t)=r(t)-y(t)\)</span>，代表在时刻
+t，系统期望值 r(t) 与实际输出值 y(t) 之间的瞬时误差。</p>
+<p>比例项（Proportional，P）是对“现在”的响应：<br />
+- <span class="math inline">\(u_p(t)=K_pe(t)\)</span><br />
+-
+物理意义：比例项提供了一个与当前误差成正比的控制作用。可以将其类比为一个虚拟弹簧，将系统拉向目标位置。误差越大，拉力（控制输出）越强。<br />
+-
+控制作用：它是控制系统中最主要的驱动力，负责快速减小误差，提高系统的响应速度。一个较大的比例系数
+<span class="math inline">\(K_p\)</span>
+能使系统更快地接近目标。然而，纯比例控制存在一个固有缺陷：当系统接近平衡点时，误差减小，控制力也随之减小。若系统存在如摩擦力、重力分力等持续的扰动，比例控制最终会稳定在一个非零的稳态误差（Steady-state
+Error）上，因为此时的控制力恰好与扰动力平衡。</p>
+<p>积分项（Integral，I）是对“过去”的补偿：<br />
+- <span class="math inline">\(u_i(t)=K_i\int_0^t
+e(\tau)d\tau\)</span><br />
+-
+物理意义：积分项累积了从初始时刻到当前所有历史误差的总和。只要存在误差，无论其多么微小，积分项都会持续增长，直到误差被完全消除。<br />
+-
+控制作用：其核心使命是消除稳态误差，提高系统的控制精度。对于上述比例控制无法克服的持续扰动，积分项能产生一个持续增大的“偏置”控制量，最终足以抵消扰动，使系统精确地稳定在目标值上。然而，积分作用也带来了负面影响：它引入了延迟（因为它依赖于历史累积），容易导致系统超调
+(Overshoot) 甚至积分饱和 (Windup)，影响稳定性。</p>
+<p>微分项（Differential，D）是对“未来”的预测： - <span
+class="math inline">\(u_d(t)=K_d\frac{de(t)}{dt}\)</span> -
+物理意义：微分项对误差的变化率进行响应，可以看作是一个虚拟阻尼器。当误差变化越快（无论是在增大还是在减小），微分项产生的阻尼作用就越强。<br />
+-
+控制作用：它的主要作用是抑制误差的变化趋势，提供预测性和阻尼。当系统快速冲向目标值时，e(t)
+快速减小，de(t)/dt
+为一个较大的负值，微分项会产生一个反向的控制作用，如同“踩刹车”，从而减小超调，提高系统稳定性。它能有效抑制由比例项引起的在目标值附近的振荡，使系统收敛过程更平滑。然而，微分项对高频噪声极为敏感（噪声的变化率极大），可能导致控制输出剧烈抖动。</p>
+<p>在独轮车的平衡控制中，这三者协同工作，P项提供主要的恢复力矩，D项提供阻尼以防止振荡，I项则负责精确抵消由机械不对称或传感器零点漂移等引起的持续倾斜趋势。</p>
+<h4 id="串级控制">2.2.2 串级控制</h4>
+<p>单一PID控制器适用于单输入单输出 (SISO)
+系统，即一个控制量对应一个被控量。然而，独轮车的平衡是一个典型的多变量控制问题。以左右平衡为例，我们最终的执行器只有一个——飞轮的驱动力矩（由PWM占空比体现），但我们希望控制的物理量却有多个，且它们之间存在物理上的内在联系：力矩决定角加速度，角加速度积分得到角速度，角速度积分得到角度，还包括电机的转速。</p>
+<p>如果我们只控制最外层的角度，当出现一个角度偏差时，控制器会输出一个大的力矩指令。这个指令会产生一个巨大的角加速度，导致角速度迅速增大，很可能在角度还未回到零点时，角速度已经过大，从而引发剧烈的超调和振荡。</p>
+<p>串级PID（Cascade
+PID）正是为解决这类问题而生。它将一个复杂的控制任务分解为多个嵌套的、由内到外的闭环，形成一个层次化的控制结构。每个环路只负责控制一个物理量，并将自己的输出作为下一级内环的目标值。</p>
+<p>在独轮车的平衡控制中，我们构建了一个经典的三闭环串级结构：</p>
+<div data-align="center">
+<figure>
+<img
+src="/imgs/面向动态平衡的独轮车串级PID控制设计/cascade_pid_structure.webp" srcset="/img/loading.gif" lazyload
+alt="Cascade PID Structure" />
+<figcaption aria-hidden="true">Cascade PID Structure</figcaption>
+</figure>
+</div>
+<p>采用分层闭环结构以实现不同时间尺度上的精确调节。外层的速度控制环以宏观运动目标为约束，其主要任务是调节车体的平动状态。该环以期望速度<span
+class="math inline">\(v_{ref}\)</span>与编码器测得的实际速度<span
+class="math inline">\(v_{actual}\)</span>之间的误差作为输入，输出期望的姿态角<span
+class="math inline">\(\theta_{ref}\)</span>。通过调节车体的倾斜角度来引导速度的变化，例如在需要加速时，系统将产生一个前倾角指令以驱动车体前进，而在需要保持静止时，系统将指令车体保持垂直。</p>
+<p>中间环为角度控制环，其功能是保证车体姿态的稳定性与跟踪性能。该环以外层给定的参考角度<span
+class="math inline">\(\theta_{ref}\)</span>与由惯性测量单元（IMU）解算（我们使用的是EKF方法）得到的实际角度<span
+class="math inline">\(\theta_{actual}\)</span>之间的偏差为输入，输出期望角速度<span
+class="math inline">\(\omega_{ref}\)</span>。通过这种方式，角度环能够将姿态偏差转化为角速度参考信号，为下一层控制环提供可执行的动态目标。</p>
+<p>最内层为角速度控制环，其目标是实现对角速度的快速且高精度的调节。该环以期望角速度<span
+class="math inline">\(\omega_{ref}\)</span>与陀螺仪直接测量的实际角速度<span
+class="math inline">\(\omega_{actual}\)</span>之差作为输入，输出最终的控制力矩<span
+class="math inline">\(\tau\)</span>，并通过电机的PWM占空比加以实现。</p>
+<p>由此构成的外中内三层闭环体系在不同控制层次上分工明确：外环确定平动目标，中间环实现姿态跟踪，内环保证动态响应。该分层控制结构确保了系统在全局运动目标与局部动态执行之间的协调性与稳定性。</p>
+<p>串级结构的内外环划分，遵循了系统动态响应的时间尺度分离原则。这一原则将控制任务解构成一个从快到慢的层次体系。最内层的角速度环是系统的“减震器”，它以最高频率运行，直接抑制由力矩引起的、响应最快的角速度变化，提供即时阻尼。其上层的角度环则负责“姿态稳定”，由于角度是角速度的积分，其动态更缓，该环路在中等频率下工作，确保车身能稳定地收敛至目标姿态。最外层的速度环是“运动规划师”，它处理系统最慢的宏观动态，在姿态已稳定的基础上，低频地引导车辆完成速度或位置的精确跟踪。</p>
+<p>总而言之，这种嵌套结构通过保证内环的响应速度远快于外环，实现了系统动态的有效解耦。角速度环保证瞬时稳定，角度环实现渐近稳定，速度环则完成渐近跟踪。每一层控制都建立在其内层已经收敛的假设之上，功能上相互支撑，时域上互不干扰，最终通过这种分层的稳定性，确保了整个复杂系统的鲁棒控制。</p>
+<h4 id="转向控制与压弯">2.2.3 转向控制与压弯</h4>
+<h5 id="转向控制">2.2.3.1 转向控制</h5>
+<p>独轮车的转向依赖于两个无刷电机驱动的动量轮，通过实现动量轮的反向加减速来产生偏航方向的控制力矩，从而实现转向。其基本原理是：当两个动量轮均以顺时针方向旋转时，车体会受到反作用力矩并趋向右转。在控制实现上，只需在两个飞轮的
+PWM 输出中引入<span
+class="math inline">\(\pm\)</span>的转向分量，即可产生相应的转向效果。</p>
+<div data-align="center">
+<figure>
+<img
+src="/imgs/面向动态平衡的独轮车串级PID控制设计/steering_control.jpg" srcset="/img/loading.gif" lazyload
+alt="Steering Control" />
+<figcaption aria-hidden="true">Steering Control</figcaption>
+</figure>
+</div>
+<p>然而，转向执行过程会受到转向饱和的限制。无刷电机的 PWM
+输出存在幅值上限，当输出接近或超过该限幅时，电机无法继续增大力矩，从而使得转向控制失效。若车辆在大角度转弯或长时间连续转弯过程中持续输出接近饱和的指令，便会发生转向饱和现象，导致车身既无法完成预期转向，又难以维持平衡，最终倾倒。</p>
+<p>在控制结构上，转向 PID
+控制通常以车体转向角度为输入，该角度由室外定位系统或室内惯性导航（IMU）计算得到。此部分构成转向控制的中间环（角度环），其目标是根据转角偏差生成适当的控制信号。然而，由于独轮车存在固有的机械不对称性，例如行进轮左右受力不均、传动轴偏置或传动皮带松弛，车辆在未施加转向控制时往往会出现自然偏转。为抑制这一现象，需要在角度环内部引入角速度环作为内环，利用车体偏航角速度反馈形成阻尼，从而抵消结构性误差导致的自发偏转。通过将角速度环与角度环串联，可显著改善转向性能。在部分场景下，还可在此基础上增加转向外环（负反馈结构），以减轻转向饱和的影响。</p>
+<p>尽管如此，当车辆长时间依赖动量轮差速实现转向时，动量轮的转速可能逐渐升至极限，最终导致饱和，进而影响平衡与转向性能。为缓解这一问题，可以引入压弯机制（动态机械零点）。该方法利用车辆在转弯时的侧向力与重力之间的平衡关系，通过适当倾斜车体来分担部分转向力矩，从而降低动量轮的负担。</p>
+<h5 id="压弯机制">2.2.3.2 压弯机制</h5>
+<div data-align="center">
+<figure>
+<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/lean.jpg" srcset="/img/loading.gif" lazyload
+alt="Lean into Turn" />
+<figcaption aria-hidden="true">Lean into Turn</figcaption>
+</figure>
+</div>
+<p>根据受力分析，在稳态转弯条件下有：</p>
+<p><span class="math display">\[
+m g \sin(\theta) + \frac{m v^2}{r} = 0
+\]</span></p>
+<p>其中，<span class="math inline">\(\theta\)</span>
+为车体横滚方向的压弯角，<span class="math inline">\(v\)</span>
+为当前车速，<span class="math inline">\(r\)</span>
+为转弯半径。该方程表明，当离心力与重力分力平衡时，车辆可以通过压弯实现稳定转弯。</p>
+<p>在实际控制中，直接计算压弯角 <span
+class="math inline">\(\theta\)</span>
+并不容易，因为能够直接获取的是转向角 <span
+class="math inline">\(\alpha\)</span>。因此可引入比例关系：</p>
+<p><span class="math display">\[
+\theta = \alpha \cdot K_2, \quad r = \theta \cdot K_1
+\]</span></p>
+<p>代入上式可得：</p>
+<p><span class="math display">\[
+\sin(\alpha K_2) \cdot g + \frac{v^2}{\alpha K_2 K_1} = 0
+\]</span></p>
+<p>为简化实现，可将非线性项近似等效为比例系数，从而得到压弯补偿的简化模型：</p>
+<p><span class="math display">\[
+\text{Machine}_{\text{zero}} = \text{Machine}_{\text{zero}} + \alpha K_2
++ v^2 \alpha K_1
+\]</span></p>
+<p>其中，<span
+class="math inline">\(\text{Machine}_{\text{zero}}\)</span>
+为横滚角控制中的机械零点补偿项。在直行状态下，<span
+class="math inline">\(K_1\)</span> 与 <span
+class="math inline">\(K_2\)</span>
+取零，不引入压弯补偿；在转弯状态下，则根据实验整定合适的 <span
+class="math inline">\(K_1,
+K_2\)</span>，即可在一定程度上减轻转向饱和问题并提升系统稳定性。</p>
+<p>综上，独轮车的转向控制依赖于角度环与角速度环的串级结构以实现偏航调节，并通过引入压弯机制修正动态机械零点，从而有效抑制转向饱和现象，增强长时间转向工况下的平衡与稳定性。</p>
+<p>在稳态转弯（忽略横向滑移、轮胎/接触复杂效应等近似）下，横滚角 ()
+与车速 (v) 和转弯半径 (r) 满足常见几何力学平衡关系：<br />
+<span class="math display">\[
+\tan\theta = \frac{v^2}{g r},
+\]</span> 或等价地<br />
+<span class="math display">\[
+\theta = \arctan\!\left(\frac{v^2}{g r}\right).
+\]</span> 当横滚角较小时，可用小角近似 ()，得到<br />
+<span class="math display">\[
+\theta \approx \frac{v^2}{g r}. \tag{1}
+\]</span></p>
+<p>控制器通常能直接获得的量是转向指令
+()（由路径规划或姿态控制器给出），而非转弯半径 (r)。因此需要建立 (r) 与
+() 的关系。常用、且在许多差速/差动或比例转向机制下合理的经验近似为<br />
+<span class="math display">\[
+r(\alpha) \approx \frac{C}{\alpha}, \qquad C&gt;0,
+\]</span> 即转向指令越大，转弯半径越小（此处 () 以弧度衡量，且假设 ()
+不为 0）。该形式在多种工程近似下经常被使用，且量纲可由常数 (C)
+保证一致（(C) 的量纲为长度·角度）。</p>
+<p>将该关系代入式 (1) 并用小角近似，可得到<br />
+<span class="math display">\[
+\theta \approx \frac{v^2}{g}\cdot\frac{\alpha}{C} =
+\underbrace{\left(\frac{1}{gC}\right)}_{k_2^{\text{phys}}}\, v^2 \alpha.
+\]</span> 由此可见，物理推导天然产生一个项与 (v^2)
+成正比，这与直觉一致。</p>
+<p>另外，考虑到转向指令 ()
+本身也会引起一定的静态倾角（例如为补偿机械偏置或实现期望的小角偏置），这部分可以用一个线性项
+(k_1 ) 来近似表示。</p>
+<p>基于上述推导与工程考虑，将压弯补偿写为：<br />
+<span class="math display">\[
+\Delta\theta_{\text{comp}} = k_1\,\alpha + k_2\,v^2\,\alpha,
+\]</span> 其中<br />
+- <span class="math inline">\(\Delta\theta_{\text{comp}}\)</span>
+为用于修正横滚角控制机械零点（Machine_zero）的补偿量；<br />
+- <span class="math inline">\(k_1\)</span>
+表示与转向指令成正比的静态补偿系数；<br />
+- <span class="math inline">\(k_2\)</span>
+表示由离心力引起的速度相关补偿系数； - 该表达在 <span
+class="math inline">\(\alpha\to0\)</span>
+时行为良好（不发散），便于实现。</p>
+<p>在控制器中对应的更新形式为： <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">Machine_zero ← Machine_zero + k1 * α + k2 * v^2 * α<br></code></pre></td></tr></table></figure> 其中，(k_1) 和 (k_2)
+需通过实验调试确定，以适应具体车辆的动力学特性与控制需求。</p>
+<h4 id="仿真结果与分析">2.2.4 仿真结果与分析</h4>
+<h5 id="平衡控制仿真">2.2.4.1 平衡控制仿真</h5>
+<p>独轮平衡车的仿真研究主要分为物理建模、控制构建和参数调试三个核心环节。物理建模阶段旨在创建一个精确的“数字孪生”：我们对实体车的动力学特性进行合理简化，构建出保持其关键质量与几何比例的虚拟模型，并为其配置了带有特定摩擦系数的虚拟测试场地，以模拟真实世界的接触力学。在此基础上，控制构建阶段将设计的串级PID控制框架植入仿真环境，对传感器信号和外部扰动进行建模，形成一个完整的闭环控制系统。最后，通过参数调试阶段对PID控制器的关键参数进行系统性整定与迭代优化，确保控制策略能够在仿真中表现出预期的自平衡能力与稳定性，为后续的实物实验提供坚实的理论与数据支撑。</p>
+<p>本项目的仿真环境搭建基于 MATLAB/Simulink
+平台，利用其建模与仿真能力，结合 Simscape Multibody
+工具箱，实现对独轮平衡车系统的多物理场建模与动态仿真。</p>
+<p>使用 brick solid 构建平板刚体，再通过 rigid transform
+进行刚体间的组合。具体如下：</p>
+<div data-align="center">
+<p><img src="/imgs/面向动态平衡的独轮车串级PID控制设计/brick.png" srcset="/img/loading.gif" lazyload
+alt="Brick Solid" /> <img
+src="/imgs/面向动态平衡的独轮车串级PID控制设计/rigid.png" srcset="/img/loading.gif" lazyload
+alt="Rigid Transform" /></p>
+</div>
+<p>按照实体车力学化简后的模型进行构建，采用同等比例，以及配重。建模中主要以长方体、柱体、圆盘、等构建出车体的物理模型。细节如下：</p>
+<div data-align="center">
+<p><img src="/imgs/面向动态平衡的独轮车串级PID控制设计/body.png" srcset="/img/loading.gif" lazyload
+alt="Body" /> <img
+src="/imgs/面向动态平衡的独轮车串级PID控制设计/bottom.png" srcset="/img/loading.gif" lazyload
+alt="Bottom" /> <img
+src="/imgs/面向动态平衡的独轮车串级PID控制设计/momentum.png" srcset="/img/loading.gif" lazyload
+alt="Momentum" /> <img
+src="/imgs/面向动态平衡的独轮车串级PID控制设计/wheel.png" srcset="/img/loading.gif" lazyload
+alt="Wheel" /></p>
+</div>
+<p>在控制系统搭建阶段，采用前述串级 PID
+控制结构，对角速度环、角度环及速度环分别进行建模。每一环路的输入与输出信号均通过
+Simulink
+信号线进行连接，实现数据的连续传递和反馈闭环的完整性。在建模过程中，充分考虑各环之间的信号依赖关系和环路耦合特性，以确保系统能够在仿真环境下正确响应各类控制输入和外部扰动。</p>
+<div data-align="center">
+<figure>
+<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/pid.png" srcset="/img/loading.gif" lazyload
+alt="PID Control" />
+<figcaption aria-hidden="true">PID Control</figcaption>
+</figure>
+</div>
+<h5 id="仿真结果">2.2.4.2 仿真结果</h5>
+<div data-align="center">
+<p><img src="/imgs/面向动态平衡的独轮车串级PID控制设计/re.png" srcset="/img/loading.gif" lazyload
+alt="Result" /> <img
+src="/imgs/面向动态平衡的独轮车串级PID控制设计/cur.png" srcset="/img/loading.gif" lazyload
+alt="PID Curve" /></p>
+</div>
+<h2 id="三单片机控制系统设计">三、单片机控制系统设计</h2>
+<h3 id="硬件设计">硬件设计</h3>
+<p>主要硬件清单：</p>
+<div data-align="center">
+<table>
+
+<thead>
+<tr>
+<th style="text-align: center;">名称</th>
+<th style="text-align: center;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">逐飞科技 TC377核心板</td>
+<td
+style="text-align: center;">核心板为英飞凌委托逐飞科技设计制作，主要功能是确保芯片正常工作并引出所有引脚。</td>
+</tr>
+<tr>
+<td style="text-align: center;">逐飞科技英飞凌调试器</td>
+<td
+style="text-align: center;">逐飞英飞凌调试器，支持英飞凌自己的开发环境AURIX
+Development Studio</td>
+</tr>
+<tr>
+<td style="text-align: center;">正交解码1024线mini编码器</td>
+<td
+style="text-align: center;">用于电机转速信息的采集，从而实现小车的速度和平衡控制。</td>
+</tr>
+<tr>
+<td style="text-align: center;">1.8寸TFT屏幕</td>
+<td style="text-align: center;">用于显示小车的运行状态和调试信息。</td>
+</tr>
+<tr>
+<td style="text-align: center;">逐飞科技 IMU963RA 六轴模块</td>
+<td
+style="text-align: center;">用于采集小车的姿态信息，包括加速度和角速度。</td>
+</tr>
+<tr>
+<td style="text-align: center;">高速WIFI SPI无线模块</td>
+<td
+style="text-align: center;">用于图传，数据发送接收，直接显示到PC端查看图像信息。</td>
+</tr>
+<tr>
+<td style="text-align: center;">RTK模块</td>
+<td style="text-align: center;">用于实现小车的高精度定位和导航。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>独轮车硬件控制电路由三部分组成，分别是主控制板，驱动板以及灯板。主控制板上搭载了
+TC377 最小系统板、1.8 寸 TFT
+屏幕、与外部外设的连接接口以及一个五维按键实现人机交互。驱动板与主控制板通过排线连接，主板将
+24V 电压传输给驱动板，驱动板上的 LM3150 芯片会将电压降低为 12V，再通过
+DRV8701 控制的 H 桥来驱动行进电机。灯板上搭载了 TLD7002
+控制芯片，通过其仿真模式，来实现对 7*21 的 LED 点阵进行控制。</p>
+<!-- 
+<div align="center">
+
+![6s To 5V Buck Convertor](/imgs/面向动态平衡的独轮车串级PID控制设计/6-5_buck.png)
+![5V To 3.3V Buck Convertor](/imgs/面向动态平衡的独轮车串级PID控制设计/5-33_buck.png)
+![6s To 12V Buck Convertor](/imgs/面向动态平衡的独轮车串级PID控制设计/6-12_buck.png)
+![Drive Circuit](/imgs/面向动态平衡的独轮车串级PID控制设计/drive.png)
+
+</div>
+  -->
+<h3 id="软件设计">软件设计</h3>
+<p>本项目面向第十九届全国大学生智能汽车竞赛独轮组，设计并实现了一套基于英飞凌微控制器的独轮智能车系统。整车融合了单目摄像头、IMU、GNSS和轮速编码器等多个传感器，实现了图像识别、EKF姿态解算、惯性导航、路径跟踪与
+RTK 高精度定位等的联合多核应用；在控制上采用串级 PID、增量式 PID 与差速
+PD 算法结合，实现独轮动态平衡与运动控制任务。</p>
+<p>软件系统整体架构如下图所示，主要包括传感器数据采集与预处理、姿态解算与状态估计、路径规划与跟踪控制、以及底层驱动与通信等模块。各模块通过统一的数据总线进行信息交互，确保系统的实时性与稳定性。</p>
+<div data-align="center">
+<figure>
+<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/architecture.png" srcset="/img/loading.gif" lazyload
+alt="Software Architecture" />
+<figcaption aria-hidden="true">Software Architecture</figcaption>
+</figure>
+</div>
+<p>各个模块解耦良好，便于后续功能扩展与维护。系统采用模块化设计思想，将复杂的控制任务分解为多个相对独立的子模块，每个模块专注于特定功能的实现。通过定义清晰的接口与数据格式，各模块之间实现松耦合，便于单独调试与优化。</p>
+<p>在实时性方面，系统充分利用英飞凌微控制器的多核架构，将计算密集型任务分配到不同的核心上并行处理。例如，传感器数据采集与预处理模块运行在一个核心上，确保高频率的数据更新；而路径规划与跟踪控制模块则运行在另一个核心上，保证控制指令的及时生成。通过合理的任务调度与优先级设置，系统能够满足独轮车对实时性的严格要求。</p>
+<p>在姿态解算与状态估计方面，系统采用扩展卡尔曼滤波（EKF）算法，将
+IMU和轮速编码器等多传感器数据进行融合，提高姿态估算的精度与鲁棒性。EKF
+模块通过预测与更新两个阶段，动态调整状态估计，减小传感器噪声与误差对系统性能的影响。</p>
+<div data-align="center">
+<figure>
+<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/ekf.png" srcset="/img/loading.gif" lazyload
+alt="EKF" />
+<figcaption aria-hidden="true">EKF</figcaption>
+</figure>
+</div>
+<p>在路径规划与跟踪控制方面，系统结合视觉信息与 GNSS
+定位数据，实现对环境的感知与路径规划。通过图像识别模块提取道路边界与障碍物信息，结合
+RTK 高精度定位，实现路径的动态规划与调整。跟踪控制模块采用串级 PID
+控制策略，实现对独轮车的平衡与运动控制，确保车辆能够准确地沿规划路径行驶。</p>
+<p>在底层驱动与通信方面，系统实现了对各类传感器与执行器的驱动接口，确保数据的高效传输与处理。通过
+SPI、I2C 等通信协议，实现与外设的稳定连接，保证系统的整体性能。</p>
+<h2 id="四实物调试与测试">四、实物调试与测试</h2>
+<h3 id="调试过程">4.1 调试过程</h3>
+<h4 id="roll-方向-pid-参数整定">4.1.1 Roll 方向 PID 参数整定</h4>
+<p>Roll 方向主要通过飞轮实现平衡控制，调参顺序建议如下：</p>
+<ul>
+<li>角速度环：从零开始逐步增加比例增益 <span
+class="math inline">\(P\)</span>，观察手动左右摆动车身时的阻尼效果，同时监控
+PWM 输出波形，峰值应控制在约 4~5 kHz 以内，避免过大 <span
+class="math inline">\(P\)</span> 值导致 PWM 达到总限幅。<br />
+</li>
+<li>角度环：在角速度环已起作用的基础上，逐步增加角度环 <span
+class="math inline">\(P\)</span>
+值，使小车从机械零点位置出现倾倒时能够维持约 3~5 秒的自平衡。<br />
+</li>
+<li>速度环：在前两个环调好后，速度环调节相对简单，从零开始逐步增加 <span
+class="math inline">\(P\)</span>，直至小车能够稳定直立。需要注意，<span
+class="math inline">\(P\)</span>
+值过大可能会导致小车直接向一侧倾倒。</li>
+</ul>
+<p>进一步优化：先使用三个环的单 <span class="math inline">\(P\)</span>
+控制实现基本直立，再根据需求加入积分 <span
+class="math inline">\(I\)</span> 和微分 <span
+class="math inline">\(D\)</span> 以优化系统响应。</p>
+<h4 id="pitch-方向-pid-参数整定">4.1.2 Pitch 方向 PID 参数整定</h4>
+<p>Pitch 方向主要通过行进轮控制，调参流程如下：</p>
+<ul>
+<li>角速度环：关闭飞轮，仅开启行进电机。从零开始逐步增加 <span
+class="math inline">\(P\)</span>
+值，直到小车出现轻微抖动，再适度减小至不抖。理想状态下，手动施加前后转矩时，行进轮能够快速调整姿态，使小车保持水平，并具有明显阻尼感。<br />
+</li>
+<li>角度环：在角速度环作用下，逐步增加角度环 <span
+class="math inline">\(P\)</span>
+值，使小车在手扶干预下能够稳定地向前移动，并维持匀速行进。双环控制下，小车应在有前进趋势时能够持续匀速运动而不倒下。<br />
+</li>
+<li>速度环：缓慢增加 <span class="math inline">\(P\)</span>
+值，确保极性正确。在手动轻压时，小车能够迅速恢复直立，体现刚劲和稳定性。<br />
+动量轮启用：启用飞轮参数后，小车在原地会出现约 ±3 cm
+范围的来回移动；若加装 RTK
+等额外负载，车身重心变化，来回移动范围可减小至约 ±1 cm。</li>
+</ul>
+<h4 id="串级-pid-参数整定">4.1.3 串级 PID 参数整定</h4>
+<p>在开展串级 PID
+闭环控制器的参数整定之前，首先需要确认各控制环路的输入–输出方向是否正确。这一步骤是保证后续调试顺利进行的前提。</p>
+<p>最内层的角速度环主要用于抑制车体的角速度。在单独调试该环时，可以先设置一个较小的比例增益，并通过手动左右扰动车体来观察响应。如果调试正确，系统应表现出明显的阻尼效应：动量轮会沿倾倒方向旋转，从而产生抑制倾倒的力矩。若实际观察到的是加速倾倒而非阻尼，则说明控制方向设置错误，此时需要在输出端引入符号反转以修正。</p>
+<div data-align="center">
+<figure>
+<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/angle_speed.gif" srcset="/img/loading.gif" lazyload
+alt="Angle Speed Control" />
+<figcaption aria-hidden="true">Angle Speed Control</figcaption>
+</figure>
+</div>
+<p>在角速度环方向确认无误的基础上，可以进一步整定角度环。角度环的目标是将姿态偏差转化为角速度指令，以抵消车体的倾斜。当给予一定比例增益后，若车体被外力倾斜，应能够感受到比单独角速度环更强的阻尼效果。同时，在保持一定倾斜角度的情况下，电机应持续旋转以抵消偏差，而不会出现方向反转现象。由于角速度环与角度环的叠加会显著提高响应速度，实验过程中主要验证其旋转方向与整体效果是否合理。</p>
+<div data-align="center">
+<figure>
+<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/angle_control.gif" srcset="/img/loading.gif" lazyload
+alt="Angle Control" />
+<figcaption aria-hidden="true">Angle Control</figcaption>
+</figure>
+</div>
+<p>相比之下，速度环的调试逻辑有所不同。其作用并非抑制速度的增加，而是通过正反馈机制提升电机输出力矩，使系统更快地恢复平衡。如果方向设置不当，速度环会削弱角度环与角速度环的作用，导致系统更难稳定。确认速度环方向的方法较为直接：在前两环已正确配置的前提下，赋予速度环一个较小的比例系数并轻微扰动车体。若电机转速随之加快，说明方向正确；若转速减小，则需修正输出方向。</p>
+<p>在完成方向确认后，即可进行各环的具体参数调节。首先是角速度环，作为执行层，其调节目标是产生适度的阻尼效果。阻尼过强会导致系统迟钝，过弱则抑制不足，因此需依赖经验在比例与微分环节中寻找平衡。其次是角度环，其调试需建立在角速度环稳定的前提下。当参数合理时，车体在机械零点附近能够维持数秒平衡再倒下，表明角度环已基本整定完毕。最后是速度环，由于其为正反馈作用，能够进一步增强电机输出。在外两环已具备基本平衡能力的条件下，逐步提高速度环比例系数，可显著延长车体保持平衡的时间。理论上，随着参数增加，系统会表现出更强的抗倾覆能力，但过大的增益会引入显著的超调与震荡，此时需要适当降低角度环或角速度环的增益以重新平衡各环作用。</p>
+<div data-align="center">
+<figure>
+<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/balance_control.gif" srcset="/img/loading.gif" lazyload
+alt="Balance Control" />
+<figcaption aria-hidden="true">Balance Control</figcaption>
+</figure>
+</div>
+<p>经过上述步骤，三个环路的参数整定完成后，车体能够实现持续的左右自平衡，并表现出一定的抗干扰能力，为后续控制性能的进一步优化奠定了基础。</p>
+<h3 id="测试结果与分析">4.2 测试结果与分析</h3>
+<p>本项目在室内与室外两类环境下对独轮平衡车进行了多轮实验，以全面评估其平衡能力、抗干扰性能及路径跟随效果。室内实验主要在平整的实验场地上进行，用于验证车辆在静态平衡和小范围运动条件下的稳定性；室外实验则选择校园道路和模拟赛道，进一步考察系统在复杂环境下的运动表现。</p>
+<h4 id="室内实验">4.2.1 室内实验</h4>
+<p>在室内测试中，独轮车能够依靠动量轮实现稳定的自平衡，即使在受到约一到两度的人为扰动后，也能在极短时间内恢复至直立状态。实验过程中，传感器反馈与控制器的快速响应协同作用，使得车辆在原地静止平衡以及低速直行任务中均展现出良好的稳定性与可控性。在进一步的抗干扰实验中，车辆被主动推撞至目标板。尽管受到外力冲击，车体在短暂倾斜后仍能够恢复平衡，恢复时间较短且姿态超调幅度有限，表明所设计的控制系统在小幅和中等冲击干扰下均具有良好的鲁棒性。</p>
+<div data-align="center">
+<figure>
+<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/indoor.png" srcset="/img/loading.gif" lazyload
+alt="Indoor Experiment" />
+<figcaption aria-hidden="true">Indoor Experiment</figcaption>
+</figure>
+</div>
+<div data-align="center">
+<video src="/imgs/面向动态平衡的独轮车串级PID控制设计/indoor.mp4">
+</video>
+</div>
+<h4 id="室外实验">4.2.2 室外实验</h4>
+<p>在室外环境中，独轮车同样表现出较强的自平衡与运动能力。车辆能够在直道中保持加速过程的稳定性，纵向姿态波动较小；在弯道转向时，姿态过渡平滑，未出现明显振荡。结合
+RTK
+定位与视觉传感器进行路径识别与修正，车辆的运动轨迹能够较好地贴合目标路线，路径偏差保持在较小范围内，整体运行稳定且姿态曲线变化平顺。实验结果表明，即便在存在地面不平整和复杂路径的条件下，动量轮依然能够有效发挥平衡作用，保证车辆平稳完成加速、减速与转向等运动任务。</p>
+<div data-align="center">
+<figure>
+<img src="/imgs/面向动态平衡的独轮车串级PID控制设计/outdoor.png" srcset="/img/loading.gif" lazyload
+alt="Outdoor Experiment" />
+<figcaption aria-hidden="true">Outdoor Experiment</figcaption>
+</figure>
+</div>
+<div data-align="center">
+<video src="/imgs/面向动态平衡的独轮车串级PID控制设计/outdoor.mp4">
+</video>
+</div>
+<h2 id="五总结">五、总结</h2>
+<p>本项目围绕独轮车固有的不稳定性这一核心挑战，成功设计、实现并验证了一套基于动量轮和串级PID控制的自平衡控制系统。研究工作涵盖了从理论建模、仿真分析到物理样机搭建与实验测试的全过程，最终达成了预设的各项设计目标。</p>
+<p>在理论层面，本报告首先将独轮车的复杂动力学行为解构为二维倒立摆模型，建立了其数学描述与状态空间方程，为控制策略的设计提供了坚实的理论基础。在此之上，我们针对系统多状态变量在时间尺度上的差异，构建了角速度-角度-速度三闭环串级PID控制架构。该架构通过分层解耦，实现了对系统瞬时动态、姿态稳定与宏观运动的精确协同控制。同时，为提升高级机动性，我们设计了基于动量轮差速的转向机制，并引入了“压弯”前馈补偿算法，有效解决了高速转向时的控制饱和问题。</p>
+<p>在实践层面，我们首先在MATLAB/Simulink环境中搭建了高保真度的仿真平台，成功验证了所提控制策略的有效性。随后，在一个以Infineon
+TC377微控制器为核心的物理样机上，完整实现了该控制系统。实验结果表明，该独轮车不仅能够实现长时间、高稳定性的原地自平衡，展现出抗外部冲击干扰能力，还能在室内外复杂环境中完成加速、转向与路径跟踪等动态任务。尤其是在转向测试中，“压弯”机制显著提升了车辆的过弯稳定性和流畅性。</p>
+<p>综上所述，本项目成功验证了动量轮技术与串级PID控制相结合，是解决独轮车平衡与机动控制问题的一套有效工程方案。研究成果不仅为一个高性能、高鲁棒性的独轮车实验平台奠定了基础，其分析、设计与实现流程也为其他欠驱动、非线性机器人系统的控制研发提供了有益的参考与借鉴。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8E%A7%E5%88%B6/" class="category-chain-item">控制</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%8B%AC%E8%BD%AE%E8%BD%A6/" class="print-no-link">#独轮车</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>面向动态平衡的独轮车串级PID控制设计</div>
+      <div>https://symcreg.github.io/2025/10/22/面向动态平衡的独轮车串级PID控制设计/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>sam</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年10月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/10/17/%E9%BB%91%E8%89%B2%E7%9C%BC%E6%B3%AA/" title="黑色眼泪">
+                        <span class="hidden-mobile">黑色眼泪</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"Ov23li5FvPkWxLe96Tkk","clientSecret":"5e38b114f45f4e5129c0b22a376534f39fa170c2","repo":"symcreg.github.io","owner":"symcreg","admin":["symcreg"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: 'c6f27b0d7890d90e7c908a9595aad9ad'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
