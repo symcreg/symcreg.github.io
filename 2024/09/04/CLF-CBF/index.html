@@ -19,12 +19,12 @@
   <meta name="author" content="sam">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1.动态控制仿射系统(Dynamics Control Affine System) 对于\(\dot{x} &#x3D; F(t,x,u)\)，其中系统状态\(x\in{\mathbb{R}^n}\)，系统输入\(u \in{\mathbb{R}^m}\)，如果\(F\)对于\(x\)和\(u\)是Lipschitz连续的，时间\(t\)是piecewise连续的，那么在给定的初始条件\(x_0">
+    <meta name="description" content="1.动态控制仿射系统(Dynamics Control Affine System) 对于ẋ &#x3D; F(t, x, u)，其中系统状态x ∈ ℝn，系统输入u ∈ ℝm，如果F对于x和u是Lipschitz连续的，时间t是piecewise连续的，那么在给定的初始条件x0下，轨迹x(t)是存在并且unique的。 一般写成如下形式： ẋ &#x3D; f(x) + g(x)u 其中f : ℝ">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CLF-CBF">
 <meta property="og:url" content="https://symcreg.github.io/2024/09/04/CLF-CBF/index.html">
 <meta property="og:site_name" content="symc">
-<meta property="og:description" content="1.动态控制仿射系统(Dynamics Control Affine System) 对于\(\dot{x} &#x3D; F(t,x,u)\)，其中系统状态\(x\in{\mathbb{R}^n}\)，系统输入\(u \in{\mathbb{R}^m}\)，如果\(F\)对于\(x\)和\(u\)是Lipschitz连续的，时间\(t\)是piecewise连续的，那么在给定的初始条件\(x_0">
+<meta property="og:description" content="1.动态控制仿射系统(Dynamics Control Affine System) 对于ẋ &#x3D; F(t, x, u)，其中系统状态x ∈ ℝn，系统输入u ∈ ℝm，如果F对于x和u是Lipschitz连续的，时间t是piecewise连续的，那么在给定的初始条件x0下，轨迹x(t)是存在并且unique的。 一般写成如下形式： ẋ &#x3D; f(x) + g(x)u 其中f : ℝ">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://symcreg.github.io/img/CLF-CBF/ESCLF.png">
 <meta property="og:image" content="https://symcreg.github.io/img/CLF-CBF/CBF.png">
@@ -75,7 +75,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"symcreg.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-0MP4SFZQ6C"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"symcreg.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-0MP4SFZQ6C"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -110,10 +110,15 @@
 
   
 
+  
+    
+  
+
+
 
 
   
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 
 <body>
@@ -135,7 +140,7 @@
       <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
 
-    <!-- Collapsible content -->
+    <!-- Collapsible content (desktop) -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto text-center">
         
@@ -231,6 +236,123 @@
   </div>
 </nav>
 
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/links/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-link-fill"></i>
+                  <span>友链</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
   
 
 <div id="banner" class="banner" parallax=true
@@ -263,7 +385,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          876 字
+          1.7k 字
         
       </span>
     
@@ -274,7 +396,7 @@
         
         
         
-          8 分钟
+          14 分钟
         
       </span>
     
@@ -291,6 +413,8 @@
     </div>
   </div>
 </div>
+
+
 
 </div>
 
@@ -320,98 +444,103 @@
 <h2
 id="动态控制仿射系统dynamics-control-affine-system">1.动态控制仿射系统(Dynamics
 Control Affine System)</h2>
-<p>对于<span class="math inline">\(\dot{x} =
-F(t,x,u)\)</span>，其中系统状态<span
-class="math inline">\(x\in{\mathbb{R}^n}\)</span>，系统输入<span
-class="math inline">\(u \in{\mathbb{R}^m}\)</span>，如果<span
-class="math inline">\(F\)</span>对于<span
-class="math inline">\(x\)</span>和<span
-class="math inline">\(u\)</span>是Lipschitz连续的，时间<span
-class="math inline">\(t\)</span>是piecewise连续的，那么在给定的初始条件<span
-class="math inline">\(x_0\)</span>下，轨迹<span
-class="math inline">\(x(t)\)</span>是存在并且unique的。</p>
+<p>对于<span
+class="math inline"><em>ẋ</em> = <em>F</em>(<em>t</em>, <em>x</em>, <em>u</em>)</span>，其中系统状态<span
+class="math inline"><em>x</em> ∈ ℝ<sup><em>n</em></sup></span>，系统输入<span
+class="math inline"><em>u</em> ∈ ℝ<sup><em>m</em></sup></span>，如果<span
+class="math inline"><em>F</em></span>对于<span
+class="math inline"><em>x</em></span>和<span
+class="math inline"><em>u</em></span>是Lipschitz连续的，时间<span
+class="math inline"><em>t</em></span>是piecewise连续的，那么在给定的初始条件<span
+class="math inline"><em>x</em><sub>0</sub></span>下，轨迹<span
+class="math inline"><em>x</em>(<em>t</em>)</span>是存在并且unique的。</p>
 <p>一般写成如下形式：</p>
-<p><span class="math display">\[\dot{x} = f(x) + g(x)u\]</span></p>
+<p><span
+class="math display"><em>ẋ</em> = <em>f</em>(<em>x</em>) + <em>g</em>(<em>x</em>)<em>u</em></span></p>
 <p>其中<span
-class="math inline">\(f:\mathbb{R}^n\rightarrow{\mathbb{R}^n},
-g:\mathbb{R}^n\rightarrow{\mathbb{R}^{n*m}}\)</span>，<span
-class="math inline">\(x\)</span>是Lipschitz连续，<span
-class="math inline">\(x_e = 0\)</span>。</p>
+class="math inline"><em>f</em> : ℝ<sup><em>n</em></sup> → ℝ<sup><em>n</em></sup>, <em>g</em> : ℝ<sup><em>n</em></sup> → ℝ<sup><em>n</em> * <em>m</em></sup></span>，<span
+class="math inline"><em>x</em></span>是Lipschitz连续，<span
+class="math inline"><em>x</em><sub><em>e</em></sub> = 0</span>。</p>
 <h2 id="clfcontrol-lyapunov-function">2.CLF(Control Lyapunov
 Function)</h2>
 <p>Lyapunove Function数学定义如下：</p>
-<p><span class="math display">\[V(x)\]</span> <span
-class="math display">\[s.t. V(x_e) = 0, V(x) &gt; 0 \ for \ x \neq
-x_e\]</span> <span class="math display">\[\dot{V(x)} = \frac{\partial
-V}{\partial x}f(x) &lt; 0 \ for \ x \neq x_e\]</span></p>
+<p><span class="math display"><em>V</em>(<em>x</em>)</span> <span
+class="math display"><em>s</em>.<em>t</em>.<em>V</em>(<em>x</em><sub><em>e</em></sub>) = 0, <em>V</em>(<em>x</em>) &gt; 0 <em>f</em><em>o</em><em>r</em> <em>x</em> ≠ <em>x</em><sub><em>e</em></sub></span>
+<span class="math display">$$\dot{V(x)} = \frac{\partial V}{\partial
+x}f(x) &lt; 0 \ for \ x \neq x_e$$</span></p>
 <p><span
-class="math inline">\(V(x)\)</span>是定义的Lyapunov函数，下面的是约束条件，当满足上述两个约束时，我们可以认为x渐近稳定。</p>
-<p>将输入<span class="math inline">\(u\)</span>引入到Lyapunove
+class="math inline"><em>V</em>(<em>x</em>)</span>是定义的Lyapunov函数，下面的是约束条件，当满足上述两个约束时，我们可以认为x渐近稳定。</p>
+<p>将输入<span class="math inline"><em>u</em></span>引入到Lyapunove
 Function，得到新的方程。 使<span
-class="math inline">\(V(x):\mathbb{R}^n\rightarrow{\mathbb{R}}\)</span>是连续Differential函数，如果存在一个常数<span
-class="math inline">\(c&gt;0\)</span>使得<span
-class="math inline">\(V(x)\)</span>满足如下条件，那么<span
-class="math inline">\(V(x)\)</span>就是一个关于<span
-class="math inline">\(x\)</span>的Control Lyapunov Function。</p>
-<p><span class="math inline">\(1)\ \Omega := \{x
-\in{\mathbb{R}^n}:V(x)\le{c}\}\)</span>，<span
-class="math inline">\(V(x)\)</span>是有界的</p>
-<p><span class="math inline">\(2)\ V(x)&gt;0\)</span>，对于所有的<span
-class="math inline">\(s\in{R^n}\backslash \{x_e\}\)</span>，<span
-class="math inline">\(V(e_e)=0\)</span></p>
-<p><span class="math inline">\(3)\
-inf_{u\in{U}}\dot{V}(x,u)&lt;0\)</span>，对于所有的<span
-class="math inline">\(x\in{\Omega_c}\backslash\{x_e\}\)</span></p>
+class="math inline"><em>V</em>(<em>x</em>) : ℝ<sup><em>n</em></sup> → ℝ</span>是连续Differential函数，如果存在一个常数<span
+class="math inline"><em>c</em> &gt; 0</span>使得<span
+class="math inline"><em>V</em>(<em>x</em>)</span>满足如下条件，那么<span
+class="math inline"><em>V</em>(<em>x</em>)</span>就是一个关于<span
+class="math inline"><em>x</em></span>的Control Lyapunov Function。</p>
+<p><span
+class="math inline">1) <em>Ω</em> := {<em>x</em> ∈ ℝ<sup><em>n</em></sup> : <em>V</em>(<em>x</em>) ≤ <em>c</em>}</span>，<span
+class="math inline"><em>V</em>(<em>x</em>)</span>是有界的</p>
+<p><span
+class="math inline">2) <em>V</em>(<em>x</em>) &gt; 0</span>，对于所有的<span
+class="math inline"><em>s</em> ∈ <em>R</em><sup><em>n</em></sup> ∖ {<em>x</em><sub><em>e</em></sub>}</span>，<span
+class="math inline"><em>V</em>(<em>e</em><sub><em>e</em></sub>) = 0</span></p>
+<p><span
+class="math inline">3) <em>i</em><em>n</em><em>f</em><sub><em>u</em> ∈ <em>U</em></sub><em>V̇</em>(<em>x</em>, <em>u</em>) &lt; 0</span>，对于所有的<span
+class="math inline"><em>x</em> ∈ <em>Ω</em><sub><em>c</em></sub> ∖ {<em>x</em><sub><em>e</em></sub>}</span></p>
 <p>为了简化<span
-class="math inline">\(\dot{V}(x,u)\)</span>的表达，用Lie括号描述：</p>
-<p><span class="math display">\[\dot{V}(x,u) = \nabla{V}(x) * \dot{x} =
-\nabla{V}(x) * f(x) + \nabla{V}(x) * g(x)*u = L_fV(x) +
-L_gV(x)u\]</span> <span
-class="math display">\[(L_pq(x):=\nabla{q(x)}*p(x))\]</span></p>
+class="math inline"><em>V̇</em>(<em>x</em>, <em>u</em>)</span>的表达，用Lie括号描述：</p>
+<p><span
+class="math display"><em>V̇</em>(<em>x</em>, <em>u</em>) = ∇<em>V</em>(<em>x</em>) * <em>ẋ</em> = ∇<em>V</em>(<em>x</em>) * <em>f</em>(<em>x</em>) + ∇<em>V</em>(<em>x</em>) * <em>g</em>(<em>x</em>) * <em>u</em> = <em>L</em><sub><em>f</em></sub><em>V</em>(<em>x</em>) + <em>L</em><sub><em>g</em></sub><em>V</em>(<em>x</em>)<em>u</em></span>
+<span
+class="math display">(<em>L</em><sub><em>p</em></sub><em>q</em>(<em>x</em>) := ∇<em>q</em>(<em>x</em>) * <em>p</em>(<em>x</em>))</span></p>
 <p>CLF保证系统最终会稳定，但不能确定多快才能稳定，这时候引入指数稳定CLF(ESCLF)。</p>
-<p>如果存在常数<span class="math inline">\(\lambda &gt;
-0\)</span>使得<span class="math inline">\(inf_{u
-\in{U}}\dot{V}(x,u)+{\lambda}{V(x)}\le0\)</span> ，那么<span
-class="math inline">\(V(x)\)</span>就是ESCLF。</p>
+<p>如果存在常数<span
+class="math inline"><em>λ</em> &gt; 0</span>使得<span
+class="math inline"><em>i</em><em>n</em><em>f</em><sub><em>u</em> ∈ <em>U</em></sub><em>V̇</em>(<em>x</em>, <em>u</em>) + <em>λ</em><em>V</em>(<em>x</em>) ≤ 0</span>
+，那么<span
+class="math inline"><em>V</em>(<em>x</em>)</span>就是ESCLF。</p>
 <p><img src="/img/CLF-CBF/ESCLF.png" srcset="/img/loading.gif" lazyload /></p>
 <h2 id="clf-qp">3.CLF-QP</h2>
 <p>将CLF转化为QP问题，搜索满足CLF-QP问题的输入u。</p>
-<p><span class="math display">\[argmin
-\  (u-u_ref)^{T}{H(u-u_ref)}+p\delta^2\]</span> <span
-class="math display">\[subject\ to :\
-L_fV(x)+L_gV(x)u+\lambda{V(x)}\le{\delta}\]</span></p>
-<p>其中<span class="math inline">\(\delta\)</span>是松弛变量，<span
-class="math inline">\(p\)</span>是惩罚因子，设置松弛变量的目的是在实际搜索中，较难找到一个合适的解，增加松弛变量后会放松CLF条件，在允许的情况下不满足CLF约束，但获得一个解。</p>
+<p><span
+class="math display"><em>a</em><em>r</em><em>g</em><em>m</em><em>i</em><em>n</em> (<em>u</em> − <em>u</em><sub><em>r</em></sub><em>e</em><em>f</em>)<sup><em>T</em></sup><em>H</em>(<em>u</em> − <em>u</em><sub><em>r</em></sub><em>e</em><em>f</em>) + <em>p</em><em>δ</em><sup>2</sup></span>
+<span
+class="math display"><em>s</em><em>u</em><em>b</em><em>j</em><em>e</em><em>c</em><em>t</em> <em>t</em><em>o</em>: <em>L</em><sub><em>f</em></sub><em>V</em>(<em>x</em>) + <em>L</em><sub><em>g</em></sub><em>V</em>(<em>x</em>)<em>u</em> + <em>λ</em><em>V</em>(<em>x</em>) ≤ <em>δ</em></span></p>
+<p>其中<span class="math inline"><em>δ</em></span>是松弛变量，<span
+class="math inline"><em>p</em></span>是惩罚因子，设置松弛变量的目的是在实际搜索中，较难找到一个合适的解，增加松弛变量后会放松CLF条件，在允许的情况下不满足CLF约束，但获得一个解。</p>
 <p>另外，这里的H是Hassian矩阵，表示二次项系数，将<span
-class="math inline">\((u-u_ref)^{T}{H(u-u_ref)}\)</span>理解为二次的cost函数(或者能量函数？)，是人为构建的，二次保证解的u的输入使系统收敛较快。</p>
+class="math inline">(<em>u</em> − <em>u</em><sub><em>r</em></sub><em>e</em><em>f</em>)<sup><em>T</em></sup><em>H</em>(<em>u</em> − <em>u</em><sub><em>r</em></sub><em>e</em><em>f</em>)</span>理解为二次的cost函数(或者能量函数？)，是人为构建的，二次保证解的u的输入使系统收敛较快。</p>
 <h2 id="cbf">4.CBF</h2>
 <p>CLF约束确保系统渐趋稳定，而CBF的作用是确保系统安全，使系统处于规定的安全集合约束内。</p>
 <pre><code class="hljs">//TODO:补充CBF原理</code></pre>
-<p>当<span class="math inline">\(B(x):\mathbb{R}^n \rightarrow
-\mathbb{R}\)</span>是连续可微的，零超水平集(zero-superlevel)为<span
-class="math inline">\(C\)</span>，<span
-class="math inline">\(C=\{x|B(x)\ge0\}\)</span>，对于所有<span
-class="math inline">\(x\in{\partial{C}}\)</span>，<span
-class="math inline">\(\nabla{B(x)\ne0}\)</span>，如果存在一个扩展<span
-class="math inline">\(Class \ K_\infty\)</span>函数<span
-class="math inline">\(\alpha\)</span>（工程中一般使用正常数和<span
-class="math inline">\(B(x)\)</span>的线性组合获取，如：<span
-class="math inline">\(\gamma{B(x)},\gamma&gt;0\)</span>），存在一个集合<span
-class="math inline">\(D\subset{\mathbb{R}^n}\)</span>，使得<span
-class="math inline">\(C\subset{D}\)</span>满足：</p>
+<p>当<span
+class="math inline"><em>B</em>(<em>x</em>) : ℝ<sup><em>n</em></sup> → ℝ</span>是连续可微的，零超水平集(zero-superlevel)为<span
+class="math inline"><em>C</em></span>，<span
+class="math inline"><em>C</em> = {<em>x</em>|<em>B</em>(<em>x</em>) ≥ 0}</span>，对于所有<span
+class="math inline"><em>x</em> ∈ ∂<em>C</em></span>，<span
+class="math inline">∇<em>B</em>(<em>x</em>) ≠ 0</span>，如果存在一个扩展<span
+class="math inline"><em>C</em><em>l</em><em>a</em><em>s</em><em>s</em> <em>K</em><sub>∞</sub></span>函数<span
+class="math inline"><em>α</em></span>（工程中一般使用正常数和<span
+class="math inline"><em>B</em>(<em>x</em>)</span>的线性组合获取，如：<span
+class="math inline"><em>γ</em><em>B</em>(<em>x</em>), <em>γ</em> &gt; 0</span>），存在一个集合<span
+class="math inline"><em>D</em> ⊂ ℝ<sup><em>n</em></sup></span>，使得<span
+class="math inline"><em>C</em> ⊂ <em>D</em></span>满足：</p>
 <p><span
-class="math display">\[sup_{u\in{U}}[L_f{B(x)}+L_g{B(x)}u]+\alpha({B(x)})\ge0\]</span></p>
-<p>那么对于所有<span class="math inline">\(x\in{D}\)</span>，<span
-class="math inline">\(B(x)\)</span>是一个CBF。</p>
+class="math display"><em>s</em><em>u</em><em>p</em><sub><em>u</em> ∈ <em>U</em></sub>[<em>L</em><sub><em>f</em></sub><em>B</em>(<em>x</em>) + <em>L</em><sub><em>g</em></sub><em>B</em>(<em>x</em>)<em>u</em>] + <em>α</em>(<em>B</em>(<em>x</em>)) ≥ 0</span></p>
+<p>那么对于所有<span
+class="math inline"><em>x</em> ∈ <em>D</em></span>，<span
+class="math inline"><em>B</em>(<em>x</em>)</span>是一个CBF。</p>
 <p><img src="/img/CLF-CBF/CBF.png" srcset="/img/loading.gif" lazyload /></p>
 <h2 id="clf-cbf-qp">5.CLF-CBF-QP</h2>
 <p>将CLF和CBF都转化为QP问题的约束条件，其中CLF保证控制器稳定，CBF保证控制满足安全条件。</p>
-<p><span class="math display">\[argmin
-\  (u-u_ref)^{T}{H(u-u_ref)}+p\delta^2\]</span> <span
-class="math display">\[subject\ to :\]</span> <span
-class="math display">\[\
-L_fV(x)+L_gV(x)u+\lambda{V(x)}\le{\delta}\]</span> <span
-class="math display">\[L_f{B(x)}+L_g{B(x)}u]+\gamma{B(x)}\ge0\]</span></p>
+<p><span
+class="math display"><em>a</em><em>r</em><em>g</em><em>m</em><em>i</em><em>n</em> (<em>u</em> − <em>u</em><sub><em>r</em></sub><em>e</em><em>f</em>)<sup><em>T</em></sup><em>H</em>(<em>u</em> − <em>u</em><sub><em>r</em></sub><em>e</em><em>f</em>) + <em>p</em><em>δ</em><sup>2</sup></span>
+<span
+class="math display"><em>s</em><em>u</em><em>b</em><em>j</em><em>e</em><em>c</em><em>t</em> <em>t</em><em>o</em>:</span>
+<span
+class="math display"> <em>L</em><sub><em>f</em></sub><em>V</em>(<em>x</em>) + <em>L</em><sub><em>g</em></sub><em>V</em>(<em>x</em>)<em>u</em> + <em>λ</em><em>V</em>(<em>x</em>) ≤ <em>δ</em></span>
+<span
+class="math display"><em>L</em><sub><em>f</em></sub><em>B</em>(<em>x</em>) + <em>L</em><sub><em>g</em></sub><em>B</em>(<em>x</em>)<em>u</em>] + <em>γ</em><em>B</em>(<em>x</em>) ≥ 0</span></p>
 <h2 id="links">links</h2>
 <ul>
 <li><em><a
@@ -425,7 +554,7 @@ Controller</a></em><br />
 target="_blank" rel="noopener" href="https://github.com/HybridRobotics/CBF-CLF-Helper">HybridRobotics/CBF-CLF-Helper</a></em><br />
 </li>
 <li><em><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=_Tkn_Hzo4AA">Jason Choi
--- Introduction to Control Lyapunov Functions and Control Barrier
+– Introduction to Control Lyapunov Functions and Control Barrier
 Functions</a></em></li>
 </ul>
 
@@ -727,7 +856,63 @@ Functions</a></em></li>
     var boardCtn = jQuery('#board-ctn');
     var boardTop = boardCtn.offset().top;
 
-    window.tocbot.init(Object.assign({
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
       tocSelector     : '#toc-body',
       contentSelector : '.markdown-body',
       linkClass       : 'tocbot-link',
@@ -738,10 +923,16 @@ Functions</a></em></li>
       scrollSmooth    : true,
       includeTitleTags: true,
       headingsOffset  : -boardTop,
-    }, CONFIG.toc));
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
     if (toc.find('.toc-list-item').length > 0) {
       toc.css('visibility', 'visible');
     }
+    expandAllToc();
+    bindTocToggle();
 
     Fluid.events.registerRefreshCallback(function() {
       if ('tocbot' in window) {
@@ -753,6 +944,8 @@ Functions</a></em></li>
         if (toc.find('.toc-list-item').length > 0) {
           toc.css('visibility', 'visible');
         }
+        expandAllToc();
+        bindTocToggle();
       }
     });
   });
@@ -854,6 +1047,8 @@ Functions</a></em></li>
     
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script defer src="/js/openkounter.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

@@ -19,12 +19,12 @@
   <meta name="author" content="sam">
   <meta name="keywords" content="">
   
-    <meta name="description" content="robotics section 2 practice 2 a 题目 编写matlab程序, 当用户输入Z-Y-X欧拉角\(\alpha-\beta-\gamma\)和位置矢量\(^{A}P_{B}\)时, 计算齐次变换矩阵\(^{A}T_{B}\). 实验两个例子: i. \(\alpha &#x3D; 10^{\circ}, \beta &#x3D; 20^{\circ}, \gamma &#x3D; 3">
+    <meta name="description" content="robotics section 2 practice 2 a 题目 编写matlab程序, 当用户输入Z-Y-X欧拉角α − β − γ和位置矢量APB时, 计算齐次变换矩阵ATB. 实验两个例子: i. α &#x3D; 10∘, β &#x3D; 20∘, γ &#x3D; 30∘,APB &#x3D; [1, 2, 3]T ii. α &#x3D; 0∘, β &#x3D; 20∘, γ &#x3D; 0∘,APB &#x3D; [3, 0, 1]">
 <meta property="og:type" content="article">
 <meta property="og:title" content="robotics section 2 practice 2">
 <meta property="og:url" content="https://symcreg.github.io/2025/03/26/robotics-section-2-practice-2/index.html">
 <meta property="og:site_name" content="symc">
-<meta property="og:description" content="robotics section 2 practice 2 a 题目 编写matlab程序, 当用户输入Z-Y-X欧拉角\(\alpha-\beta-\gamma\)和位置矢量\(^{A}P_{B}\)时, 计算齐次变换矩阵\(^{A}T_{B}\). 实验两个例子: i. \(\alpha &#x3D; 10^{\circ}, \beta &#x3D; 20^{\circ}, \gamma &#x3D; 3">
+<meta property="og:description" content="robotics section 2 practice 2 a 题目 编写matlab程序, 当用户输入Z-Y-X欧拉角α − β − γ和位置矢量APB时, 计算齐次变换矩阵ATB. 实验两个例子: i. α &#x3D; 10∘, β &#x3D; 20∘, γ &#x3D; 30∘,APB &#x3D; [1, 2, 3]T ii. α &#x3D; 0∘, β &#x3D; 20∘, γ &#x3D; 0∘,APB &#x3D; [3, 0, 1]">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://symcreg.github.io/img/robotics-section-2-practice-2/result_a_i.png">
 <meta property="og:image" content="https://symcreg.github.io/img/robotics-section-2-practice-2/result_a_ii.png">
@@ -79,7 +79,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"symcreg.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-0MP4SFZQ6C"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"symcreg.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-0MP4SFZQ6C"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -114,10 +114,15 @@
 
   
 
+  
+    
+  
+
+
 
 
   
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 
 <body>
@@ -139,7 +144,7 @@
       <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
 
-    <!-- Collapsible content -->
+    <!-- Collapsible content (desktop) -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto text-center">
         
@@ -235,6 +240,123 @@
   </div>
 </nav>
 
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/links/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-link-fill"></i>
+                  <span>友链</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
   
 
 <div id="banner" class="banner" parallax=true
@@ -267,7 +389,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          3.6k 字
         
       </span>
     
@@ -278,7 +400,7 @@
         
         
         
-          9 分钟
+          30 分钟
         
       </span>
     
@@ -295,6 +417,8 @@
     </div>
   </div>
 </div>
+
+
 
 </div>
 
@@ -326,14 +450,15 @@
 <h2 id="a">a</h2>
 <h3 id="题目">题目</h3>
 <p>编写matlab程序, 当用户输入Z-Y-X欧拉角<span
-class="math inline">\(\alpha-\beta-\gamma\)</span>和位置矢量<span
-class="math inline">\(^{A}P_{B}\)</span>时, 计算齐次变换矩阵<span
-class="math inline">\(^{A}T_{B}\)</span>.</p>
+class="math inline"><em>α</em> − <em>β</em> − <em>γ</em></span>和位置矢量<span
+class="math inline"><sup><em>A</em></sup><em>P</em><sub><em>B</em></sub></span>时,
+计算齐次变换矩阵<span
+class="math inline"><sup><em>A</em></sup><em>T</em><sub><em>B</em></sub></span>.</p>
 <p>实验两个例子:<br />
-i. <span class="math inline">\(\alpha = 10^{\circ}, \beta = 20^{\circ},
-\gamma = 30^{\circ}, ^{A}P_{B} = [1, 2, 3]^T\)</span><br />
-ii. <span class="math inline">\(\alpha = 0^{\circ}, \beta = 20^{\circ},
-\gamma = 0^{\circ}, ^{A}P_{B} = [3, 0, 1]^T\)</span></p>
+i. <span
+class="math inline"><em>α</em> = 10<sup>∘</sup>, <em>β</em> = 20<sup>∘</sup>, <em>γ</em> = 30<sup>∘</sup>,<sup><em>A</em></sup><em>P</em><sub><em>B</em></sub> = [1, 2, 3]<sup><em>T</em></sup></span><br />
+ii. <span
+class="math inline"><em>α</em> = 0<sup>∘</sup>, <em>β</em> = 20<sup>∘</sup>, <em>γ</em> = 0<sup>∘</sup>,<sup><em>A</em></sup><em>P</em><sub><em>B</em></sub> = [3, 0, 1]<sup><em>T</em></sup></span></p>
 <h3 id="解答">解答</h3>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs matlab"><span class="hljs-comment">%%ZYX欧拉角+P转齐次变换矩阵T</span><br><span class="hljs-comment">%输入角度</span><br>R_z=input(<span class="hljs-string">&#x27;Rotate around the z-axis in alpha =&#x27;</span>);<br>R_y=input(<span class="hljs-string">&#x27;Rotate around the y-axis in beta =&#x27;</span>);<br>R_x=input(<span class="hljs-string">&#x27;Rotate around the x-axis in gamma =&#x27;</span>);<br><span class="hljs-comment">%输入位置矢量</span><br>PBA_x = input (<span class="hljs-string">&#x27;X-axis distance = &#x27;</span>);<br>PBA_y = input (<span class="hljs-string">&#x27;Y-axis distance = &#x27;</span>);<br>PBA_z = input (<span class="hljs-string">&#x27;Z-axis distance = &#x27;</span>);<br><span class="hljs-comment">%只要有一个输入为空，输出警告</span><br><span class="hljs-keyword">if</span> <span class="hljs-built_in">isempty</span>(R_z)+<span class="hljs-built_in">isempty</span>(R_y)+<span class="hljs-built_in">isempty</span>(R_x)+<span class="hljs-built_in">isempty</span>(PBA_x)+<span class="hljs-built_in">isempty</span>(PBA_y)+<span class="hljs-built_in">isempty</span>(PBA_z)&gt;<span class="hljs-number">0</span><br>    fprintf(<span class="hljs-string">&#x27;Error!&#x27;</span>);<br><span class="hljs-keyword">else</span><br>    R=rotz(R_z)*roty(R_y)*rotx(R_x);<span class="hljs-comment">%ZYX</span><br>    T = [R, [PBA_x; PBA_y; PBA_z]; <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span>];<br>    <span class="hljs-comment">%T=SE3(R,[PBA_x PBA_y PBA_z]);%输出齐次变换矩阵</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
 <p>其中SE3函数是机器人工具箱中的函数, 用于生成齐次变换矩阵.
@@ -345,10 +470,12 @@ alt="result_a_i" /><br />
 alt="result_a_ii" /></p>
 <h2 id="b">b</h2>
 <h3 id="题目-1">题目</h3>
-<p>已知<span class="math inline">\(\beta=20^{\circ}\)</span>, <span
-class="math inline">\(^{A}P_{B}=[3,0,1]^{T}\)</span>和<span
-class="math inline">\(P_{B}=[1,0,1]^{T}\)</span>, 计算<span
-class="math inline">\(^{A}P\)</span>, 画草图验证结果是否正确.</p>
+<p>已知<span class="math inline"><em>β</em> = 20<sup>∘</sup></span>,
+<span
+class="math inline"><sup><em>A</em></sup><em>P</em><sub><em>B</em></sub> = [3, 0, 1]<sup><em>T</em></sup></span>和<span
+class="math inline"><em>P</em><sub><em>B</em></sub> = [1, 0, 1]<sup><em>T</em></sup></span>,
+计算<span class="math inline"><sup><em>A</em></sup><em>P</em></span>,
+画草图验证结果是否正确.</p>
 <h3 id="解答-1">解答</h3>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs matlab"><span class="hljs-comment">%%ZYX欧拉角+P转齐次变换矩阵T</span><br><span class="hljs-comment">%输入角度</span><br>R_z=input(<span class="hljs-string">&#x27;Rotate around the z-axis in alpha =&#x27;</span>);<br>R_y=input(<span class="hljs-string">&#x27;Rotate around the y-axis in beta =&#x27;</span>);<br>R_x=input(<span class="hljs-string">&#x27;Rotate around the x-axis in gamma =&#x27;</span>);<br><span class="hljs-comment">%输入位置矢量</span><br>PBA_x = input (<span class="hljs-string">&#x27;X-axis distance = &#x27;</span>);<br>PBA_y = input (<span class="hljs-string">&#x27;Y-axis distance = &#x27;</span>);<br>PBA_z = input (<span class="hljs-string">&#x27;Z-axis distance = &#x27;</span>);<br><span class="hljs-comment">%只要有一个输入为空，输出警告</span><br><span class="hljs-keyword">if</span> <span class="hljs-built_in">isempty</span>(R_z)+<span class="hljs-built_in">isempty</span>(R_y)+<span class="hljs-built_in">isempty</span>(R_x)+<span class="hljs-built_in">isempty</span>(PBA_x)+<span class="hljs-built_in">isempty</span>(PBA_y)+<span class="hljs-built_in">isempty</span>(PBA_z)&gt;<span class="hljs-number">0</span><br>    fprintf(<span class="hljs-string">&#x27;Error!&#x27;</span>);<br><span class="hljs-keyword">else</span><br>    R=rotz(R_z)*roty(R_y)*rotx(R_x);<span class="hljs-comment">%ZYX</span><br>    T = [R, [PBA_x; PBA_y; PBA_z]; <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span>];<br>    <span class="hljs-comment">%T=SE3(R,[PBA_x PBA_y PBA_z]);%输出齐次变换矩阵</span><br>    PB = [<span class="hljs-number">1</span>; <span class="hljs-number">0</span>; <span class="hljs-number">1</span>; <span class="hljs-number">1</span>]; <span class="hljs-comment">% 齐次坐标下的 PB 点</span><br>    PA = T * PB; <span class="hljs-comment">% 变换后的坐标</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
 <h3 id="结果-1">结果</h3>
@@ -360,10 +487,10 @@ alt="result_b" />
 <h2 id="c">c</h2>
 <h3 id="题目-2">题目</h3>
 <p>编写一个matlab程序运用符号公式计算齐次变换矩阵的逆矩阵<span
-class="math inline">\(^{A}T_{B}^{-1}=^{B}T_{A}\)</span>.
+class="math inline"><sup><em>A</em></sup><em>T</em><sub><em>B</em></sub><sup>−1</sup>=<sup><em>B</em></sup><em>T</em><sub><em>A</em></sub></span>.
 将结果和数值数值函数<span
-class="math inline">\(inv()\)</span>的结果进行比较. 证明两者相等.
-对a中的两个例子进行验证.</p>
+class="math inline"><em>i</em><em>n</em><em>v</em>()</span>的结果进行比较.
+证明两者相等. 对a中的两个例子进行验证.</p>
 <h3 id="解答-2">解答</h3>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs matlab"><span class="hljs-comment">%%ZYX欧拉角+P转齐次变换矩阵T</span><br><span class="hljs-comment">%输入角度</span><br>R_z=input(<span class="hljs-string">&#x27;Rotate around the z-axis in alpha =&#x27;</span>);<br>R_y=input(<span class="hljs-string">&#x27;Rotate around the y-axis in beta =&#x27;</span>);<br>R_x=input(<span class="hljs-string">&#x27;Rotate around the x-axis in gamma =&#x27;</span>);<br><span class="hljs-comment">%输入位置矢量</span><br>PBA_x = input (<span class="hljs-string">&#x27;X-axis distance = &#x27;</span>);<br>PBA_y = input (<span class="hljs-string">&#x27;Y-axis distance = &#x27;</span>);<br>PBA_z = input (<span class="hljs-string">&#x27;Z-axis distance = &#x27;</span>);<br><span class="hljs-comment">%只要有一个输入为空，输出警告</span><br><span class="hljs-keyword">if</span> <span class="hljs-built_in">isempty</span>(R_z)+<span class="hljs-built_in">isempty</span>(R_y)+<span class="hljs-built_in">isempty</span>(R_x)+<span class="hljs-built_in">isempty</span>(PBA_x)+<span class="hljs-built_in">isempty</span>(PBA_y)+<span class="hljs-built_in">isempty</span>(PBA_z)&gt;<span class="hljs-number">0</span><br>    fprintf(<span class="hljs-string">&#x27;Error!&#x27;</span>);<br><span class="hljs-keyword">else</span><br>    R=rotz(R_z)*roty(R_y)*rotx(R_x);<span class="hljs-comment">%ZYX</span><br>    T = [R, [PBA_x; PBA_y; PBA_z]; <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span>];<br>    <span class="hljs-comment">%T=SE3(R,[PBA_x PBA_y PBA_z]);%输出齐次变换矩阵</span><br>    <span class="hljs-comment">%计算逆矩阵</span><br>    T_inv = inv(T);<br>    <span class="hljs-comment">%符号计算逆矩阵</span><br>    R_inv = R&#x27;; <span class="hljs-comment">% 旋转矩阵的逆矩阵</span><br>    x = -R_inv * [PBA_x; PBA_y; PBA_z]; <span class="hljs-comment">% 位置矢量的逆矩阵</span><br>    T_inv_sym = [R_inv, x; <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span>];<br>    <span class="hljs-comment">%验证两者是否相等</span><br>    <span class="hljs-built_in">disp</span>(<span class="hljs-string">&#x27;T_inv = &#x27;</span>);<br>    <span class="hljs-built_in">disp</span>(T_inv);<br>    <span class="hljs-built_in">disp</span>(<span class="hljs-string">&#x27;T_inv_sym = &#x27;</span>);<br>    <span class="hljs-built_in">disp</span>(T_inv_sym);<br>    <span class="hljs-built_in">disp</span>(<span class="hljs-string">&#x27;T_inv - T_inv_sym = &#x27;</span>);<br>    <span class="hljs-built_in">disp</span>(T_inv - T_inv_sym);<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
 <h3 id="结果-2">结果</h3>
@@ -373,47 +500,54 @@ alt="result_c_i" /><br />
 alt="result_c_ii" /></p>
 <h2 id="d">d</h2>
 <h3 id="题目-3">题目</h3>
-<p>令<span class="math inline">\(^{A}T_{B}\)</span>为a中i的解, <span
-class="math inline">\(^{B}T_{C}\)</span>为a中ii的解.<br />
-i. 计算<span class="math inline">\(^{A}T_{C}\)</span>,
+<p>令<span
+class="math inline"><sup><em>A</em></sup><em>T</em><sub><em>B</em></sub></span>为a中i的解,
+<span
+class="math inline"><sup><em>B</em></sup><em>T</em><sub><em>C</em></sub></span>为a中ii的解.<br />
+i. 计算<span
+class="math inline"><sup><em>A</em></sup><em>T</em><sub><em>C</em></sub></span>,
 并用变换图说明关系. 对<span
-class="math inline">\(^{C}T_{A}\)</span>作同样的处理.<br />
-ii. 已知i中的<span class="math inline">\(^{A}T_{C}\)</span>和<span
-class="math inline">\(^{B}T_{C}\)</span>, 假定<span
-class="math inline">\(^{A}T_{B}\)</span>未知,
+class="math inline"><sup><em>C</em></sup><em>T</em><sub><em>A</em></sub></span>作同样的处理.<br />
+ii. 已知i中的<span
+class="math inline"><sup><em>A</em></sup><em>T</em><sub><em>C</em></sub></span>和<span
+class="math inline"><sup><em>B</em></sup><em>T</em><sub><em>C</em></sub></span>,
+假定<span
+class="math inline"><sup><em>A</em></sup><em>T</em><sub><em>B</em></sub></span>未知,
 计算它并与已知的答案进行比较.<br />
-iii. 已知i中的<span class="math inline">\(^{A}T_{C}\)</span>和<span
-class="math inline">\(^{A}T_{B}\)</span>, 假定<span
-class="math inline">\(^{B}T_{C}\)</span>未知,
+iii. 已知i中的<span
+class="math inline"><sup><em>A</em></sup><em>T</em><sub><em>C</em></sub></span>和<span
+class="math inline"><sup><em>A</em></sup><em>T</em><sub><em>B</em></sub></span>,
+假定<span
+class="math inline"><sup><em>B</em></sup><em>T</em><sub><em>C</em></sub></span>未知,
 计算它并与已知的答案进行比较.</p>
 <h3 id="解答-3">解答</h3>
 <ol type="i">
-<li><span class="math display">\[
+<li><span class="math display">$$
 ^{A}T_{C} = ^{A}T_{B} \cdot ^{B}T_{C} = \begin{bmatrix} R_{A} &amp;
 P_{A} \\ 0 &amp; 1 \end{bmatrix} \begin{bmatrix} R_{B} &amp; P_{B} \\ 0
 &amp; 1 \end{bmatrix} = \begin{bmatrix} R_{A} \cdot R_{B} &amp; R_{A}
 \cdot P_{B} + P_{A} \\ 0 &amp; 1 \end{bmatrix}
-\]</span></li>
+$$</span></li>
 </ol>
-<p><span class="math display">\[
+<p><span class="math display">$$
 ^{C}T_{A} = (^{A}T_{C})^{-1} = (^{A}T_{B} \cdot ^{B}T_{C})^{-1} =
 \begin{bmatrix} R_{A} \cdot R_{B} &amp; R_{A} \cdot P_{B} + P_{A} \\ 0
 &amp; 1 \end{bmatrix}^{-1} = \begin{bmatrix} R_{B}^{T} &amp; -R_{B}^{T}
 \cdot P_{B} \\ 0 &amp; 1 \end{bmatrix}
-\]</span></p>
+$$</span></p>
 <ol start="2" type="i">
-<li><p><span class="math display">\[
+<li><p><span class="math display">$$
 ^{A}T_{B} = ^{A}T_{C} \cdot ^{C}T_{B} = \begin{bmatrix} R_{A} \cdot
 R_{C} &amp; R_{A} \cdot P_{C} + P_{A} \\ 0 &amp; 1 \end{bmatrix}
 \begin{bmatrix} R_{C} &amp; P_{C} \\ 0 &amp; 1 \end{bmatrix} =
 \begin{bmatrix} R_{A} &amp; P_{A} \\ 0 &amp; 1 \end{bmatrix}
-\]</span></p></li>
-<li><p><span class="math display">\[
+$$</span></p></li>
+<li><p><span class="math display">$$
 ^{B}T_{C} = ^{B}T_{A} \cdot ^{A}T_{C} = \begin{bmatrix} R_{B} &amp;
 P_{B} \\ 0 &amp; 1 \end{bmatrix} \begin{bmatrix} R_{A} &amp; P_{A} \\ 0
 &amp; 1 \end{bmatrix} = \begin{bmatrix} R_{C} &amp; P_{C} \\ 0 &amp; 1
 \end{bmatrix}
-\]</span></p></li>
+$$</span></p></li>
 </ol>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs matlab">TAB = [ <span class="hljs-number">0.9254</span>    <span class="hljs-number">0.0180</span>    <span class="hljs-number">0.3785</span>    <span class="hljs-number">1</span>;<br>        <span class="hljs-number">0.1632</span>    <span class="hljs-number">0.8826</span>   <span class="hljs-number">-0.4410</span>    <span class="hljs-number">2</span>;<br>       <span class="hljs-number">-0.3420</span>    <span class="hljs-number">0.4698</span>    <span class="hljs-number">0.8138</span>    <span class="hljs-number">3</span>;<br>        <span class="hljs-number">0</span>         <span class="hljs-number">0</span>         <span class="hljs-number">0</span>         <span class="hljs-number">1</span>];<br><br>TBC = [ <span class="hljs-number">0.9397</span>     <span class="hljs-number">0</span>    <span class="hljs-number">0.3420</span>         <span class="hljs-number">3</span>;<br>         <span class="hljs-number">0</span>         <span class="hljs-number">1</span>         <span class="hljs-number">0</span>         <span class="hljs-number">0</span>;<br>        <span class="hljs-number">-0.3420</span>    <span class="hljs-number">0</span>    <span class="hljs-number">0.9397</span>         <span class="hljs-number">1</span>;<br>         <span class="hljs-number">0</span>         <span class="hljs-number">0</span>         <span class="hljs-number">0</span>         <span class="hljs-number">1</span>];<br><br>TAC = TAB * TBC;<br><br><span class="hljs-built_in">disp</span>(TAC)<br></code></pre></td></tr></table></figure>
 <h3 id="结果-3">结果</h3>
@@ -721,7 +855,63 @@ alt="result_d" />
     var boardCtn = jQuery('#board-ctn');
     var boardTop = boardCtn.offset().top;
 
-    window.tocbot.init(Object.assign({
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
       tocSelector     : '#toc-body',
       contentSelector : '.markdown-body',
       linkClass       : 'tocbot-link',
@@ -732,10 +922,16 @@ alt="result_d" />
       scrollSmooth    : true,
       includeTitleTags: true,
       headingsOffset  : -boardTop,
-    }, CONFIG.toc));
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
     if (toc.find('.toc-list-item').length > 0) {
       toc.css('visibility', 'visible');
     }
+    expandAllToc();
+    bindTocToggle();
 
     Fluid.events.registerRefreshCallback(function() {
       if ('tocbot' in window) {
@@ -747,6 +943,8 @@ alt="result_d" />
         if (toc.find('.toc-list-item').length > 0) {
           toc.css('visibility', 'visible');
         }
+        expandAllToc();
+        bindTocToggle();
       }
     });
   });
@@ -848,6 +1046,8 @@ alt="result_d" />
     
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script defer src="/js/openkounter.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

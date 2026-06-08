@@ -19,12 +19,12 @@
   <meta name="author" content="sam">
   <meta name="keywords" content="">
   
-    <meta name="description" content="robotics section 3 matlab practice 本练习主要讨论平面3自由度、3R机器人的DH坐标参数和正向(位姿)运动学变换方程(见图3-6和图3-7)。已知下列固定长度参数:\(L_1&#x3D;4\),\(L_2&#x3D;3\)和\(L_3&#x3D;2\)(米)。 a 题目 求D-H参数。 解答 1234567clear;clc;syms theta1 theta2 theta3">
+    <meta name="description" content="robotics section 3 matlab practice 本练习主要讨论平面3自由度、3R机器人的DH坐标参数和正向(位姿)运动学变换方程(见图3-6和图3-7)。已知下列固定长度参数:L1 &#x3D; 4,L2 &#x3D; 3和L3 &#x3D; 2(米)。 a 题目 求D-H参数。 解答 1234567clear;clc;syms theta1 theta2 theta3 l1 l2 l3">
 <meta property="og:type" content="article">
 <meta property="og:title" content="robotics section 3 matlab practice">
 <meta property="og:url" content="https://symcreg.github.io/2025/04/17/robotics-section-3-matlab-practice/index.html">
 <meta property="og:site_name" content="symc">
-<meta property="og:description" content="robotics section 3 matlab practice 本练习主要讨论平面3自由度、3R机器人的DH坐标参数和正向(位姿)运动学变换方程(见图3-6和图3-7)。已知下列固定长度参数:\(L_1&#x3D;4\),\(L_2&#x3D;3\)和\(L_3&#x3D;2\)(米)。 a 题目 求D-H参数。 解答 1234567clear;clc;syms theta1 theta2 theta3">
+<meta property="og:description" content="robotics section 3 matlab practice 本练习主要讨论平面3自由度、3R机器人的DH坐标参数和正向(位姿)运动学变换方程(见图3-6和图3-7)。已知下列固定长度参数:L1 &#x3D; 4,L2 &#x3D; 3和L3 &#x3D; 2(米)。 a 题目 求D-H参数。 解答 1234567clear;clc;syms theta1 theta2 theta3 l1 l2 l3">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://symcreg.github.io/img/robotics-section-3-matlab-practice/result_a.png">
 <meta property="og:image" content="https://symcreg.github.io/img/robotics-section-3-matlab-practice/result_b.png">
@@ -77,7 +77,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"symcreg.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-0MP4SFZQ6C"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"symcreg.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-0MP4SFZQ6C"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -112,10 +112,15 @@
 
   
 
+  
+    
+  
+
+
 
 
   
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 
 <body>
@@ -137,7 +142,7 @@
       <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
 
-    <!-- Collapsible content -->
+    <!-- Collapsible content (desktop) -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto text-center">
         
@@ -233,6 +238,123 @@
   </div>
 </nav>
 
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/links/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-link-fill"></i>
+                  <span>友链</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
   
 
 <div id="banner" class="banner" parallax=true
@@ -265,7 +387,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          696 字
+          2.9k 字
         
       </span>
     
@@ -276,7 +398,7 @@
         
         
         
-          6 分钟
+          25 分钟
         
       </span>
     
@@ -293,6 +415,8 @@
     </div>
   </div>
 </div>
+
+
 
 </div>
 
@@ -322,9 +446,9 @@
 <h1 id="robotics-section-3-matlab-practice">robotics section 3 matlab
 practice</h1>
 <p>本练习主要讨论平面3自由度、3R机器人的DH坐标参数和正向(位姿)运动学变换方程(见图3-6和图3-7)。已知下列固定长度参数:<span
-class="math inline">\(L_1=4\)</span>,<span
-class="math inline">\(L_2=3\)</span>和<span
-class="math inline">\(L_3=2\)</span>(米)。</p>
+class="math inline"><em>L</em><sub>1</sub> = 4</span>,<span
+class="math inline"><em>L</em><sub>2</sub> = 3</span>和<span
+class="math inline"><em>L</em><sub>3</sub> = 2</span>(米)。</p>
 <h2 id="a">a</h2>
 <h3 id="题目">题目</h3>
 <p>求D-H参数。</p>
@@ -339,9 +463,9 @@ alt="result_a" />
 <h2 id="b">b</h2>
 <h3 id="题目-1">题目</h3>
 <p>推导相邻的齐次变换矩阵<span
-class="math inline">\(^{i-1}_{i}T\)</span>，它们是关节角度变量<span
-class="math inline">\(\theta_i\)</span>(i=1,2,3)的函数。用试探法推导常量矩阵<span
-class="math inline">\(^3_HT\)</span>。这里，{H}的原点在夹爪手指的中心，{H}的姿态与{3}的姿态相同。</p>
+class="math inline"><sub><em>i</em></sub><sup><em>i</em> − 1</sup><em>T</em></span>，它们是关节角度变量<span
+class="math inline"><em>θ</em><sub><em>i</em></sub></span>(i=1,2,3)的函数。用试探法推导常量矩阵<span
+class="math inline"><sub><em>H</em></sub><sup>3</sup><em>T</em></span>。这里，{H}的原点在夹爪手指的中心，{H}的姿态与{3}的姿态相同。</p>
 <h3 id="解答-1">解答</h3>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs matlab">clc;clear;<br>syms theta1 theta2 theta3 theta4 l1 l2 l3<br><span class="hljs-comment">%齐次变换矩阵</span><br>syms alphai_1 ai_1 di thetai<br>i_1iT=[<span class="hljs-built_in">cos</span>(thetai) -<span class="hljs-built_in">sin</span>(thetai) <span class="hljs-number">0</span> ai_1<br>    <span class="hljs-built_in">sin</span>(thetai)*<span class="hljs-built_in">cos</span>(alphai_1) <span class="hljs-built_in">cos</span>(thetai)*<span class="hljs-built_in">cos</span>(alphai_1) -<span class="hljs-built_in">sin</span>(alphai_1) -<span class="hljs-built_in">sin</span>(alphai_1)*di<br>    <span class="hljs-built_in">sin</span>(thetai)*<span class="hljs-built_in">sin</span>(alphai_1) <span class="hljs-built_in">cos</span>(thetai)*<span class="hljs-built_in">sin</span>(alphai_1) <span class="hljs-built_in">cos</span>(alphai_1) <span class="hljs-built_in">cos</span>(alphai_1)*di<br>    <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span>];<br><span class="hljs-comment">%R = subs(S, old, new) 利用new的值代替符号表达式中old的值</span><br>T01=subs(i_1iT,[alphai_1 ai_1 di thetai],[<span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> theta1])<br>T12=subs(i_1iT,[alphai_1 ai_1 di thetai],[<span class="hljs-number">0</span> l1 <span class="hljs-number">0</span> theta2])<br>T23=subs(i_1iT,[alphai_1 ai_1 di thetai],[<span class="hljs-number">0</span> l2 <span class="hljs-number">0</span> theta3])<br>T3H=subs(i_1iT,[alphai_1 ai_1 di thetai],[<span class="hljs-number">0</span> l3 <span class="hljs-number">0</span> <span class="hljs-number">0</span>])<br></code></pre></td></tr></table></figure>
 <h3 id="结果-1">结果</h3>
@@ -353,27 +477,26 @@ alt="result_b" />
 <h2 id="c">c</h2>
 <h3 id="题目-2">题目</h3>
 <p>用MATLAB符号法求正向运动学解<span
-class="math inline">\(^0_3T\)</span>和<span
-class="math inline">\(^0_HT\)</span>(<span class="math inline">\(\theta
-_i\)</span>的函数)。用s=sin(<span
-class="math inline">\(\theta\)</span>),c=cos(<span
-class="math inline">\(\theta\)</span>)等简写你的结果。由于<span
-class="math inline">\(Z_i\)</span>轴相互平行，因此可以用二角和公式将(<span
-class="math inline">\(\theta_1 + \theta_2 +
-\theta_3\)</span>)简写。用MATLAB计算正向运动学解(<span
-class="math inline">\(^0_3T\)</span>和<span
-class="math inline">\(^0_HT\)</span>)。输入参数为:<br />
-i) <span class="math inline">\(\theta_1\)</span>=0°,<span
-class="math inline">\(\theta_2\)</span>=0°,<span
-class="math inline">\(\theta_3\)</span>=0°;<br />
-ii) <span class="math inline">\(\theta_1\)</span>=10°,<span
-class="math inline">\(\theta_2\)</span>=20°,<span
-class="math inline">\(\theta_3\)</span>=30°;<br />
-iii) <span class="math inline">\(\theta_1\)</span>=90°,<span
-class="math inline">\(\theta_2\)</span>=90°,<span
-class="math inline">\(\theta_3\)</span>=90°;<br />
+class="math inline"><sub>3</sub><sup>0</sup><em>T</em></span>和<span
+class="math inline"><sub><em>H</em></sub><sup>0</sup><em>T</em></span>(<span
+class="math inline"><em>θ</em><sub><em>i</em></sub></span>的函数)。用s=sin(<span
+class="math inline"><em>θ</em></span>),c=cos(<span
+class="math inline"><em>θ</em></span>)等简写你的结果。由于<span
+class="math inline"><em>Z</em><sub><em>i</em></sub></span>轴相互平行，因此可以用二角和公式将(<span
+class="math inline"><em>θ</em><sub>1</sub> + <em>θ</em><sub>2</sub> + <em>θ</em><sub>3</sub></span>)简写。用MATLAB计算正向运动学解(<span
+class="math inline"><sub>3</sub><sup>0</sup><em>T</em></span>和<span
+class="math inline"><sub><em>H</em></sub><sup>0</sup><em>T</em></span>)。输入参数为:<br />
+i) <span class="math inline"><em>θ</em><sub>1</sub></span>=0°,<span
+class="math inline"><em>θ</em><sub>2</sub></span>=0°,<span
+class="math inline"><em>θ</em><sub>3</sub></span>=0°;<br />
+ii) <span class="math inline"><em>θ</em><sub>1</sub></span>=10°,<span
+class="math inline"><em>θ</em><sub>2</sub></span>=20°,<span
+class="math inline"><em>θ</em><sub>3</sub></span>=30°;<br />
+iii) <span class="math inline"><em>θ</em><sub>1</sub></span>=90°,<span
+class="math inline"><em>θ</em><sub>2</sub></span>=90°,<span
+class="math inline"><em>θ</em><sub>3</sub></span>=90°;<br />
 对于这三种情况，可以利用操作臂位形简图校核结果，用试探法推导正向运动学变换(参考由旋转矩阵和位置矢量定义<span
-class="math inline">\(^0_HT\)</span>的方法)。简图中包括坐标系{H}，{3}和{0}。</p>
+class="math inline"><sub><em>H</em></sub><sup>0</sup><em>T</em></span>的方法)。简图中包括坐标系{H}，{3}和{0}。</p>
 <h3 id="解答-2">解答</h3>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs matlab">clc;clear;<br>syms theta1 theta2 theta3 theta4 l1 l2 l3<br><span class="hljs-comment">%齐次变换矩阵</span><br>syms alphai_1 ai_1 di thetai<br>i_1iT=[<span class="hljs-built_in">cos</span>(thetai) -<span class="hljs-built_in">sin</span>(thetai) <span class="hljs-number">0</span> ai_1<br>    <span class="hljs-built_in">sin</span>(thetai)*<span class="hljs-built_in">cos</span>(alphai_1) <span class="hljs-built_in">cos</span>(thetai)*<span class="hljs-built_in">cos</span>(alphai_1) -<span class="hljs-built_in">sin</span>(alphai_1) -<span class="hljs-built_in">sin</span>(alphai_1)*di<br>    <span class="hljs-built_in">sin</span>(thetai)*<span class="hljs-built_in">sin</span>(alphai_1) <span class="hljs-built_in">cos</span>(thetai)*<span class="hljs-built_in">sin</span>(alphai_1) <span class="hljs-built_in">cos</span>(alphai_1) <span class="hljs-built_in">cos</span>(alphai_1)*di<br>    <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span>];<br><span class="hljs-comment">%R = subs(S, old, new) 利用new的值代替符号表达式中old的值</span><br>T01=subs(i_1iT,[alphai_1 ai_1 di thetai],[<span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> theta1]);<br>T12=subs(i_1iT,[alphai_1 ai_1 di thetai],[<span class="hljs-number">0</span> l1 <span class="hljs-number">0</span> theta2]);<br>T23=subs(i_1iT,[alphai_1 ai_1 di thetai],[<span class="hljs-number">0</span> l2 <span class="hljs-number">0</span> theta3]);<br>T3H=subs(i_1iT,[alphai_1 ai_1 di thetai],[<span class="hljs-number">0</span> l3 <span class="hljs-number">0</span> <span class="hljs-number">0</span>]);<br>T03=T01*T12*T23<br>T0H=T01*T12*T23*T3H<br>T03i=subs(T03,[theta1 theta2 theta3],[<span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span>])<br>T0Hi=subs(T0H,[theta1 theta2 theta3],[<span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span>])<br>T03ii=subs(T03,[theta1 theta2 theta3],[<span class="hljs-number">10</span> <span class="hljs-number">20</span> <span class="hljs-number">30</span>])<br>T0Hii=subs(T0H,[theta1 theta2 theta3],[<span class="hljs-number">10</span> <span class="hljs-number">20</span> <span class="hljs-number">30</span>])<br>T03iii=subs(T03,[theta1 theta2 theta3],[<span class="hljs-number">10</span> <span class="hljs-number">20</span> <span class="hljs-number">30</span>])<br>T0Hiii=subs(T0H,[theta1 theta2 theta3],[<span class="hljs-number">10</span> <span class="hljs-number">20</span> <span class="hljs-number">30</span>])<br></code></pre></td></tr></table></figure>
 <h3 id="结果-2">结果</h3>
@@ -692,7 +815,63 @@ alt="result_d" />
     var boardCtn = jQuery('#board-ctn');
     var boardTop = boardCtn.offset().top;
 
-    window.tocbot.init(Object.assign({
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
       tocSelector     : '#toc-body',
       contentSelector : '.markdown-body',
       linkClass       : 'tocbot-link',
@@ -703,10 +882,16 @@ alt="result_d" />
       scrollSmooth    : true,
       includeTitleTags: true,
       headingsOffset  : -boardTop,
-    }, CONFIG.toc));
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
     if (toc.find('.toc-list-item').length > 0) {
       toc.css('visibility', 'visible');
     }
+    expandAllToc();
+    bindTocToggle();
 
     Fluid.events.registerRefreshCallback(function() {
       if ('tocbot' in window) {
@@ -718,6 +903,8 @@ alt="result_d" />
         if (toc.find('.toc-list-item').length > 0) {
           toc.css('visibility', 'visible');
         }
+        expandAllToc();
+        bindTocToggle();
       }
     });
   });
@@ -819,6 +1006,8 @@ alt="result_d" />
     
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script defer src="/js/openkounter.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

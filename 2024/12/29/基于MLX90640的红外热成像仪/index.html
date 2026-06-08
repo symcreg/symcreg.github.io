@@ -85,7 +85,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"symcreg.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-0MP4SFZQ6C"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"symcreg.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-0MP4SFZQ6C"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -120,10 +120,15 @@
 
   
 
+  
+    
+  
+
+
 
 
   
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 
 <body>
@@ -145,7 +150,7 @@
       <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
 
-    <!-- Collapsible content -->
+    <!-- Collapsible content (desktop) -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto text-center">
         
@@ -241,6 +246,123 @@
   </div>
 </nav>
 
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/links/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-link-fill"></i>
+                  <span>友链</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
   
 
 <div id="banner" class="banner" parallax=true
@@ -273,7 +395,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.8k 字
+          19k 字
         
       </span>
     
@@ -284,7 +406,7 @@
         
         
         
-          57 分钟
+          162 分钟
         
       </span>
     
@@ -301,6 +423,8 @@
     </div>
   </div>
 </div>
+
+
 
 </div>
 
@@ -562,33 +686,33 @@ alt="温度矩阵" />
 </p></li>
 <li><p>例如一帧数据<br />
 5A5A-0206-6E0E-690E-5A0E-XXXX-050E-8D0E-D540<br />
-Byte0~ Byte1---0x5A0x5A 表示帧头；<br />
-Byte2~ Byte3---0x0206 表示数据量=0x06*256+0x02=1538
+Byte0~ Byte1—0x5A0x5A 表示帧头；<br />
+Byte2~ Byte3—0x0206 表示数据量=0x06*256+0x02=1538
 个温度数据（包括目标数据和MLX90640 自身温度数据）<br />
-Byte4~ Byte1539---表示上图中768 个点的温度数据，输出顺序一次为(Col 1,Row
+Byte4~ Byte1539—表示上图中768 个点的温度数据，输出顺序一次为(Col 1,Row
 1)-&gt;(Col 32,Row 1)-&gt;(Col 1,Row 2)-&gt;(Col 32,Row 2)-&gt;(Col
 1,Row XX)-&gt;(Col 32,Row XX)-&gt;(Col 1,Row 24)-&gt;(Col 32,Row
 24)<br />
 </p></li>
 <li><p>例子<br />
 一帧数据 5A5A-0206-6E0E-690E-5A0E-XXXX-050E-8D0E-D540</p>
-<p><span class="math display">\[
+<p><span class="math display">$$
   \begin{align*}
   T_{Col1, Row1} = \frac{0x0E*256+0x6E}{100} = 36.94 \\
   T_{Col2, Row1} = \frac{0x0E*256+0x69}{100} = 36.89 \\
   \dots \\
   T_{Col32, Row24} = \frac{0x0E*256+0x50}{100} = 36.64
   \end{align*}
-  \]</span></p>
-<p>Byte1540---Byte1541表示MLX90640自身温度数据。</p>
-<p><span class="math display">\[
+  $$</span></p>
+<p>Byte1540—Byte1541表示MLX90640自身温度数据。</p>
+<p><span class="math display">$$
   TA = \frac{0x0E*256+0x8D}{100} = 37.25
-  \]</span></p>
-<p>Byte1542---Byte1543表示前771个字的累加和, 每个字为16bit。<br />
+  $$</span></p>
+<p>Byte1542—Byte1543表示前771个字的累加和, 每个字为16bit。<br />
 字 1=0x5A5A<br />
 字2=0x0602(即数据量)<br />
 字 3=0x0E6E(即点1的温度数据)<br />
-...<br />
+…<br />
 字 770=0x0E05(即点768 的温度数据)<br />
 字 771=0x0E8D(即MLX90640 的温度数据)<br />
 则<br />
@@ -604,35 +728,35 @@ Byte4~ Byte1539---表示上图中768 个点的温度数据，输出顺序一次�
 <p>发给模块的指令为四字节：<br />
 波特率设置指令：</p>
 <ul>
-<li>9600 设置指令-----------0xA5+0x15+0x01+0xBB<br />
+<li>9600 设置指令———–0xA5+0x15+0x01+0xBB<br />
 </li>
-<li>115200 设置指令---------0xA5+0x15+0x02+0xBC<br />
+<li>115200 设置指令———0xA5+0x15+0x02+0xBC<br />
 </li>
-<li>460800 设置指令---------0xA5+0x15+0x03+0xBD</li>
+<li>460800 设置指令———0xA5+0x15+0x03+0xBD</li>
 </ul>
 <p>模块更新频率设置指令：</p>
 <ul>
-<li>0.5hz 设置指令---------0xA5+0x25+0x00+0xCA<br />
+<li>0.5hz 设置指令———0xA5+0x25+0x00+0xCA<br />
 </li>
-<li>1hz 设置指令-----------0xA5+0x25+0x01+0xCB<br />
+<li>1hz 设置指令———–0xA5+0x25+0x01+0xCB<br />
 </li>
-<li>2hz 设置指令-----------0xA5+0x25+0x02+0xCC<br />
+<li>2hz 设置指令———–0xA5+0x25+0x02+0xCC<br />
 </li>
-<li>4hz 设置指令-----------0xA5+0x25+0x03+0xCD<br />
+<li>4hz 设置指令———–0xA5+0x25+0x03+0xCD<br />
 </li>
-<li>8hz 设置指令-----------0xA5+0x25+0x04+0xCE</li>
+<li>8hz 设置指令———–0xA5+0x25+0x04+0xCE</li>
 </ul>
 <p>自动/查询设置指令：</p>
 <ul>
-<li>查询输出数据指令-------0xA5+0x35+0x01+0xDB<br />
+<li>查询输出数据指令——-0xA5+0x35+0x01+0xDB<br />
 </li>
-<li>自动输出数据指令-------0xA5+0x35+0x02+0Xdc<br />
+<li>自动输出数据指令——-0xA5+0x35+0x02+0Xdc<br />
 </li>
 <li>发射率设置指令: 0xA5+0x45+0xXX+sum(8bit校验和)</li>
 </ul>
 <p>保存设置指令：</p>
 <ul>
-<li>保存设置指令-------------0xA5+0x65+0x01+0x0B<br />
+<li>保存设置指令————-0xA5+0x65+0x01+0x0B<br />
 </li>
 <li>保存设置指令：表示将当前的波特率设置、模块更新频率设置、自动/查询和发射率设置保存到flash中，重启后按照保存的设置运行。</li>
 </ul>
@@ -1082,7 +1206,63 @@ target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1pDCpYJEYo
     var boardCtn = jQuery('#board-ctn');
     var boardTop = boardCtn.offset().top;
 
-    window.tocbot.init(Object.assign({
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
       tocSelector     : '#toc-body',
       contentSelector : '.markdown-body',
       linkClass       : 'tocbot-link',
@@ -1093,10 +1273,16 @@ target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1pDCpYJEYo
       scrollSmooth    : true,
       includeTitleTags: true,
       headingsOffset  : -boardTop,
-    }, CONFIG.toc));
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
     if (toc.find('.toc-list-item').length > 0) {
       toc.css('visibility', 'visible');
     }
+    expandAllToc();
+    bindTocToggle();
 
     Fluid.events.registerRefreshCallback(function() {
       if ('tocbot' in window) {
@@ -1108,6 +1294,8 @@ target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1pDCpYJEYo
         if (toc.find('.toc-list-item').length > 0) {
           toc.css('visibility', 'visible');
         }
+        expandAllToc();
+        bindTocToggle();
       }
     });
   });
@@ -1209,6 +1397,8 @@ target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1pDCpYJEYo
     
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script defer src="/js/openkounter.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

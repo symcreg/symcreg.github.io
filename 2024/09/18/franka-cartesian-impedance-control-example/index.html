@@ -72,7 +72,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"symcreg.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-0MP4SFZQ6C"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"symcreg.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-0MP4SFZQ6C"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -107,10 +107,15 @@
 
   
 
+  
+    
+  
+
+
 
 
   
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 
 <body>
@@ -132,7 +137,7 @@
       <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
 
-    <!-- Collapsible content -->
+    <!-- Collapsible content (desktop) -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto text-center">
         
@@ -228,6 +233,123 @@
   </div>
 </nav>
 
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/links/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-link-fill"></i>
+                  <span>友链</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
   
 
 <div id="banner" class="banner" parallax=true
@@ -260,7 +382,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          6.9k 字
         
       </span>
     
@@ -271,7 +393,7 @@
         
         
         
-          11 分钟
+          58 分钟
         
       </span>
     
@@ -288,6 +410,8 @@
     </div>
   </div>
 </div>
+
+
 
 </div>
 
@@ -329,22 +453,21 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">std::function&lt;franka::Torques(<span class="hljs-type">const</span> franka::RobotState&amp;, franka::Duration)&gt;<br>    impedance_control_callback = [&amp;](<span class="hljs-type">const</span> franka::RobotState&amp; robot_state, franka::Duration <span class="hljs-comment">/*duration*/</span>) -&gt; franka::Torques &#123;&#125;<br></code></pre></td></tr></table></figure>
 <p>前面的function是cpp11的函数容器，后面的lambda表达式是函数体。<br />
 简单说明function的用法，&lt;&gt;中间外层是函数的返回值类型，内层是参数类型（括号内）。<br />
-lambda表达式的写法是<code>[capture](parameters) -&gt; return_type &#123;body&#125;</code>。<br />
+lambda表达式的写法是<code>[capture](parameters) -&gt; return_type {body}</code>。<br />
 其中capture是捕获列表，parameters是参数列表，return_type是返回值类型，body是函数体。<br />
 capture可以是<code>[]</code>，<code>[&amp;]</code>，<code>[=]</code>，<code>[this]</code>，<code>[&amp;a, b]</code>等。<br />
 <code>[&amp;]</code>表示引用捕获，<code>[=]</code>表示值捕获，<code>[this]</code>表示捕获当前对象的this指针。<br />
 <code>-&gt; return_type</code>是返回值类型，可以省略。<br />
-<code>&#123;body&#125;</code>是函数体，可以省略。</p>
+<code>{body}</code>是函数体，可以省略。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">error.<span class="hljs-built_in">head</span>(<span class="hljs-number">3</span>) &lt;&lt; position - position_d;<br></code></pre></td></tr></table></figure>
 <p>对于位移的误差，直接相减即可。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// &quot;difference&quot; quaternion</span><br><span class="hljs-keyword">if</span> (orientation_d.<span class="hljs-built_in">coeffs</span>().<span class="hljs-built_in">dot</span>(orientation.<span class="hljs-built_in">coeffs</span>()) &lt; <span class="hljs-number">0.0</span>) &#123;<br>orientation.<span class="hljs-built_in">coeffs</span>() &lt;&lt; -orientation.<span class="hljs-built_in">coeffs</span>();<br>&#125;<br><span class="hljs-comment">// &quot;difference&quot; quaternion</span><br><span class="hljs-function">Eigen::Quaterniond <span class="hljs-title">error_quaternion</span><span class="hljs-params">(orientation.inverse() * orientation_d)</span></span>;<br>error.<span class="hljs-built_in">tail</span>(<span class="hljs-number">3</span>) &lt;&lt; error_quaternion.<span class="hljs-built_in">x</span>(), error_quaternion.<span class="hljs-built_in">y</span>(), error_quaternion.<span class="hljs-built_in">z</span>();<br><span class="hljs-comment">// Transform to base frame</span><br>error.<span class="hljs-built_in">tail</span>(<span class="hljs-number">3</span>) &lt;&lt; -transform.<span class="hljs-built_in">rotation</span>() * error.<span class="hljs-built_in">tail</span>(<span class="hljs-number">3</span>);<br></code></pre></td></tr></table></figure>
 <p>首先判断两个四元数的点积是否小于0，如果小于0，说明两个四元数的方向相反，需要取反。</p>
 <p>然后通过orientation.inverse() *
 orientation_d计算姿态误差，这里可以通过旋转矩阵来理解，以<span
-class="math inline">\(^{0}{R}_{c}\)</span>(代表当前姿态)和<span
-class="math inline">\(^{0}{R}_{d}\)</span>(代表目标姿态)举例，都是相对于基坐标系的表示，那么姿态误差可以表示为<span
-class="math inline">\(^{c}{R}_{d} = ^{0}{R}_{c}^{-1} \cdot
-^{0}{R}_{d}\)</span>，也就是目标姿态相对于当前姿态的表示，四元数应该也是一样（的吧？）。</p>
+class="math inline"><sup>0</sup><em>R</em><sub><em>c</em></sub></span>(代表当前姿态)和<span
+class="math inline"><sup>0</sup><em>R</em><sub><em>d</em></sub></span>(代表目标姿态)举例，都是相对于基坐标系的表示，那么姿态误差可以表示为<span
+class="math inline"><sup><em>c</em></sup><em>R</em><sub><em>d</em></sub>=<sup>0</sup><em>R</em><sub><em>c</em></sub><sup>−1</sup>⋅<sup>0</sup><em>R</em><sub><em>d</em></sub></span>，也就是目标姿态相对于当前姿态的表示，四元数应该也是一样（的吧？）。</p>
 <p>最后通过左乘旋转矩阵将姿态误差转换到基坐标系下。</p>
 <p>chatgpt给出了另一种做法：<br />
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">Eigen::AngleAxisd <span class="hljs-title">angle_axis_error</span><span class="hljs-params">(error_quaternion)</span></span>;<br>error.<span class="hljs-built_in">tail</span>(<span class="hljs-number">3</span>) &lt;&lt; angle_axis_error.<span class="hljs-built_in">axis</span>() * angle_axis_error.<span class="hljs-built_in">angle</span>();<br></code></pre></td></tr></table></figure></p>
@@ -659,7 +782,63 @@ target="_blank" rel="noopener" href="https://frankaemika.github.io/libfranka/0.1
     var boardCtn = jQuery('#board-ctn');
     var boardTop = boardCtn.offset().top;
 
-    window.tocbot.init(Object.assign({
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
       tocSelector     : '#toc-body',
       contentSelector : '.markdown-body',
       linkClass       : 'tocbot-link',
@@ -670,10 +849,16 @@ target="_blank" rel="noopener" href="https://frankaemika.github.io/libfranka/0.1
       scrollSmooth    : true,
       includeTitleTags: true,
       headingsOffset  : -boardTop,
-    }, CONFIG.toc));
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
     if (toc.find('.toc-list-item').length > 0) {
       toc.css('visibility', 'visible');
     }
+    expandAllToc();
+    bindTocToggle();
 
     Fluid.events.registerRefreshCallback(function() {
       if ('tocbot' in window) {
@@ -685,6 +870,8 @@ target="_blank" rel="noopener" href="https://frankaemika.github.io/libfranka/0.1
         if (toc.find('.toc-list-item').length > 0) {
           toc.css('visibility', 'visible');
         }
+        expandAllToc();
+        bindTocToggle();
       }
     });
   });
@@ -786,6 +973,8 @@ target="_blank" rel="noopener" href="https://frankaemika.github.io/libfranka/0.1
     
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script defer src="/js/openkounter.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

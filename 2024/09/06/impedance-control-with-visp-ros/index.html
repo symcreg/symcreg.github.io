@@ -72,7 +72,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"symcreg.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-0MP4SFZQ6C"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"symcreg.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-0MP4SFZQ6C"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -107,10 +107,15 @@
 
   
 
+  
+    
+  
+
+
 
 
   
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 
 <body>
@@ -132,7 +137,7 @@
       <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
 
-    <!-- Collapsible content -->
+    <!-- Collapsible content (desktop) -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto text-center">
         
@@ -228,6 +233,123 @@
   </div>
 </nav>
 
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/links/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-link-fill"></i>
+                  <span>友链</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
   
 
 <div id="banner" class="banner" parallax=true
@@ -260,7 +382,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          10k 字
         
       </span>
     
@@ -271,7 +393,7 @@
         
         
         
-          19 分钟
+          87 分钟
         
       </span>
     
@@ -288,6 +410,8 @@
     </div>
   </div>
 </div>
+
+
 
 </div>
 
@@ -347,17 +471,19 @@ well as a set of operations on these matrices.</p>
 <p>The vpHomogeneousMatrix class is derived from
 vpArray2D&lt;double&gt;.</p>
 <p>An homogeneous matrix is 4x4 matrix defines as <span
-class="math display">\[\left[
+class="math display">$$\left[
 ^a{\bf M}_b = \left(\begin{array}{cc}
 ^a{\bf R}_b &amp; ^a{\bf t}_b \\
 {\bf 0}_{1\times 3} &amp; 1
 \end{array}
 \right)
-\right]\]</span><br />
+\right]$$</span><br />
 that defines the position of frame <em>b</em> in frame <em>a</em></p>
-<p><span class="math inline">\(^a{R}_b\)</span> is a rotation matrix and
-<span class="math inline">\(^a{t}_b\)</span> is a translation
-vector.</p>
+<p><span
+class="math inline"><sup><em>a</em></sup><em>R</em><sub><em>b</em></sub></span>
+is a rotation matrix and <span
+class="math inline"><sup><em>a</em></sup><em>t</em><sub><em>b</em></sub></span>
+is a translation vector.</p>
 <h3 id="矩阵更新">矩阵更新</h3>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">edVf.<span class="hljs-built_in">insert</span>(fMed.<span class="hljs-built_in">getRotationMatrix</span>().<span class="hljs-built_in">t</span>(), <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>edVf.<span class="hljs-built_in">insert</span>(fMed.<span class="hljs-built_in">getRotationMatrix</span>().<span class="hljs-built_in">t</span>(), <span class="hljs-number">3</span>, <span class="hljs-number">3</span>);<br></code></pre></td></tr></table></figure>
 <p>TODO:这个没懂是干啥的，后面待补充。</p>
@@ -366,8 +492,8 @@ vector.</p>
 matrix)，然后计算与目标位姿的误差，fMed是上面设置的目标位姿。<br />
 为什么 <em>fMed.inverse() * fMe</em>
 得到的就是位姿误差？这里我的理解是fMed的形式应该是<span
-class="math inline">\(^{B}T_{D}\)</span>(目标位姿相对基坐标系)，fMe的形式<span
-class="math inline">\({B}T_{E}\)</span>(末端执行器位姿相对基坐标系)，通过左乘变换矩阵将fMe转换到目标坐标系下，即末端执行器相对目标坐标系的位姿表示，得到的即是位姿误差。<br />
+class="math inline"><sup><em>B</em></sup><em>T</em><sub><em>D</em></sub></span>(目标位姿相对基坐标系)，fMe的形式<span
+class="math inline"><em>B</em><em>T</em><sub><em>E</em></sub></span>(末端执行器位姿相对基坐标系)，通过左乘变换矩阵将fMe转换到目标坐标系下，即末端执行器相对目标坐标系的位姿表示，得到的即是位姿误差。<br />
 //TODO:这里理解可能是错误的</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp">vpMatrix La = symc::<span class="hljs-built_in">Ta</span>(pose_error);<br>Ja = La*edVf*fJe;<br><span class="hljs-keyword">if</span>(!symc::<span class="hljs-built_in">IsEqual</span>(sys_info.dt_, <span class="hljs-number">0</span>))&#123;<br>    Ja_dot = (Ja - Ja_old) / sys_info.dt_;<br>&#125;<span class="hljs-keyword">else</span>&#123;<br>    Ja_dot = <span class="hljs-number">0</span>;<br>&#125;<br>Ja_old = Ja;<br></code></pre></td></tr></table></figure>
 <p>通过 <em>Ta</em>
@@ -377,8 +503,8 @@ class="math inline">\({B}T_{E}\)</span>(末端执行器位姿相对基坐标系)
 然后计算雅可比矩阵（Ja），<strong>注意fJe是上面获取的关节空间下的雅可比矩阵</strong>，通过左乘La*edVf将其转换到笛卡尔空间下，得到笛卡尔空间下的雅可比矩阵Ja。<br />
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">Ja_pinv_B_t = (Ja * B.<span class="hljs-built_in">inverseByCholesky</span>()*Ja.<span class="hljs-built_in">t</span>()).<span class="hljs-built_in">inverseByCholesky</span>()*Ja*B.<span class="hljs-built_in">inverseByCholesky</span>();<br></code></pre></td></tr></table></figure></p>
 <p>没看懂，根据chatgpt的说法，Ja_pinv_B_t是加权伪逆雅可比矩阵，其公式就是：<br />
-<span class="math display">\[Ja\_pinv\_B\_t=(Ja \cdot {B^{−1}}\cdot
-Ja^{T})^{-1}\cdot Ja\cdot B^{-1}\]</span><br />
+<span
+class="math display"><em>J</em><em>a</em>_<em>p</em><em>i</em><em>n</em><em>v</em>_<em>B</em>_<em>t</em> = (<em>J</em><em>a</em> ⋅ <em>B</em><sup>−1</sup> ⋅ <em>J</em><em>a</em><sup><em>T</em></sup>)<sup>−1</sup> ⋅ <em>J</em><em>a</em> ⋅ <em>B</em><sup>−1</sup></span><br />
 贴一下它的解释：<br />
 这个表达式 Ja_pinv_B_t 是计算 加权伪逆雅可比矩阵
 的一种方式。加权伪逆（weighted
@@ -403,8 +529,8 @@ D项阻尼控制项，利用速度误差来增加阻尼，抑制振荡和不稳�
 -Ja_dot*q_dot雅可比矩阵的变化影响项，考虑了机器人关节速度和雅可比矩阵随时间变化的耦合效应。<br />
 x_dot_dot_desired期望加速度，直接给出系统应该达到的加速度目标。<br />
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">tau_desired = B*Ja.<span class="hljs-built_in">pseudoInverse</span>()* control_law + C + F - (I7 - Ja.<span class="hljs-built_in">t</span>()*Ja_pinv_B_t)*B*q_dot*<span class="hljs-number">100</span>;<br></code></pre></td></tr></table></figure> 计算期望力矩，其公式为：<br />
-<span class="math display">\[\tau = M(q)\cdot \ddot{q} + C(q,\dot{q}) +
-F(\dot{q}) + G(q)\]</span><br />
+<span class="math display">$$\tau = M(q)\cdot \ddot{q} + C(q,\dot{q}) +
+F(\dot{q}) + G(q)$$</span><br />
 control_law左乘 <em>Ja.pseudoInverse()</em>
 是将control_law从笛卡尔空间转换到任务空间。<br />
 后面的-(I7 -
@@ -710,7 +836,63 @@ Ja.t()*Ja_pinv_B_t)*B*q_dot*100根据chatgpt的解释是误差校正项，没看
     var boardCtn = jQuery('#board-ctn');
     var boardTop = boardCtn.offset().top;
 
-    window.tocbot.init(Object.assign({
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
       tocSelector     : '#toc-body',
       contentSelector : '.markdown-body',
       linkClass       : 'tocbot-link',
@@ -721,10 +903,16 @@ Ja.t()*Ja_pinv_B_t)*B*q_dot*100根据chatgpt的解释是误差校正项，没看
       scrollSmooth    : true,
       includeTitleTags: true,
       headingsOffset  : -boardTop,
-    }, CONFIG.toc));
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
     if (toc.find('.toc-list-item').length > 0) {
       toc.css('visibility', 'visible');
     }
+    expandAllToc();
+    bindTocToggle();
 
     Fluid.events.registerRefreshCallback(function() {
       if ('tocbot' in window) {
@@ -736,6 +924,8 @@ Ja.t()*Ja_pinv_B_t)*B*q_dot*100根据chatgpt的解释是误差校正项，没看
         if (toc.find('.toc-list-item').length > 0) {
           toc.css('visibility', 'visible');
         }
+        expandAllToc();
+        bindTocToggle();
       }
     });
   });
@@ -837,6 +1027,8 @@ Ja.t()*Ja_pinv_B_t)*B*q_dot*100根据chatgpt的解释是误差校正项，没看
     
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script defer src="/js/openkounter.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
